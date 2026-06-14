@@ -31,3 +31,5 @@ create EXTENSION postgis_tiger_geocoder;
 
 -- 5.0 Cree una tabla dentro de la base de datos y el schema 'geovisor_data'
 CREATE TABLE coast_data.coast_gis();
+
+--*--
