@@ -7,6 +7,7 @@
   <link rel="icon" type="image/png" href="logo-inst3.png">
   
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   
   <style>
@@ -14,7 +15,7 @@
     
     body { 
       font-family: 'Inter', sans-serif; 
-      background-color: #e7ebee;
+      background-color: #e7ebee; 
       height: 100vh;
       margin: 0;
       display: flex;
@@ -22,7 +23,6 @@
       overflow: hidden;
     }
 
-    /* Paneles Estilo Dashboard */
     .dashboard-panel {
       background: #ffffff;
       border-radius: 1rem;
@@ -51,7 +51,14 @@
       overflow-y: auto;
     }
 
-    /* Botones de Capas Activas */
+    #map { 
+      height: 100%; 
+      width: 100%; 
+      z-index: 1;
+      border-radius: 0.75rem;
+    }
+
+    /* Botones de Selección de Capas */
     .layer-btn {
       width: 100%;
       text-align: left;
@@ -80,14 +87,6 @@
       color: white;
       border-color: #0f172a;
     }
-
-    /* Contenedor del Mapa MapViewer */
-    .map-container {
-      width: 100%;
-      height: 100%;
-      border: none;
-      border-radius: 0.75rem;
-    }
   </style>
 </head>
 <body>
@@ -114,13 +113,13 @@
           <p class="text-[12px] font-black text-slate-400 tracking-widest mb-3 uppercase">Seleccione una capa:</p>
           
           <div class="space-y-1">
-            <button class="layer-btn active" data-var="asbCaribe">
+            <button class="layer-btn active" onclick="switchWMS('asb_caribe', [11.08, -74.05], 7)">
               <i class="fa-solid fa-map-location-dot"></i> ASB Caribe Vectorial
             </button>
-            <button class="layer-btn" data-var="poligonoLimite">
+            <button class="layer-btn" onclick="switchWMS('poligono_limite', [10.65, -75.37], 9)">
               <i class="fa-solid fa-vector-square"></i> Polígono Límite de Estudio
             </button>
-            <button class="layer-btn" data-var="rasterClusters">
+            <button class="layer-btn" onclick="switchWMS('raster_clusters_enteros_project_0_10_3', [10.65, -75.37], 9)">
               <i class="fa-solid fa-border-all"></i> Clústeres Interpolados (Raster)
             </button>
           </div>
@@ -140,7 +139,7 @@
     </div>
 
     <div class="col-span-6 row-span-6 dashboard-panel !p-1">
-      <iframe id="geo-mapa" class="map-container" src="https://geoserver.coast-wind.org/geoserver/coast_wind_data/wms?service=WMS&version=1.1.0&request=GetMap&layers=coast_wind_data%3Aasb_caribe&bbox=-76.97413635253906%2C8.870560646057129%2C-71.14173889160156%2C13.308505058288574&width=768&height=584&srs=EPSG%3A4326&styles=&format=application/openlayers"></iframe>
+      <div id="map"></div>
     </div>
 
     <div class="col-span-3 row-span-6 flex flex-col gap-4">
@@ -195,41 +194,62 @@
     </div>
   </footer>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
   <script>
-    // Captura de elementos del DOM
-    const iframeMapa = document.getElementById('geo-mapa');
-    const panelTexto = document.getElementById('panel-texto');
-    const botonesCapas = document.querySelectorAll('.layer-btn');
+    // 1. Inicializar el mapa con el mapa base satelital que se ve increíble para zonas costeras
+    var map = L.map('map', { zoomControl: false }).setView([11.08, -74.05], 7);
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
 
-    // Diccionario de contenidos exactos validados por GeoServer
-    const capasContenido = {
-      asbCaribe: {
-        url: 'https://geoserver.coast-wind.org/geoserver/coast_wind_data/wms?service=WMS&version=1.1.0&request=GetMap&layers=coast_wind_data%3Aasb_caribe&bbox=-76.97413635253906%2C8.870560646057129%2C-71.14173889160156%2C13.308505058288574&width=768&height=584&srs=EPSG%3A4326&styles=&format=application/openlayers',
-        texto: '<p class="font-bold text-slate-800 mb-1">Capa Activa: ASB Caribe</p>Análisis espacial del área marina costera correspondiente al sector norte de la cuenca del Caribe.'
-      },
-      poligonoLimite: {
-        url: 'https://geoserver.coast-wind.org/geoserver/coast_wind_data/wms?service=WMS&version=1.1.0&request=GetMap&layers=coast_wind_data%3Apoligono_limite&bbox=-76.14698791503906%2C9.776363372802734%2C-74.60242462158203%2C11.5410795211792&width=672&height=768&srs=EPSG%3A4326&styles=&format=application/openlayers',
-        texto: '<p class="font-bold text-slate-800 mb-1">Capa Activa: Polígono Límite</p>Muestra la delimitación geográfica oficial de la zona de estudio del proyecto COAST.'
-      },
-      rasterClusters: {
-        url: 'https://geoserver.coast-wind.org/geoserver/coast_wind_data/wms?service=WMS&version=1.1.0&request=GetMap&layers=coast_wind_data%3Araster_clusters_enteros_project_0_10_3&bbox=-76.1514400163021%2C9.774286397951894%2C-74.60147439329504%2C11.541119638992866&width=673&height=768&srs=EPSG%3A4326&styles=&format=application/openlayers',
-        texto: '<p class="font-bold text-slate-800 mb-1">Capa Activa: Clústeres Interpolados</p>Modelo raster que visualiza las densidades y agrupaciones espaciales de las variables de viento calculadas.'
-      }
+    var basemap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}').addTo(map);
+
+    // Variable global para contener la capa WMS cargada en cada momento
+    var currentWmsLayer = null;
+
+    // Base URL de tu servicio WMS limpia para peticiones directas de imágenes
+    var wmsBaseUrl = "https://geoserver.coast-wind.org/geoserver/coast_wind_data/wms";
+
+    // Textos informativos dinámicos
+    var textosInformativos = {
+      'asb_caribe': '<p class="font-bold text-slate-800 mb-1">Capa Activa: ASB Caribe</p>Análisis espacial del área marina costera correspondiente al sector norte de la cuenca del Caribe.',
+      'poligono_limite': '<p class="font-bold text-slate-800 mb-1">Capa Activa: Polígono Límite</p>Muestra la delimitación geográfica oficial de la zona de estudio del proyecto COAST.',
+      'raster_clusters_enteros_project_0_10_3': '<p class="font-bold text-slate-800 mb-1">Capa Activa: Clústeres Interpolados</p>Modelo raster que visualiza las densidades y agrupaciones espaciales de las variables de viento calculadas.'
     };
 
-    // Asignación de Event Listeners directos
-    botonesCapas.forEach(btn => {
-      btn.addEventListener('click', () => {
-        // Remover clase activa del botón previo y ponérsela al actual
-        botonesCapas.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+    // 2. Función maestra para alternar las capas WMS sin usar iframes
+    function switchWMS(layerName, centerCoords, zoomLevel) {
+      // Si hay una capa WMS activa en el mapa, la removemos primero
+      if (currentWmsLayer) {
+        map.removeLayer(currentWmsLayer);
+      }
 
-        // Extraer la variable asociada e inyectar al iframe de forma instantánea
-        const seleccion = btn.dataset.var;
-        iframeMapa.src = capasContenido[seleccion].url;
-        panelTexto.innerHTML = capasContenido[seleccion].texto;
+      // Creamos la conexión WMS directa nativa de Leaflet usando tus parámetros validados
+      currentWmsLayer = L.tileLayer.wms(wmsBaseUrl, {
+        layers: 'coast_wind_data:' + layerName,
+        format: 'image/png',
+        transparent: true,
+        version: '1.1.0',
+        srs: 'EPSG:4326',
+        styles: ''
       });
-    });
+
+      // Añadir la capa al mapa por encima del mapa base
+      currentWmsLayer.addTo(map);
+
+      // Re-centrar el mapa automáticamente en el Bounding Box de la capa seleccionada
+      map.setView(centerCoords, zoomLevel);
+
+      // Actualizar el texto descriptivo inferior
+      document.getElementById('panel-texto').innerHTML = textosInformativos[layerName];
+
+      // Manejo estético visual de los botones del menú lateral
+      var srcButton = event.currentTarget;
+      document.querySelectorAll('.layer-btn').forEach(b => b.classList.remove('active'));
+      srcButton.classList.add('active');
+    }
+
+    // Cargar la primera capa por defecto de manera inmediata al iniciar
+    switchWMS('asb_caribe', [11.08, -74.05], 7);
   </script>
 </body>
 </html>
