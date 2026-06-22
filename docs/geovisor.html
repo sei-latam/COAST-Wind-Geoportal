@@ -7,6 +7,7 @@
   <link rel="icon" type="image/png" href="logo-inst3.png">
   
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   
   <style>
@@ -22,6 +23,7 @@
       overflow: hidden;
     }
 
+    /* Paneles Estilo Dashboard (Bordes redondeados y sombras suaves) */
     .dashboard-panel {
       background: #ffffff;
       border-radius: 1rem;
@@ -50,6 +52,7 @@
       overflow-y: auto;
     }
 
+    /* Botones de Mapas Base */
     .map-btn {
       width: 100%;
       text-align: left;
@@ -76,136 +79,212 @@
       border-color: #0f172a;
     }
 
+    /* Checkbox Personalizado */
     .custom-check {
       accent-color: #1e40af;
       width: 1rem;
       height: 1rem;
     }
+
+    /* Contenedor del Mapa */
+    #map {
+      width: 100%;
+      height: 100%;
+      border-radius: 0.75rem;
+    }
   </style>
 </head>
 <body>
 
-  <div id="app" class="h-full flex flex-col overflow-hidden">
+  <header class="h-16 border-b border-slate-800 bg-[#0f172a]/95 flex items-center justify-between px-6 z-50 rounded-xl m-2 shadow-lg shrink-0">
+      <div class="flex items-center gap-3 w-1/3">
+          <img src="logo-inst1.png" alt="Logo" class="h-6 w-auto">
+          <span class="text-white font-bold text-sm">Geovisor Interactivo</span>
+      </div>
+      <div class="flex items-center justify-end gap-3 w-1/3">
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-[12px] font-bold text-white hover:bg-slate-700 transition-all flex items-center gap-2 no-underline">
+              <i class="fa-solid fa-home"></i> Inicio
+          </a>
+      </div>
+  </header>
 
-    <header class="h-16 border-b border-slate-800 bg-[#0f172a]/95 flex items-center justify-between px-6 z-50 rounded-xl m-2 shadow-lg shrink-0">
-        <div class="flex items-center gap-3 w-1/3">
-            <img src="logo-inst1.png" alt="Logo" class="h-6 w-auto">
-            <span class="text-white font-bold text-sm">Geovisor Interactivo</span>
-        </div>
-        <div class="flex items-center justify-end gap-3 w-1/3">
-            <a href="index.html" class="px-3 py-1.5 rounded-lg text-[12px] font-bold text-white hover:bg-slate-700 transition-all flex items-center gap-2 no-underline">
-                <i class="fa-solid fa-home"></i> Inicio
-            </a>
-        </div>
-    </header>
-
-    <div class="flex-1 px-4 pb-4 grid grid-cols-12 grid-rows-6 gap-4 overflow-hidden">
-      
-      <div class="col-span-3 row-span-6 flex flex-col gap-4">
-        <div class="flex-1 dashboard-panel">
-          <div class="panel-header"><i class="fas fa-layer-group text-blue-600"></i> Mapas Base</div>
-          <div class="panel-content">
-            
-            <div class="space-y-1">
-              <button @click="cambiarFondo('esri')" :class="['map-btn', { active: mapaBaseActivo === 'esri' }]">Esri World Imagery</button>
-              <button @click="cambiarFondo('osm')" :class="['map-btn', { active: mapaBaseActivo === 'osm' }]">OpenStreetMap</button>
-              <button @click="cambiarFondo('arcgis')" :class="['map-btn', { active: mapaBaseActivo === 'arcgis' }]">ArcGIS Terrain</button>
-              <button @click="cambiarFondo('google')" :class="['map-btn', { active: mapaBaseActivo === 'google' }]">Google Hybrid Style</button>
+  <div class="flex-1 px-4 pb-4 grid grid-cols-12 grid-rows-6 gap-4 overflow-hidden">
+    
+    <div class="col-span-3 row-span-6 flex flex-col gap-4">
+      <div class="flex-1 dashboard-panel">
+        <div class="panel-header"><i class="fas fa-layer-group text-blue-600"></i> Mapas Base</div>
+        <div class="panel-content">
+          
+          <div class="space-y-1">
+            <button onclick="setBasemap('esri')" id="btn-esri" class="map-btn">Esri World Imagery</button>
+            <button onclick="setBasemap('osm')" id="btn-osm" class="map-btn active">OpenStreetMap</button>
+            <button onclick="setBasemap('arcgis')" id="btn-arcgis" class="map-btn">ArcGIS Terrain</button>
+            <button onclick="setBasemap('google')" id="btn-google" class="map-btn">Google Hybrid Style</button>
+          </div>
+          
+          <div class="mt-6">
+            <p class="text-[14px] font-black text-slate-400 tracking-widest mb-3">Capas Temáticas</p>
+            <div class="space-y-3">
+              <label class="flex items-center gap-3 text-xs font-semibold text-slate-700 cursor-pointer">
+                <input type="checkbox" id="check-raster" onchange="toggleWmsLayer('rasterClusters', this.checked)" class="custom-check"> 
+                Modelo de Clústeres Interpolados (Raster)
+              </label>
+              <label class="flex items-center gap-3 text-xs font-semibold text-slate-700 cursor-pointer">
+                <input type="checkbox" id="check-mcsi" onchange="toggleWmsLayer('mcsi', this.checked)" class="custom-check"> 
+                Índice de Susceptibilidad Marino - Costera (MCSI)
+              </label>
+              <label class="flex items-center gap-3 text-xs font-semibold text-slate-700 cursor-pointer">
+                <input type="checkbox" id="check-esi" onchange="toggleWmsLayer('esi', this.checked)" class="custom-check"> 
+                Índice de Sensibilidad Ecológica (ESI)
+              </label>
             </div>
-            
-            <div class="mt-6">
-              <p class="text-[14px] font-black text-slate-400 tracking-widest mb-3">Capas Temáticas</p>
-              <div class="space-y-3">
-                <label class="flex items-center gap-3 text-xs font-semibold text-slate-700 cursor-pointer">
-                  <input type="checkbox" class="custom-check" v-model="capasActivas.rasterClusters"> 
-                  Modelo de Clústeres Interpolados (Raster)
-                </label>
-                <label class="flex items-center gap-3 text-xs font-semibold text-slate-700 cursor-pointer">
-                  <input type="checkbox" class="custom-check" v-model="capasActivas.mcsi"> 
-                  Índice de Susceptibilidad Marino - Costera (MCSI)
-                </label>
-                <label class="flex items-center gap-3 text-xs font-semibold text-slate-700 cursor-pointer">
-                  <input type="checkbox" class="custom-check" v-model="capasActivas.esi"> 
-                  Índice de Sensibilidad Ecológica (ESI)
-                </label>
-              </div>
-            </div>
-
           </div>
-        </div>
 
-        <div class="h-1/3 dashboard-panel">
-          <div class="panel-header"><i class="fas fa-chart-bar text-blue-600"></i> Gráficos y Análisis</div>
-          <div class="panel-content flex items-center justify-center text-center">
-            <p class="text-slate-400 italic text-[11px]">Seleccione un área en el mapa.</p>
-          </div>
         </div>
       </div>
 
-      <div class="col-span-6 row-span-6 dashboard-panel !p-1">
-        <map-view ref="referenciaMapa" :visibilidad="capasActivas"></map-view>
-      </div>
-
-      <div class="col-span-3 row-span-6 flex flex-col gap-4">
-        <div class="flex-1 dashboard-panel">
-          <div class="panel-header"><i class="fas fa-list-ul text-blue-600"></i> Visualización de Datos</div>
-          <div class="panel-content">
-            <table class="w-full text-left text-[12px]">
-              <thead class="border-b border-slate-100">
-                <tr><th class="pb-2">Región</th><th class="pb-2 text-right">Índice MCSI</th></tr>
-              </thead>
-              <tbody class="text-slate-600">
-                <tr v-for="item in tableMcsi" :key="item.region" class="border-b border-slate-50">
-                  <td class="py-2.5 font-semibold">{{ item.region }}</td>
-                  <td :class="['py-2.5 text-right font-bold', item.color]">{{ item.valor }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="h-1/4 dashboard-panel">
-          <div class="panel-header"><i class="fas fa-info-circle text-blue-600"></i> Créditos</div>
-          <div class="panel-content">
-            <p class="text-[11px] font-bold text-slate-800 uppercase">Proyecto COAST</p>
-            <p class="text-[10px] text-slate-500">Desarrollado por el SEI-LA.</p>
-          </div>
+      <div class="h-1/3 dashboard-panel">
+        <div class="panel-header"><i class="fas fa-chart-bar text-blue-600"></i> Gráficos y Análisis</div>
+        <div class="panel-content flex items-center justify-center text-center">
+          <p class="text-slate-400 italic text-[11px]">Seleccione un área en el mapa.</p>
         </div>
       </div>
-
     </div>
+
+    <div class="col-span-6 row-span-6 dashboard-panel !p-1">
+      <div id="map"></div>
+    </div>
+
+    <div class="col-span-3 row-span-6 flex flex-col gap-4">
+      <div class="flex-1 dashboard-panel">
+        <div class="panel-header"><i class="fas fa-list-ul text-blue-600"></i> Visualización de Datos</div>
+        <div class="panel-content">
+          <table class="w-full text-left text-[12px]">
+            <thead class="border-b border-slate-100">
+              <tr>
+                <th class="pb-2">Región</th>
+                <th class="pb-2 text-right">Índice MCSI</th>
+              </tr>
+            </thead>
+            <tbody class="text-slate-600">
+              <tr class="border-b border-slate-50">
+                <td class="py-2.5 font-semibold">Zona Norte A</td>
+                <td class="py-2.5 text-right font-bold text-red-600">0.92</td>
+              </tr>
+              <tr class="border-b border-slate-50">
+                <td class="py-2.5 font-semibold">Zona Central B</td>
+                <td class="py-2.5 text-right font-bold text-yellow-600">0.74</td>
+              </tr>
+              <tr class="border-b border-slate-50">
+                <td class="py-2.5 font-semibold">Zona Sur C</td>
+                <td class="py-2.5 text-right font-bold text-green-600">0.45</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="h-1/4 dashboard-panel">
+        <div class="panel-header"><i class="fas fa-info-circle text-blue-600"></i> Créditos</div>
+        <div class="panel-content">
+          <p class="text-[11px] font-bold text-slate-800 uppercase">Proyecto COAST</p>
+          <p class="text-[10px] text-slate-500">Desarrollado por el SEI-LA.</p>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <footer class="h-12 border-t border-slate-800 bg-[#0f172a]/95 flex items-center justify-center px-8 z-50 m-2 rounded-xl shrink-0 shadow-lg text-white">
+    <div class="flex items-center gap-3">
+        <img src="logo-inst1.png" alt="Logo SEI" class="h-4 w-auto">
+        <span class="text-[10px] text-slate-400 font-medium">
+          Stockholm Environment Institute Latin America Center (SEI-LA) © 2026
+        </span>
+    </div>
+  </footer>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
   <script>
-    const { createApp } = Vue;
+    // 1. Inicialización NATIVA del Mapa de Leaflet
+    var map = L.map('map', { zoomControl: false }).setView([11.5, -74.5], 7);
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
 
-    createApp({
-      data() {
-        return {
-          mapaBaseActivo: 'osm',
-          // El objeto de la verdad: controla la reactividad del mapa al instante
-          capasActivas: {
-            rasterClusters: false,
-            mcsi: false,
-            esi: false
-          },
-          tableMcsi: [
-            { region: 'Zona Norte A', valor: '0.92', color: 'text-red-600' },
-            { region: 'Zona Central B', valor: '0.74', color: 'text-yellow-600' },
-            { region: 'Zona Sur C', valor: '0.45', color: 'text-green-600' }
-          ]
+    // 2. Diccionario de Mapas Base Disponibles
+    var baseLayers = {
+      esri: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'),
+      osm: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }),
+      arcgis: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'),
+      google: L.tileLayer('http://{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', { subdomains: ['mt0','mt1','mt2','mt3'] })
+    };
+
+    // Activar OpenStreetMap por defecto
+    baseLayers.osm.addTo(map);
+
+    // Función nativa para intercambiar mapas base
+    function setBasemap(key) {
+      Object.keys(baseLayers).forEach(l => map.removeLayer(baseLayers[l]));
+      baseLayers[key].addTo(map);
+      
+      // Cambiar estado visual de botones de forma directa en el DOM
+      document.querySelectorAll('.map-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('btn-' + key).classList.add('active');
+    }
+
+    // 3. Diccionario con las Configuraciones WMS Directas de tu GeoServer
+    var wmsConfigs = {
+      rasterClusters: {
+        url: "https://geoserver.coast-wind.org/geoserver/wms",
+        options: {
+          layers: "coast_wind_data:raster_clusters_4326",
+          format: "image/png",
+          transparent: true,
+          version: "1.1.1"
         }
       },
-      methods: {
-        cambiarFondo(key) {
-          this.mapaBaseActivo = key;
-          // Llama directamente al método del componente MapView
-          this.$refs.referenciaMapa.setBasemap(key);
+      mcsi: {
+        url: "https://geoserver.coast-wind.org/geoserver/wms",
+        options: {
+          layers: "coast_wind_data:mcsi_vector",
+          format: "image/png",
+          transparent: true,
+          version: "1.1.1"
+        }
+      },
+      esi: {
+        url: "https://geoserver.coast-wind.org/geoserver/wms",
+        options: {
+          layers: "coast_wind_data:esi_vector",
+          format: "image/png",
+          transparent: true,
+          version: "1.1.1"
         }
       }
-    }).mount('#app');
+    };
+
+    // Diccionario intermedio en memoria para almacenar las capas que se van prendiendo
+    var activeWmsLayers = {};
+
+    // FUNCIÓN ESTRELLA: Controla el encendido y apagado asíncrono del WMS
+    function toggleWmsLayer(layerKey, isChecked) {
+      if (isChecked) {
+        // Si el usuario activa el checkbox y la capa no existe en el mapa, la creamos y la montamos
+        if (!activeWmsLayers[layerKey]) {
+          var config = wmsConfigs[layerKey];
+          activeWmsLayers[layerKey] = L.tileLayer.wms(config.url, config.options);
+          activeWmsLayers[layerKey].addTo(map);
+          console.log("Capa WMS cargada con éxito desde GeoServer:", layerKey);
+        }
+      } else {
+        // Si el usuario desmarca el checkbox, la removemos del mapa inmediatamente
+        if (activeWmsLayers[layerKey]) {
+          map.removeLayer(activeWmsLayers[layerKey]);
+          delete activeWmsLayers[layerKey]; // Liberamos espacio en memoria
+          console.log("Capa WMS removida del lienzo:", layerKey);
+        }
+      }
+    }
   </script>
 </body>
 </html>
