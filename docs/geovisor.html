@@ -10,91 +10,14 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght=400;600;700;900&display=swap');
-    
-    body { 
-      font-family: 'Inter', sans-serif; 
-      background-color: #e7ebee; 
-      height: 100vh;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .dashboard-panel {
-      background: #ffffff;
-      border-radius: 1rem;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-      border: 1px solid #e2e8f0;
-    }
-
-    .panel-header {
-      padding: 1rem 1.25rem;
-      border-bottom: 1px solid #f1f5f9;
-      font-size: 0.75rem;
-      font-weight: 800;
-      color: #475569;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .panel-content {
-      flex: 1;
-      padding: 1.25rem;
-      overflow-y: auto;
-    }
-
-    #map { 
-      height: 100%; 
-      width: 100%; 
-      z-index: 1;
-      border-radius: 0.75rem;
-    }
-
-    /* Botones de Selección de Capas */
-    .layer-btn {
-      width: 100%;
-      text-align: left;
-      padding: 0.75rem 1rem;
-      border-radius: 0.5rem;
-      border: 1px solid #e2e8f0;
-      background: #f8fafc;
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-bottom: 0.6rem;
-      transition: all 0.2s;
-      color: #475569;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      cursor: pointer;
-    }
-
-    .layer-btn:hover {
-      background: #f1f5f9;
-      border-color: #cbd5e1;
-    }
-
-    .layer-btn.active {
-      background: #0f172a;
-      color: white;
-      border-color: #0f172a;
-    }
-  </style>
+  <link rel="stylesheet" href="geovisor.css">
 </head>
 <body>
 
   <header class="h-16 border-b border-slate-800 bg-[#0f172a]/95 flex items-center justify-between px-6 z-50 rounded-xl m-2 shadow-lg shrink-0">
       <div class="flex items-center gap-3 w-1/3">
           <img src="logo-inst1.png" alt="Logo" class="h-6 w-auto">
-          <span class="text-white font-bold text-sm">Geovisor Interactivo</span>
+          <span class="text-white font-bold text-sm">Geovisor Interactivo - COAST</span>
       </div>
       <div class="flex items-center justify-end gap-3 w-1/3">
           <a href="index.html" class="px-3 py-1.5 rounded-lg text-[12px] font-bold text-white hover:bg-slate-700 transition-all flex items-center gap-2 no-underline">
@@ -105,35 +28,35 @@
 
   <div class="flex-1 px-4 pb-4 grid grid-cols-12 grid-rows-6 gap-4 overflow-hidden">
     
-    <div class="col-span-3 row-span-6 flex flex-col gap-4">
-      <div class="flex-1 dashboard-panel">
-        <div class="panel-header"><i class="fas fa-layer-group text-blue-600"></i> Capas Temáticas</div>
-        <div class="panel-content">
-          
-          <p class="text-[12px] font-black text-slate-400 tracking-widest mb-3 uppercase">Seleccione una capa:</p>
-          
-          <div class="space-y-1">
-            <button class="layer-btn active" onclick="switchWMS('asb_caribe', [11.08, -74.05], 7)">
-              <i class="fa-solid fa-map-location-dot"></i> ASB Caribe Vectorial
-            </button>
-            <button class="layer-btn" onclick="switchWMS('poligono_limite', [10.65, -75.37], 9)">
-              <i class="fa-solid fa-vector-square"></i> Polígono Límite de Estudio
-            </button>
-            <button class="layer-btn" onclick="switchWMS('raster_clusters_enteros_project_0_10_3', [10.65, -75.37], 9)">
-              <i class="fa-solid fa-border-all"></i> Clústeres Interpolados (Raster)
-            </button>
+    <div class="col-span-3 row-span-6 flex flex-col gap-4 overflow-hidden">
+      <div class="dashboard-panel p-4 gap-3 bg-slate-50 border-slate-200 shrink-0">
+        <div class="text-[11px] font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1">
+          <i class="fa-solid fa-earth-americas text-blue-600"></i> Mapa Base
+        </div>
+        <select id="selector-basemap" onchange="cambiarMapaBase()" class="w-full text-xs bg-white border border-slate-300 rounded-lg p-2 font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="Esri Satelital">Esri Satelital</option>
+          <option value="Google Híbrido">Google Híbrido</option>
+          <option value="OpenStreetMap">OpenStreetMap (Clásico)</option>
+        </select>
+        <div class="flex flex-col gap-1 mt-1">
+          <div class="flex justify-between text-[10px] font-semibold text-slate-500">
+            <span>Opacidad del Fondo</span>
           </div>
-
+          <input type="range" id="opacity-slider" min="10" max="100" value="100" class="w-full h-1 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
         </div>
       </div>
 
-      <div class="h-1/3 dashboard-panel">
-        <div class="panel-header"><i class="fas fa-chart-bar text-blue-600"></i> Gráficos y Análisis</div>
+      <div class="flex-1 dashboard-panel overflow-hidden">
+        <div class="panel-header"><i class="fas fa-layer-group text-blue-600"></i> Capas y Variables</div>
+        <div id="contenedor-capas" class="panel-content overflow-y-auto">
+          <p class="text-[11px] font-black text-slate-400 tracking-widest mb-2 uppercase">Selección múltiple:</p>
+        </div>
+      </div>
+
+      <div class="h-1/4 dashboard-panel">
+        <div class="panel-header"><i class="fas fa-chart-bar text-blue-600"></i> Información de la Capa</div>
         <div class="panel-content flex flex-col justify-center">
-          <div id="panel-texto" class="text-slate-600 text-xs leading-relaxed">
-            <p class="font-bold text-slate-800 mb-1">Capa Activa: ASB Caribe</p>
-            Análisis espacial del área marina costera correspondiente al sector norte de la cuenca del Caribe.
-          </div>
+          <div id="panel-texto" class="text-slate-600 text-xs leading-relaxed"></div>
         </div>
       </div>
     </div>
@@ -142,36 +65,47 @@
       <div id="map"></div>
     </div>
 
-    <div class="col-span-3 row-span-6 flex flex-col gap-4">
-      <div class="flex-1 dashboard-panel">
-        <div class="panel-header"><i class="fas fa-list-ul text-blue-600"></i> Visualización de Datos</div>
-        <div class="panel-content">
-          <table class="w-full text-left text-[12px]">
-            <thead class="border-b border-slate-100">
-              <tr>
-                <th class="pb-2 tracking-tighter">Región</th>
-                <th class="pb-2 font-bold tracking-tighter text-right">Índice MCSI</th>
-              </tr>
-            </thead>
-            <tbody class="text-slate-600">
-              <tr class="border-b border-slate-50">
-                <td class="py-3 font-semibold">Zona Norte A</td>
-                <td class="py-3 text-right font-bold text-red-600">0.92</td>
-              </tr>
-              <tr class="border-b border-slate-50">
-                <td class="py-3 font-semibold">Zona Central B</td>
-                <td class="py-3 text-right font-bold text-yellow-600">0.74</td>
-              </tr>
-              <tr class="border-b border-slate-50">
-                <td class="py-3 font-semibold">Zona Sur C</td>
-                <td class="py-3 text-right font-bold text-green-600">0.45</td>
-              </tr>
-            </tbody>
-          </table>
+    <div class="col-span-3 row-span-6 flex flex-col gap-4 overflow-hidden">
+      
+      <div class="dashboard-panel p-4 gap-3 bg-slate-50 border-slate-200 shrink-0">
+        <div class="text-[11px] font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1">
+          <i class="fa-solid fa-network-wired text-blue-600"></i> Conexión Externa GIS
+        </div>
+        <p class="text-[10px] text-slate-500 leading-tight">Copie estos enlaces para cargar el geoservicio directamente en QGIS o ArcGIS Pro:</p>
+        
+        <div class="flex flex-col gap-2 mt-1">
+          <div>
+            <span class="text-[9px] font-bold text-slate-600 uppercase font-mono">Servicio Web de Mapas (WMS)</span>
+            <div class="flex gap-1 mt-0.5">
+              <input type="text" id="wms-url" readonly value="https://geoserver.coast-wind.org/geoserver/coast_wind_data/wms" class="w-full text-[9px] font-mono bg-white border border-slate-300 rounded p-1.5 text-slate-600 focus:outline-none">
+              <button onclick="navigator.clipboard.writeText(document.getElementById('wms-url').value)" class="bg-blue-600 hover:bg-blue-700 text-white px-2.5 rounded text-[10px] transition-colors">
+                <i class="fa-solid fa-copy"></i>
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <span class="text-[9px] font-bold text-slate-600 uppercase font-mono">Servicio Web de Objetos (WFS)</span>
+            <div class="flex gap-1 mt-0.5">
+              <input type="text" id="wfs-url" readonly value="https://geoserver.coast-wind.org/geoserver/coast_wind_data/wfs" class="w-full text-[9px] font-mono bg-white border border-slate-300 rounded p-1.5 text-slate-600 focus:outline-none">
+              <button onclick="navigator.clipboard.writeText(document.getElementById('wfs-url').value)" class="bg-blue-600 hover:bg-blue-700 text-white px-2.5 rounded text-[10px] transition-colors">
+                <i class="fa-solid fa-copy"></i>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="h-1/4 dashboard-panel">
+      <div class="flex-1 dashboard-panel overflow-hidden">
+        <div class="panel-header"><i class="fas fa-download text-blue-600"></i> Extracción de Datos (Formatos GIS)</div>
+        <div class="panel-content overflow-y-auto">
+          <p class="text-[10px] text-slate-500 leading-tight mb-3">Haga clic en el formato nativo para descargar de forma directa las variables activas en el mapa:</p>
+          <div id="panel-descargas" class="space-y-2">
+            </div>
+        </div>
+      </div>
+
+      <div class="h-1/4 dashboard-panel shrink-0">
         <div class="panel-header"><i class="fas fa-info-circle text-blue-600"></i> Créditos</div>
         <div class="panel-content">
           <p class="text-[11px] font-bold text-slate-800 uppercase mb-1">Proyecto COAST</p>
@@ -195,61 +129,6 @@
   </footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  
-  <script>
-    // 1. Inicializar el mapa con el mapa base satelital que se ve increíble para zonas costeras
-    var map = L.map('map', { zoomControl: false }).setView([11.08, -74.05], 7);
-    L.control.zoom({ position: 'bottomright' }).addTo(map);
-
-    var basemap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}').addTo(map);
-
-    // Variable global para contener la capa WMS cargada en cada momento
-    var currentWmsLayer = null;
-
-    // Base URL de tu servicio WMS limpia para peticiones directas de imágenes
-    var wmsBaseUrl = "https://geoserver.coast-wind.org/geoserver/coast_wind_data/wms";
-
-    // Textos informativos dinámicos
-    var textosInformativos = {
-      'asb_caribe': '<p class="font-bold text-slate-800 mb-1">Capa Activa: ASB Caribe</p>Análisis espacial del área marina costera correspondiente al sector norte de la cuenca del Caribe.',
-      'poligono_limite': '<p class="font-bold text-slate-800 mb-1">Capa Activa: Polígono Límite</p>Muestra la delimitación geográfica oficial de la zona de estudio del proyecto COAST.',
-      'raster_clusters_enteros_project_0_10_3': '<p class="font-bold text-slate-800 mb-1">Capa Activa: Clústeres Interpolados</p>Modelo raster que visualiza las densidades y agrupaciones espaciales de las variables de viento calculadas.'
-    };
-
-    // 2. Función maestra para alternar las capas WMS sin usar iframes
-    function switchWMS(layerName, centerCoords, zoomLevel) {
-      // Si hay una capa WMS activa en el mapa, la removemos primero
-      if (currentWmsLayer) {
-        map.removeLayer(currentWmsLayer);
-      }
-
-      // Creamos la conexión WMS directa nativa de Leaflet usando tus parámetros validados
-      currentWmsLayer = L.tileLayer.wms(wmsBaseUrl, {
-        layers: 'coast_wind_data:' + layerName,
-        format: 'image/png',
-        transparent: true,
-        version: '1.1.0',
-        srs: 'EPSG:4326',
-        styles: ''
-      });
-
-      // Añadir la capa al mapa por encima del mapa base
-      currentWmsLayer.addTo(map);
-
-      // Re-centrar el mapa automáticamente en el Bounding Box de la capa seleccionada
-      map.setView(centerCoords, zoomLevel);
-
-      // Actualizar el texto descriptivo inferior
-      document.getElementById('panel-texto').innerHTML = textosInformativos[layerName];
-
-      // Manejo estético visual de los botones del menú lateral
-      var srcButton = event.currentTarget;
-      document.querySelectorAll('.layer-btn').forEach(b => b.classList.remove('active'));
-      srcButton.classList.add('active');
-    }
-
-    // Cargar la primera capa por defecto de manera inmediata al iniciar
-    switchWMS('asb_caribe', [11.08, -74.05], 7);
-  </script>
+  <script src="geovisor.js"></script>
 </body>
 </html>
