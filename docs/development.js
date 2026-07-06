@@ -80,8 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-
-// 5. Sistema de Traducción Estable por Cookies (Google Translate API)
+// 5. Sistema de Traducción Forzado (Google Translate)
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'es',
@@ -91,28 +90,33 @@ function googleTranslateElementInit() {
 }
 
 function changeLanguage(lang) {
-  // Crear o actualizar la cookie nativa que lee Google Translate
-  // El formato requerido por Google es: /lang_original/lang_destino
+  // 1. Forzar el valor en la cookie nativa de Google
   document.cookie = "googtrans=/es/" + lang + "; path=/; domain=" + window.location.hostname;
   document.cookie = "googtrans=/es/" + lang + "; path=/;";
-  
-  // Recargar la página inmediatamente para que Google aplique los cambios desde el servidor
+
+  // 2. Intentar ejecutar el cambio directamente sobre el widget interno de Google si ya cargó
+  const googleSelect = document.querySelector('#google_translate_element select');
+  if (googleSelect) {
+    googleSelect.value = lang;
+    googleSelect.dispatchEvent(new Event('change'));
+  }
+
+  // 3. Recargar la página para que la cookie sea leída desde el arranque
   location.reload();
 }
 
-// Escuchador y sincronizador dentro del DOMContentLoaded existente
+// Escuchador integrado en el DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
   const langSelector = document.getElementById('lang-selector');
-  
   if (langSelector) {
-    // Sincronizar el selector visual leyendo la cookie actual de Google al cargar la página
+    // Sincronizar el selector visual leyendo la cookie actual de Google
     const match = document.cookie.match(/(^| )googtrans=([^;]+)/);
     if (match) {
-      const currentLang = match[2].split('/').pop(); // Extrae 'en' o 'es'
+      const currentLang = match[2].split('/').pop();
       langSelector.value = currentLang;
     }
 
-    // Escuchar el cambio del usuario
+    // Escuchar cambios del usuario
     langSelector.addEventListener('change', (e) => {
       changeLanguage(e.target.value);
     });
