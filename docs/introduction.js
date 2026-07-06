@@ -50,7 +50,7 @@ function toggleTheme() {
   body.classList.toggle('light-theme');
 
   if (body.classList.contains('light-theme')) {
-    if (themeIcon) themeIcon.className = 'fa-solid fa-sun';
+    if (themeIcon) themeIcon.className = 'fa-solid fa-sun text-amber-500';
     localStorage.setItem('theme', 'light');
   } else {
     if (themeIcon) themeIcon.className = 'fa-solid fa-moon';
@@ -58,7 +58,17 @@ function toggleTheme() {
   }
 }
 
-// 4. Inicializador de procesos al cargar el DOM
+// Función Controladora de traducción estable por cookies (Google Translate)
+function changeLanguage(lang) {
+  // Setea la cookie en el dominio actual y subdominios
+  document.cookie = "googtrans=/es/" + lang + "; path=/; domain=" + window.location.hostname;
+  document.cookie = "googtrans=/es/" + lang + "; path=/;";
+  
+  // Recarga para procesar la traducción limpia desde el inicio
+  location.reload();
+}
+
+// 4. Inicializador de procesos unificado al cargar el DOM
 document.addEventListener('DOMContentLoaded', () => {
   // Inicializar reloj
   setInterval(updateDateTime, 1000);
@@ -75,6 +85,29 @@ document.addEventListener('DOMContentLoaded', () => {
   if (savedTheme === 'light') {
     document.body.classList.add('light-theme');
     const themeIcon = document.getElementById('theme-icon');
-    if (themeIcon) themeIcon.className = 'fa-solid fa-sun';
+    if (themeIcon) themeIcon.className = 'fa-solid fa-sun text-amber-500';
+  }
+
+// Sincronizar y escuchar cambios en el Selector de Idioma
+  const langSelector = document.getElementById('lang-selector');
+  if (langSelector) {
+    // Comprobar si existe la cookie de Google activa para inicializar el select en el valor correcto
+    const match = document.cookie.match(/(^| )googtrans=([^;]+)/);
+    if (match) {
+      const currentLang = match[2].split('/').pop();
+      
+      // Lista de todos los idiomas que agregamos para Cloudflare
+      const validLangs = ['es', 'en', 'de', 'fr', 'it', 'ja', 'ko', 'pt', 'ru', 'zh-CN'];
+      
+      // Si el idioma de la cookie está en nuestra lista, lo sincroniza en el selector visual
+      if (validLangs.includes(currentLang)) {
+        langSelector.value = currentLang;
+      }
+    }
+
+    // Escuchar la acción de cambio del usuario
+    langSelector.addEventListener('change', (e) => {
+      changeLanguage(e.target.value);
+    });
   }
 });

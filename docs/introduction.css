@@ -57,10 +57,6 @@ html { scroll-behavior: smooth; }
   color: #ffffff;
 }
 
-/* ==========================================================================
-   MUTACIONES PARA MODO CLARO (Sobrescriben estilos oscuros estáticos)
-   ========================================================================== */
-
 body.light-theme {
   background-color: #f8fafc !important;
 }
@@ -82,8 +78,7 @@ body.light-theme .content-card .text-gray-600 {
   color: #334155 !important;
 }
 
-body.light-theme .bg-gray-50 {
-  background-color: #f1f5f9 !important;
+body.light-theme .bg-slate-50 {
   border-color: #e2e8f0 !important;
 }
 
@@ -152,4 +147,29 @@ body.light-theme footer .bg-slate-900\/50 {
 
 body.light-theme footer .bg-slate-900\/50 span {
   color: #475569 !important;
+}
+
+/* Quita el fondo blanco de tarjetas en modo claro */
+body.light-theme .bg-white {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+
+.goog-te-banner-frame.skiptranslate,
+.goog-te-banner-frame,
+#goog-gt-tt,
+.goog-te-balloon-frame,
+.goog-te-gadget-icon {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
+}
+
+.goog-text-highlight {
+  background-color: transparent !important;
+  box-shadow: none !important;
 }
