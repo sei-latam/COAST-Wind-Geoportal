@@ -81,41 +81,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// 5. Sistema de Traducción Automática (Google Translate)
+// 5. Sistema de Traducción Estable por Cookies (Google Translate API)
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({
     pageLanguage: 'es',
     includedLanguages: 'en,es',
-    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
     autoDisplay: false
   }, 'google_translate_element');
 }
 
 function changeLanguage(lang) {
-  const iframe = document.querySelector('.goog-te-menu-frame');
-  if (!iframe) {
-    setTimeout(() => changeLanguage(lang), 300);
-    return;
-  }
-  const doc = iframe.contentDocument || iframe.contentWindow.document;
-  const languages = doc.querySelectorAll('.goog-te-menu2-item span.text');
-  let targetNode = null;
+  // Crear o actualizar la cookie nativa que lee Google Translate
+  // El formato requerido por Google es: /lang_original/lang_destino
+  document.cookie = "googtrans=/es/" + lang + "; path=/; domain=" + window.location.hostname;
+  document.cookie = "googtrans=/es/" + lang + "; path=/;";
   
-  languages.forEach(node => {
-    if (lang === 'en' && (node.textContent.includes('Inglés') || node.textContent.includes('English'))) {
-      targetNode = node;
-    } else if (lang === 'es' && (node.textContent.includes('Español') || node.textContent.includes('Spanish'))) {
-      targetNode = node;
-    }
-  });
-
-  if (targetNode) targetNode.click();
+  // Recargar la página inmediatamente para que Google aplique los cambios desde el servidor
+  location.reload();
 }
 
-// Agregar este escuchador dentro del bloque document.addEventListener('DOMContentLoaded', ...) existente:
+// Escuchador y sincronizador dentro del DOMContentLoaded existente
 document.addEventListener('DOMContentLoaded', () => {
   const langSelector = document.getElementById('lang-selector');
+  
   if (langSelector) {
+    // Sincronizar el selector visual leyendo la cookie actual de Google al cargar la página
+    const match = document.cookie.match(/(^| )googtrans=([^;]+)/);
+    if (match) {
+      const currentLang = match[2].split('/').pop(); // Extrae 'en' o 'es'
+      langSelector.value = currentLang;
+    }
+
+    // Escuchar el cambio del usuario
     langSelector.addEventListener('change', (e) => {
       changeLanguage(e.target.value);
     });
