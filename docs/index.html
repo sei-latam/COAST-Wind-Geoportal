@@ -19,7 +19,7 @@
               <img src="logo-inst1.png" alt="Logo Inst 2" class="h-6 w-auto">
           </div>    
           <div class="hidden md:block overflow-hidden">
-              <img src="https://readme-typing-svg.herokuapp.com?font=Inter&size=14&pause=1000&color=F8FAFC&width=220&lines=Bienvenido(a)+a+COAST" alt="Typing SVG" />
+              <img src="https://readme-typing-svg.herokuapp.com?font=Inter&size=14&pause=1000&color=blue&width=220&lines=Bienvenido(a)+a+COAST" alt="Typing SVG" />
           </div>
       </div>
 
@@ -44,6 +44,17 @@
               </a>
           </div>
       </div>
+
+    <div class="flex items-center gap-2 border-l border-slate-850 pl-3 ml-1 tracking-tight">
+      <select id="lang-selector" class="select-lang-custom">
+        <option value="es">🇲🇽 ES</option>
+        <option value="en">🇺🇸 EN</option>
+      </select>
+
+      <button id="theme-toggle" title="Cambiar tema" class="btn-theme-toggle">
+        <i id="theme-icon" class="fa-solid fa-moon"></i>
+      </button>
+    </div>
   </header>
 
 <header class="relative h-[800px] overflow-hidden m-2 rounded-xl shadow-2xl shrink-0 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)]">
@@ -190,6 +201,21 @@
     }
     setInterval(updateDateTime, 1000);
     updateDateTime();
+
+      // REEMPLAZAR DENTRO DEL <SCRIPT> AL FINAL DE INDEX.HTML
+      const themeToggleBtn = document.getElementById('theme-toggle');
+      const themeIcon = document.getElementById('theme-icon');
+
+      themeToggleBtn.addEventListener('click', function() {
+        document.body.classList.toggle('light-theme');
+        
+        if (document.body.classList.contains('light-theme')) {
+          themeIcon.className = 'fa-solid fa-sun text-amber-500';
+        } else {
+          themeIcon.className = 'fa-solid fa-moon';
+        }
+      });
+
   </script>
 </body>
 </html>

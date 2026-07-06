@@ -94,3 +94,167 @@ body {
 .chapter-content ul {
   @apply ml-5 list-disc;
 }
+
+/* ==========================================================================
+   ESTILOS DE LOS CONTROLES (IDIOMA Y TEMA) EN EL HEADER
+   ========================================================================== */
+
+/* Selector de Idioma Personalizado */
+.select-lang-custom {
+  background: rgba(15, 23, 42, 0.6);
+  color: #f8fafc;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(51, 65, 85, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+.select-lang-custom:hover {
+  background: #0f172a;
+  border-color: #475569;
+}
+
+/* Botón de Cambio de Tema Personalizado */
+.btn-theme-toggle {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.6);
+  color: #94a3b8;
+  border-radius: 6px;
+  border: 1px solid rgba(51, 65, 85, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-theme-toggle:hover {
+  background: #0f172a;
+  color: #f8fafc;
+  border-color: #475569;
+}
+.btn-theme-toggle i {
+  font-size: 11px;
+}
+
+/* 1. Fondo por defecto (Modo Oscuro): Tu Imagen con una capa oscura encima */
+body {
+  background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.90)), 
+                    url('https://pub-57e2d6782dd6483194a2084ca392d4ce.r2.dev/Body_wepage.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+}
+
+
+/* 2. Cuando se activa el Modo Claro: La misma imagen pero con una capa blanca/translúcida encima */
+body.light-theme {
+  background-image: linear-gradient(rgba(241, 245, 249, 0.88), rgba(241, 245, 249, 0.88)), 
+                    url('https://pub-57e2d6782dd6483194a2084ca392d4ce.r2.dev/Body_wepage.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+  color: #0f172a !important;
+}
+
+/* 2. Mutación de Tarjetas Translúcidas Principales */
+body.light-theme .bg-slate-900\/40,
+body.light-theme .bg-slate-900\/60,
+body.light-theme .bg-slate-950\/40,
+body.light-theme .backdrop-blur-xl {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Forzar contraste en Títulos e Iconos dentro de las tarjetas modificadas */
+body.light-theme h1, 
+body.light-theme h2, 
+body.light-theme h5, 
+body.light-theme .text-white {
+  color: #0f172a !important;
+}
+
+/* Forzar contraste en textos secundarios o párrafos */
+body.light-theme .text-slate-300,
+body.light-theme .text-slate-400 {
+  color: #475569 !important;
+}
+
+
+/* 3. Mutación Específica del HEADER en Modo Claro */
+body.light-theme header {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Enlaces, textos e indicadores de hora/país internos del header */
+body.light-theme header a,
+body.light-theme header span,
+body.light-theme header #topbar-datetime {
+  color: #1e293b !important;
+}
+
+/* Comportamiento Hover de los enlaces del Header en modo claro */
+body.light-theme header a:hover {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+/* Divisores estéticos y cajitas internas del header */
+body.light-theme header .border-slate-700,
+body.light-theme header .bg-slate-700 {
+  background-color: #cbd5e1 !important;
+  border-color: #cbd5e1 !important;
+}
+body.light-theme header .bg-slate-900\/50 {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+}
+
+
+/* 4. Mutación Específica del FOOTER en Modo Claro */
+body.light-theme footer {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 -10px 25px -5px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Textos y enlaces del footer */
+body.light-theme footer span,
+body.light-theme footer a {
+  color: #334155 !important;
+}
+
+/* Enlaces activos u hovers en el footer */
+body.light-theme footer a:hover {
+  color: #0284c7 !important;
+}
+
+/* Ajuste de la pastilla de versión del footer */
+body.light-theme footer .bg-slate-900\/50 {
+  background-color: #f1f5f9 !important;
+}
+body.light-theme footer .bg-slate-900\/50 span {
+  color: #475569 !important;
+}
+
+
+/* 5. Comportamiento de los propios selectores del Header en Modo Claro */
+body.light-theme .select-lang-custom,
+body.light-theme .btn-theme-toggle {
+  background: #ffffff;
+  color: #334155;
+  border-color: #cbd5e1;
+}
+body.light-theme .select-lang-custom:hover,
+body.light-theme .btn-theme-toggle:hover {
+  background: #f8fafc;
+  color: #0f172a;
+}
