@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ==========================================================================
+   ESTILOS GENERALES Y COMPONENTES BASE
+   ========================================================================== */
+
 body {
   @apply m-0 font-sans bg-[#ecf3f0] text-[#333];
 }
@@ -95,8 +99,9 @@ body {
   @apply ml-5 list-disc;
 }
 
+
 /* ==========================================================================
-   ESTILOS DE LOS CONTROLES (IDIOMA Y TEMA) EN EL HEADER
+   ESTILOS DE LOS CONTROLES DE IDIOMA Y TEMA (HEADER)
    ========================================================================== */
 
 /* Selector de Idioma Personalizado */
@@ -140,7 +145,12 @@ body {
   font-size: 11px;
 }
 
-/* 1. Fondo por defecto (Modo Oscuro): Tu imagen con una capa oscura encima */
+
+/* ==========================================================================
+   MANEJO DE IMAGEN DE FONDO CON CAPAS EN EL BODY (MANDATORIO)
+   ========================================================================== */
+
+/* 1. Fondo por defecto (Modo Oscuro): Imagen local filtrada con una capa slate oscura */
 body {
   background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), 
                     url('Body_wepage.jpg') !important;
@@ -150,7 +160,7 @@ body {
   background-repeat: no-repeat !important;
 }
 
-/* 2. Cuando se activa el Modo Claro: La misma imagen pero con una capa blanca encima */
+/* 2. Cuando se activa el Modo Claro: La misma imagen filtrada con una capa limpia clara */
 body.light-theme {
   background-image: linear-gradient(rgba(241, 245, 249, 0.88), rgba(241, 245, 249, 0.88)), 
                     url('Body_wepage.jpg') !important;
@@ -161,7 +171,12 @@ body.light-theme {
   color: #0f172a !important;
 }
 
-/* 2. Mutación de Tarjetas Translúcidas Principales */
+
+/* ==========================================================================
+   MUTACIONES DE DISEÑO EN MODO CLARO (.light-theme)
+   ========================================================================== */
+
+/* Mutación de Tarjetas Translúcidas Principales */
 body.light-theme .bg-slate-900\/40,
 body.light-theme .bg-slate-900\/60,
 body.light-theme .bg-slate-950\/40,
@@ -171,7 +186,7 @@ body.light-theme .backdrop-blur-xl {
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05) !important;
 }
 
-/* Forzar contraste en Títulos e Iconos dentro de las tarjetas modificadas */
+/* Contraste para Títulos e Iconos dentro de contenedores modificados */
 body.light-theme h1, 
 body.light-theme h2, 
 body.light-theme h5, 
@@ -179,21 +194,21 @@ body.light-theme .text-white {
   color: #0f172a !important;
 }
 
-/* Forzar contraste en textos secundarios o párrafos */
+/* Contraste para textos secundarios o descripciones cortas */
 body.light-theme .text-slate-300,
 body.light-theme .text-slate-400 {
   color: #475569 !important;
 }
 
 
-/* 3. Mutación Específica del HEADER en Modo Claro */
+/* Mutación Específica del HEADER en Modo Claro */
 body.light-theme header {
   background-color: rgba(255, 255, 255, 0.9) !important;
   border-color: #cbd5e1 !important;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05) !important;
 }
 
-/* Enlaces, textos e indicadores de hora/país internos del header */
+/* Enlaces, textos e indicador de hora interno del header */
 body.light-theme header a,
 body.light-theme header span,
 body.light-theme header #topbar-datetime {
@@ -206,7 +221,7 @@ body.light-theme header a:hover {
   color: #0f172a !important;
 }
 
-/* Divisores estéticos y cajitas internas del header */
+/* Divisores internos y cajita central del header */
 body.light-theme header .border-slate-700,
 body.light-theme header .bg-slate-700 {
   background-color: #cbd5e1 !important;
@@ -218,7 +233,7 @@ body.light-theme header .bg-slate-900\/50 {
 }
 
 
-/* 4. Mutación Específica del FOOTER en Modo Claro */
+/* Mutación Específica del FOOTER en Modo Claro */
 body.light-theme footer {
   background-color: rgba(255, 255, 255, 0.9) !important;
   border-color: #cbd5e1 !important;
@@ -231,12 +246,12 @@ body.light-theme footer a {
   color: #334155 !important;
 }
 
-/* Enlaces activos u hovers en el footer */
+/* Enlaces del footer al hacer Hover */
 body.light-theme footer a:hover {
   color: #0284c7 !important;
 }
 
-/* Ajuste de la pastilla de versión del footer */
+/* Ajuste de la pastilla de versión dentro del footer */
 body.light-theme footer .bg-slate-900\/50 {
   background-color: #f1f5f9 !important;
 }
@@ -245,8 +260,12 @@ body.light-theme footer .bg-slate-900\/50 span {
 }
 
 
-/* 5. Comportamiento de los propios selectores del Header en Modo Claro */
-body.light-theme .select-lang-custom,
+/* Comportamiento de los propios selectores de Idioma/Tema en Modo Claro */
+body.light-theme .select-lang-custom {
+  background: #ffffff;
+  color: #334155;
+  border-color: #cbd5e1;
+}
 body.light-theme .btn-theme-toggle {
   background: #ffffff;
   color: #334155;
@@ -256,4 +275,12 @@ body.light-theme .select-lang-custom:hover,
 body.light-theme .btn-theme-toggle:hover {
   background: #f8fafc;
   color: #0f172a;
+}
+
+
+/* ==========================================================================
+   TRANSICIÓN DE COLORES FLUIDA
+   ========================================================================== */
+body, header, footer, .bg-slate-900\/50, a, span, button, select {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
