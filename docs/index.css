@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ==========================================================================
-   ESTILOS GENERALES Y COMPONENTES BASE
-   ========================================================================== */
-
 body {
   @apply m-0 font-sans bg-[#ecf3f0] text-[#333];
 }
@@ -99,9 +95,8 @@ body {
   @apply ml-5 list-disc;
 }
 
-
 /* ==========================================================================
-   ESTILOS DE LOS CONTROLES DE IDIOMA Y TEMA (HEADER)
+   ESTILOS DE LOS CONTROLES (IDIOMA Y TEMA) EN EL HEADER
    ========================================================================== */
 
 /* Selector de Idioma Personalizado */
@@ -145,33 +140,30 @@ body {
   font-size: 11px;
 }
 
-
 /* ==========================================================================
-   MANEJO DE IMAGEN DE FONDO CON CAPAS EN EL BODY (MANDATORIO)
-   ========================================================================== */
+   MANEJO DE IMAGEN DE FONDO USANDO CLOUDFLARE R2
+   ========================================================================= */
 
-/* 1. Fondo por defecto (Modo Oscuro): Imagen local filtrada con una capa slate oscura */
+/* 1. Fondo por defecto (Modo Oscuro) con enlace directo de R2 */
 body {
   background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), 
-                    url('Body_wepage.jpg') !important;
+                    url('https://pub-57e2d6782dd6483194a2084ca392d4ce.r2.dev/Body_wepage.jpg') !important;
   background-size: cover !important;
   background-position: center !important;
   background-attachment: fixed !important;
   background-repeat: no-repeat !important;
 }
 
-/* 2. Cuando se activa el Modo Claro: La misma imagen filtrada con una capa limpia clara */
+/* 2. Cuando se activa el Modo Claro con enlace directo de R2 */
 body.light-theme {
   background-image: linear-gradient(rgba(241, 245, 249, 0.88), rgba(241, 245, 249, 0.88)), 
-                    url('Body_wepage.jpg') !important;
+                    url('https://pub-57e2d6782dd6483194a2084ca392d4ce.r2.dev/Body_wepage.jpg') !important;
   background-size: cover !important;
   background-position: center !important;
   background-attachment: fixed !important;
   background-repeat: no-repeat !important;
   color: #0f172a !important;
 }
-
-
 /* ==========================================================================
    MUTACIONES DE DISEÑO EN MODO CLARO (.light-theme)
    ========================================================================== */
@@ -186,7 +178,7 @@ body.light-theme .backdrop-blur-xl {
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05) !important;
 }
 
-/* Contraste para Títulos e Iconos dentro de contenedores modificados */
+/* Forzar contraste en Títulos e Iconos dentro de las tarjetas modificadas */
 body.light-theme h1, 
 body.light-theme h2, 
 body.light-theme h5, 
@@ -194,12 +186,11 @@ body.light-theme .text-white {
   color: #0f172a !important;
 }
 
-/* Contraste para textos secundarios o descripciones cortas */
+/* Forzar contraste en textos secundarios o párrafos */
 body.light-theme .text-slate-300,
 body.light-theme .text-slate-400 {
   color: #475569 !important;
 }
-
 
 /* Mutación Específica del HEADER en Modo Claro */
 body.light-theme header {
@@ -208,7 +199,7 @@ body.light-theme header {
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05) !important;
 }
 
-/* Enlaces, textos e indicador de hora interno del header */
+/* Enlaces, textos e indicadores de hora/país internos del header */
 body.light-theme header a,
 body.light-theme header span,
 body.light-theme header #topbar-datetime {
@@ -221,7 +212,7 @@ body.light-theme header a:hover {
   color: #0f172a !important;
 }
 
-/* Divisores internos y cajita central del header */
+/* Divisores estéticos y cajitas internas del header */
 body.light-theme header .border-slate-700,
 body.light-theme header .bg-slate-700 {
   background-color: #cbd5e1 !important;
@@ -231,7 +222,6 @@ body.light-theme header .bg-slate-900\/50 {
   background-color: #f1f5f9 !important;
   border-color: #cbd5e1 !important;
 }
-
 
 /* Mutación Específica del FOOTER en Modo Claro */
 body.light-theme footer {
@@ -246,12 +236,12 @@ body.light-theme footer a {
   color: #334155 !important;
 }
 
-/* Enlaces del footer al hacer Hover */
+/* Enlaces activos u hovers en el footer */
 body.light-theme footer a:hover {
   color: #0284c7 !important;
 }
 
-/* Ajuste de la pastilla de versión dentro del footer */
+/* Ajuste de la pastilla de versión del footer */
 body.light-theme footer .bg-slate-900\/50 {
   background-color: #f1f5f9 !important;
 }
@@ -259,13 +249,8 @@ body.light-theme footer .bg-slate-900\/50 span {
   color: #475569 !important;
 }
 
-
-/* Comportamiento de los propios selectores de Idioma/Tema en Modo Claro */
-body.light-theme .select-lang-custom {
-  background: #ffffff;
-  color: #334155;
-  border-color: #cbd5e1;
-}
+/* Comportamiento de los propios selectores del Header en Modo Claro */
+body.light-theme .select-lang-custom,
 body.light-theme .btn-theme-toggle {
   background: #ffffff;
   color: #334155;
@@ -277,10 +262,7 @@ body.light-theme .btn-theme-toggle:hover {
   color: #0f172a;
 }
 
-
-/* ==========================================================================
-   TRANSICIÓN DE COLORES FLUIDA
-   ========================================================================== */
+/* Transición suave global al cambiar de tema */
 body, header, footer, .bg-slate-900\/50, a, span, button, select {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
