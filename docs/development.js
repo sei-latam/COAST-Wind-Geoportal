@@ -80,45 +80,30 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// 5. Sistema de Traducción Forzado (Google Translate)
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({
-    pageLanguage: 'es',
-    includedLanguages: 'en,es',
-    autoDisplay: false
-  }, 'google_translate_element');
-}
-
-function changeLanguage(lang) {
-  // 1. Forzar el valor en la cookie nativa de Google
-  document.cookie = "googtrans=/es/" + lang + "; path=/; domain=" + window.location.hostname;
-  document.cookie = "googtrans=/es/" + lang + "; path=/;";
-
-  // 2. Intentar ejecutar el cambio directamente sobre el widget interno de Google si ya cargó
-  const googleSelect = document.querySelector('#google_translate_element select');
-  if (googleSelect) {
-    googleSelect.value = lang;
-    googleSelect.dispatchEvent(new Event('change'));
-  }
-
-  // 3. Recargar la página para que la cookie sea leída desde el arranque
-  location.reload();
-}
-
-// Escuchador integrado en el DOMContentLoaded
-document.addEventListener('DOMContentLoaded', () => {
+// Escuchador para tu selector personalizado de idiomas
   const langSelector = document.getElementById('lang-selector');
   if (langSelector) {
-    // Sincronizar el selector visual leyendo la cookie actual de Google
-    const match = document.cookie.match(/(^| )googtrans=([^;]+)/);
-    if (match) {
-      const currentLang = match[2].split('/').pop();
-      langSelector.value = currentLang;
+    // Sincronizar el estado del selector según la URL actual
+    if (window.location.href.includes('translate.google.com')) {
+      langSelector.value = 'en';
+    } else {
+      langSelector.value = 'es';
     }
 
-    // Escuchar cambios del usuario
     langSelector.addEventListener('change', (e) => {
-      changeLanguage(e.target.value);
+      const selectedLang = e.target.value;
+      const currentUrl = window.location.href.split('?')[0]; // Limpiar parámetros viejos
+
+      if (selectedLang === 'en') {
+        // Redirección directa al traductor de Google en modo espejo seguro
+        window.location.href = `https://translate.google.com/translate?sl=es&tl=en&u=${encodeURIComponent(currentUrl)}`;
+      } else {
+        // Si vuelve a español, romper el marco de traducción regresando a la URL limpia
+        if (window.top !== window.self) {
+          window.top.location.href = currentUrl;
+        } else {
+          window.location.href = currentUrl;
+        }
+      }
     });
   }
-});
