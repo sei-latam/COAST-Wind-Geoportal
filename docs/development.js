@@ -89,14 +89,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (themeIcon) themeIcon.className = 'fa-solid fa-sun text-amber-500';
   }
 
-  // Sincronizar y escuchar cambios en el Selector de Idioma
+// Sincronizar y escuchar cambios en el Selector de Idioma
   const langSelector = document.getElementById('lang-selector');
   if (langSelector) {
     // Comprobar si existe la cookie de Google activa para inicializar el select en el valor correcto
     const match = document.cookie.match(/(^| )googtrans=([^;]+)/);
     if (match) {
       const currentLang = match[2].split('/').pop();
-      if (currentLang === 'en' || currentLang === 'es') {
+      
+      // Lista de todos los idiomas que agregamos para Cloudflare
+      const validLangs = ['es', 'en', 'de', 'fr', 'it', 'ja', 'ko', 'pt', 'ru', 'zh-CN'];
+      
+      // Si el idioma de la cookie está en nuestra lista, lo sincroniza en el selector visual
+      if (validLangs.includes(currentLang)) {
         langSelector.value = currentLang;
       }
     }

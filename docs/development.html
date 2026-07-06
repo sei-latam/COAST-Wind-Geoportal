@@ -32,11 +32,18 @@
           </a>
       </div>
       <div class="flex items-center gap-2 border-l border-slate-850 pl-3 ml-1 tracking-tight">
-          <select id="lang-selector" class="select-lang-custom">
-            <option value="es">🇲🇽 ES</option>
-            <option value="en">🇺🇸 EN</option>
-          </select>
-
+        <select id="lang-selector" class="select-lang-custom">
+          <option value="es">🇲🇽 ES</option>
+          <option value="en">🇺🇸 EN</option>
+          <option value="de">🇩🇪 DE</option>
+          <option value="fr">🇫🇷 FR</option>
+          <option value="it">🇮🇹 IT</option>
+          <option value="ja">🇯🇵 JA</option>
+          <option value="ko">🇰🇷 KO</option>
+          <option value="pt">🇧🇷 PT</option>
+          <option value="ru">🇷🇺 RU</option>
+          <option value="zh-CN">🇨🇳 ZH</option>
+        </select>
           <button id="theme-toggle" title="Cambiar tema" class="btn-theme-toggle">
             <i id="theme-icon" class="fa-solid fa-moon"></i>
           </button>
@@ -205,15 +212,15 @@
   </footer>
 
   <div id="google_translate_element" style="display:none !important;"></div>
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'es',
-        includedLanguages: 'en,es',
-        autoDisplay: false
-      }, 'google_translate_element');
-    }
-  </script>
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+          pageLanguage: 'es',
+          includedLanguages: 'es,en,de,fr,it,ja,ko,pt,ru,zh-CN',
+          autoDisplay: false
+        }, 'google_translate_element');
+      }
+    </script>
   <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   
   <script src="development.js"></script>

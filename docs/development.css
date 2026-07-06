@@ -57,10 +57,6 @@ html { scroll-behavior: smooth; }
   color: #ffffff;
 }
 
-/* ==========================================================================
-   MUTACIONES PARA MODO CLARO (Sobrescriben estilos oscuros estáticos)
-   ========================================================================== */
-
 body.light-theme {
   background-color: #f8fafc !important;
 }
@@ -87,7 +83,6 @@ body.light-theme .bg-slate-50 {
 }
 
 body.light-theme #sidebar {
-  background-color: #ffffff !important;
   border-color: #e2e8f0 !important;
 }
 
