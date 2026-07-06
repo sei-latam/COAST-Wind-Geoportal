@@ -5,23 +5,23 @@ var mapaBaseDefiniciones = {
   "Satélite Híbrido": {
     url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
     urlEsriLabels: "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
-    thumb: "C:\\Users\\Carlos Andres\\Documents\\GitHub\\COAST-Wind-Geoportal\\docs\\Esri_Hybrid_Map.png"
+    thumb: "https://pub-57e2d6782dd6483194a2084ca392d4ce.r2.dev/Esri_Hybrid_Map.png"
   },
   "Satélite Esri": {
     url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-    thumb: "C:\\Users\\Carlos Andres\\Documents\\GitHub\\COAST-Wind-Geoportal\\docs\\Esri_Satellite_Map.png"
+    thumb: "https://pub-57e2d6782dd6483194a2084ca392d4ce.r2.dev/Esri_Satellite_Map.png"
   },
   "Esri World Street Map": {
     url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
-    thumb: "C:\\Users\\Carlos Andres\\Documents\\GitHub\\COAST-Wind-Geoportal\\docs\\Esri_World_Street_Map.png"
+    thumb: "https://pub-57e2d6782dd6483194a2084ca392d4ce.r2.dev/Esri_World_Street_Map.png"
   },
   "Google Maps": {
     url: "https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
-    thumb: "C:\\Users\\Carlos Andres\\Documents\\GitHub\\COAST-Wind-Geoportal\\docs\\Google_Maps.png"
+    thumb: "https://pub-57e2d6782dd6483194a2084ca392d4ce.r2.dev/Google_Maps.png"
   },
   "Google Satélite": {
     url: "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
-    thumb: "C:\\Users\\Carlos Andres\\Documents\\GitHub\\COAST-Wind-Geoportal\\docs\\Google_Satellite.png"
+    thumb: "https://pub-57e2d6782dd6483194a2084ca392d4ce.r2.dev/Esri_Satellite_Map.png"
   }
 };
 
