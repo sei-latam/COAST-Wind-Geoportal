@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+body { 
+  font-family: 'Inter', sans-serif; 
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+.content-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1.5rem;
+  padding: 3rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.technical-text { 
+  line-height: 1.8; 
+  color: #334155; 
+  text-align: justify;
+  hyphens: auto;
+}
+
+.sticky-sidebar {
+  position: sticky;
+  top: 100px;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #475569;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.sidebar-link:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
+.sidebar-link.active {
+  background-color: #0f172a;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   MUTACIONES PARA MODO CLARO (Sobrescriben estilos oscuros estáticos)
+   ========================================================================== */
+
+body.light-theme {
+  background-color: #f8fafc !important;
+}
+
+body.light-theme .content-card {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+
+body.light-theme .content-card h1,
+body.light-theme .content-card h2,
+body.light-theme .content-card h5 {
+  color: #0f172a !important;
+}
+
+body.light-theme .content-card p,
+body.light-theme .content-card text-sm,
+body.light-theme .content-card .text-gray-600 {
+  color: #334155 !important;
+}
+
+body.light-theme .bg-gray-50 {
+  background-color: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
+}
+
+body.light-theme #sidebar {
+  border-color: #e2e8f0 !important;
+}
+
+body.light-theme #sidebar-title {
+  color: #64748b !important;
+}
+
+body.light-theme #sidebar nav a.text-gray-600 {
+  color: #475569 !important;
+}
+
+body.light-theme #sidebar nav a.text-gray-600:hover {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+/* Mutación del HEADER en Modo Claro */
+body.light-theme header {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05) !important;
+}
+
+body.light-theme header a,
+body.light-theme header button,
+body.light-theme header select {
+  color: #0f172a !important;
+}
+
+body.light-theme header a:hover {
+  background-color: #e2e8f0 !important;
+}
+
+body.light-theme header .border-slate-850 {
+  border-color: #cbd5e1 !important;
+}
+
+body.light-theme header .select-lang-custom {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Mutación del FOOTER en Modo Claro */
+body.light-theme footer {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 -10px 25px -5px rgba(0, 0, 0, 0.05) !important;
+}
+
+body.light-theme footer span,
+body.light-theme footer a {
+  color: #334155 !important;
+}
+
+body.light-theme footer a:hover {
+  color: #0284c7 !important;
+}
+
+body.light-theme footer .bg-slate-900\/50 {
+  background-color: #f1f5f9 !important;
+}
+
+body.light-theme footer .bg-slate-900\/50 span {
+  color: #475569 !important;
+}
