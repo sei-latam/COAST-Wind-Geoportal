@@ -78,3 +78,46 @@ document.addEventListener('DOMContentLoaded', () => {
     if (themeIcon) themeIcon.className = 'fa-solid fa-sun';
   }
 });
+
+
+
+// 5. Sistema de Traducción Automática (Google Translate)
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'es',
+    includedLanguages: 'en,es',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+    autoDisplay: false
+  }, 'google_translate_element');
+}
+
+function changeLanguage(lang) {
+  const iframe = document.querySelector('.goog-te-menu-frame');
+  if (!iframe) {
+    setTimeout(() => changeLanguage(lang), 300);
+    return;
+  }
+  const doc = iframe.contentDocument || iframe.contentWindow.document;
+  const languages = doc.querySelectorAll('.goog-te-menu2-item span.text');
+  let targetNode = null;
+  
+  languages.forEach(node => {
+    if (lang === 'en' && (node.textContent.includes('Inglés') || node.textContent.includes('English'))) {
+      targetNode = node;
+    } else if (lang === 'es' && (node.textContent.includes('Español') || node.textContent.includes('Spanish'))) {
+      targetNode = node;
+    }
+  });
+
+  if (targetNode) targetNode.click();
+}
+
+// Agregar este escuchador dentro del bloque document.addEventListener('DOMContentLoaded', ...) existente:
+document.addEventListener('DOMContentLoaded', () => {
+  const langSelector = document.getElementById('lang-selector');
+  if (langSelector) {
+    langSelector.addEventListener('change', (e) => {
+      changeLanguage(e.target.value);
+    });
+  }
+});
