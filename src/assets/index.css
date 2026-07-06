@@ -140,21 +140,20 @@ body {
   font-size: 11px;
 }
 
-/* 1. Fondo por defecto (Modo Oscuro): Tu Imagen con una capa oscura encima */
+/* 1. Fondo por defecto (Modo Oscuro): Tu imagen con una capa oscura encima */
 body {
-  background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.90)), 
-                    url('https://pub-57e2d6782dd6483194a2084ca392d4ce.r2.dev/Body_wepage.jpg') !important;
+  background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), 
+                    url('Body_wepage.jpg') !important;
   background-size: cover !important;
   background-position: center !important;
   background-attachment: fixed !important;
   background-repeat: no-repeat !important;
 }
 
-
-/* 2. Cuando se activa el Modo Claro: La misma imagen pero con una capa blanca/translúcida encima */
+/* 2. Cuando se activa el Modo Claro: La misma imagen pero con una capa blanca encima */
 body.light-theme {
   background-image: linear-gradient(rgba(241, 245, 249, 0.88), rgba(241, 245, 249, 0.88)), 
-                    url('https://pub-57e2d6782dd6483194a2084ca392d4ce.r2.dev/Body_wepage.jpg') !important;
+                    url('Body_wepage.jpg') !important;
   background-size: cover !important;
   background-position: center !important;
   background-attachment: fixed !important;
