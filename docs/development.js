@@ -1,3 +1,4 @@
+// 1. Reloj Institucional con Zona Horaria de Bogotá
 function updateDateTime() {
   const options = { 
     weekday: 'long', 
@@ -50,7 +51,7 @@ function toggleTheme() {
   body.classList.toggle('light-theme');
 
   if (body.classList.contains('light-theme')) {
-    if (themeIcon) themeIcon.className = 'fa-solid fa-sun';
+    if (themeIcon) themeIcon.className = 'fa-solid fa-sun text-amber-500';
     localStorage.setItem('theme', 'light');
   } else {
     if (themeIcon) themeIcon.className = 'fa-solid fa-moon';
@@ -58,7 +59,17 @@ function toggleTheme() {
   }
 }
 
-// 4. Inicializador de procesos al cargar el DOM
+// Función Controladora de traducción estable por cookies (Google Translate)
+function changeLanguage(lang) {
+  // Setea la cookie en el dominio actual y subdominios
+  document.cookie = "googtrans=/es/" + lang + "; path=/; domain=" + window.location.hostname;
+  document.cookie = "googtrans=/es/" + lang + "; path=/;";
+  
+  // Recarga para procesar la traducción limpia desde el inicio
+  location.reload();
+}
+
+// 4. Inicializador de procesos unificado al cargar el DOM
 document.addEventListener('DOMContentLoaded', () => {
   // Inicializar reloj
   setInterval(updateDateTime, 1000);
@@ -75,35 +86,24 @@ document.addEventListener('DOMContentLoaded', () => {
   if (savedTheme === 'light') {
     document.body.classList.add('light-theme');
     const themeIcon = document.getElementById('theme-icon');
-    if (themeIcon) themeIcon.className = 'fa-solid fa-sun';
+    if (themeIcon) themeIcon.className = 'fa-solid fa-sun text-amber-500';
   }
-});
 
-
-// Escuchador para tu selector personalizado de idiomas
+  // Sincronizar y escuchar cambios en el Selector de Idioma
   const langSelector = document.getElementById('lang-selector');
   if (langSelector) {
-    // Sincronizar el estado del selector según la URL actual
-    if (window.location.href.includes('translate.google.com')) {
-      langSelector.value = 'en';
-    } else {
-      langSelector.value = 'es';
+    // Comprobar si existe la cookie de Google activa para inicializar el select en el valor correcto
+    const match = document.cookie.match(/(^| )googtrans=([^;]+)/);
+    if (match) {
+      const currentLang = match[2].split('/').pop();
+      if (currentLang === 'en' || currentLang === 'es') {
+        langSelector.value = currentLang;
+      }
     }
 
+    // Escuchar la acción de cambio del usuario
     langSelector.addEventListener('change', (e) => {
-      const selectedLang = e.target.value;
-      const currentUrl = window.location.href.split('?')[0]; // Limpiar parámetros viejos
-
-      if (selectedLang === 'en') {
-        // Redirección directa al traductor de Google en modo espejo seguro
-        window.location.href = `https://translate.google.com/translate?sl=es&tl=en&u=${encodeURIComponent(currentUrl)}`;
-      } else {
-        // Si vuelve a español, romper el marco de traducción regresando a la URL limpia
-        if (window.top !== window.self) {
-          window.top.location.href = currentUrl;
-        } else {
-          window.location.href = currentUrl;
-        }
-      }
+      changeLanguage(e.target.value);
     });
   }
+});
