@@ -42,7 +42,7 @@ var capasWMSActivas = {};
 var wmsBaseUrl = "https://geoserver.coast-wind.org/geoserver/coast_wind_data/wms";
 
 var capasProyecto = [
-  { id: "1_env_interest_suma_geotiff", nombre: "1_env_interest_suma_geotiff", grupo: "Síntesis" },
+  { id: "1_env_interest_suma_geotiff", nombre: "Environmental Sensitivity Index (ESI)", grupo: "índice (ESI)" },
   { id: "MANGLARES_DE_COLOMBIA_grilla_raster", nombre: "Manglares", grupo: "Ecosistemas" },
   { id: "Distribución_de_Pastos_Marinos_grilla_raster", nombre: "Presencia de pastos marinos", grupo: "Ecosistemas" },
   { id: "Unidades_de_las_Áreas_Coralinas_(Poligonos)_grilla_raster", nombre: "Áreas coralinas", grupo: "Ecosistemas" },
