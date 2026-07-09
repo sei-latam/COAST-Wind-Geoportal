@@ -79,28 +79,21 @@
   <aside id="panel-izquierdo" class="absolute top-36 left-4 z-30 w-[285px] max-h-[calc(100vh-220px)] bg-slate-900/90 backdrop-blur-md border border-slate-800 p-2.5 rounded-xl shadow-2xl flex flex-col gap-2 overflow-hidden transition-all duration-300 hidden">
     
     <div class="dashboard-panel p-2 bg-slate-950/40 border-slate-800/80 shrink-0">
-      <div class="text-[10px] font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1 mb-1">
-        <i class="fa-solid fa-earth-americas text-blue-500"></i> Mapa Base rápido
+      <div class="text-[10px] font-bold text-slate-200 tracking-wider flex items-center gap-1 mb-1">
+        <i class="fa-solid fa-earth-americas text-blue-500"></i> Ajuste de Opacidad
       </div>
-      <select id="selector-basemap" onchange="cambiarMapaBaseRapido(this.value)" class="w-full text-[11px] bg-slate-900 border border-slate-700 rounded-md p-1.5 font-medium text-slate-200 focus:outline-none">
-        <option value="Satélite Híbrido">Satélite Híbrido (Esri)</option>
-        <option value="Satélite Esri">Satélite Esri Pure</option>
-        <option value="Google Satélite">Google Satélite</option>
-        <option value="Google Maps">Google Maps</option>
-        <option value="Esri World Street Map">Esri Street Map</option>
-      </select>
       <input type="range" id="opacity-slider" min="10" max="100" value="100" class="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500 mt-1.5">
     </div>
 
     <div class="flex-1 min-h-[120px] dashboard-panel overflow-hidden bg-slate-950/40 border-slate-800/80 flex flex-col">
-      <div class="panel-header text-white border-b border-slate-800/80 bg-slate-950/60 font-bold text-[10px] uppercase tracking-wider p-2">
+      <div class="panel-header text-white border-b border-slate-800/80 bg-slate-950/60 font-bold text-[10px] tracking-wider p-2">
         <i class="fas fa-layer-group text-blue-500 mr-1"></i> Capas y Variables
       </div>
       <div id="contenedor-capas" class="panel-content overflow-y-auto p-2 flex-1"></div>
     </div>
 
-    <div class="h-28 dashboard-panel shrink-0 bg-slate-950/40 border-slate-800/80 flex flex-col">
-      <div class="panel-header text-white border-b border-slate-800/80 bg-slate-950/60 font-bold text-[10px] uppercase tracking-wider p-2">
+    <div class="h-20 dashboard-panel shrink-0 bg-slate-950/40 border-slate-800/80 flex flex-col">
+      <div class="panel-header text-white border-b border-slate-800/80 bg-slate-950/60 font-bold text-[10px] tracking-wider p-2">
         <i class="fas fa-chart-bar text-blue-500 mr-1"></i> Simbología
       </div>
       <div class="panel-content overflow-y-auto p-2 flex-1">
@@ -153,8 +146,8 @@
   <aside id="panel-derecho" class="absolute top-36 right-4 z-30 w-[285px] max-h-[calc(100vh-220px)] bg-slate-900/90 backdrop-blur-md border border-slate-800 p-2.5 rounded-xl shadow-2xl flex flex-col gap-2 overflow-hidden transition-all duration-300 hidden">
     
     <div class="dashboard-panel p-2 bg-slate-950/40 border-slate-800/80 shrink-0">
-      <div class="text-[10px] font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1 mb-1">
-        <i class="fa-solid fa-network-wired text-blue-500"></i> Conexión Externa GIS
+      <div class="text-[10px] font-bold text-slate-200 tracking-wider flex items-center gap-1 mb-1">
+        <i class="fa-solid fa-map text-blue-500"></i> GeoServicios WMS/WFS
       </div>
       <div class="flex flex-col gap-1.5 text-[9px]">
         <div class="flex gap-1">
@@ -169,18 +162,10 @@
     </div>
 
     <div class="flex-1 min-h-[120px] dashboard-panel overflow-hidden bg-slate-950/40 border-slate-800/80 flex flex-col">
-      <div class="panel-header text-white border-b border-slate-800/80 bg-slate-950/60 font-bold text-[10px] uppercase tracking-wider p-2">
-        <i class="fas fa-download text-blue-500 mr-1"></i> Extracción de Datos
+      <div class="panel-header text-white border-b border-slate-800/80 bg-slate-950/60 font-bold text-[10px] tracking-wider p-2">
+        <i class="fas fa-download text-blue-500 mr-1"></i> Descarga de Datos
       </div>
       <div id="panel-descargas" class="panel-content overflow-y-auto p-2 flex-1 space-y-2"></div>
-    </div>
-
-    <div class="h-20 dashboard-panel shrink-0 bg-slate-950/40 border-slate-800/80 p-2 flex flex-col justify-between">
-      <div>
-        <p class="text-[10px] font-bold text-slate-200 uppercase mb-0.5">Proyecto COAST</p>
-        <p class="text-[9px] text-slate-400 leading-tight">Desarrollado por el SEI-LA.</p>
-      </div>
-      <span class="bg-blue-950/60 text-blue-400 text-[8px] font-bold px-1.5 py-0.5 rounded border border-blue-900/50 w-max">v1.0 - 2026</span>
     </div>
   </aside>
 
@@ -194,10 +179,31 @@
     <button onclick="map.zoomOut()" title="Alejar" class="w-8 h-8 flex items-center justify-center text-slate-300 hover:bg-slate-800 hover:text-white transition-colors border-t border-slate-800"><i class="fa-solid fa-minus text-xs"></i></button>
   </div>
 
-  <footer class="absolute bottom-3 left-4 right-4 h-10 border border-slate-800 bg-[#0f172a]/90 backdrop-blur-md flex items-center justify-center px-6 z-50 rounded-xl shadow-2xl text-slate-400 text-[11px]">
-    <span>Stockholm Environment Institute Latin America Center (SEI-LA) © 2026 Todos los derechos reservados</span>
-  </footer>
+<footer class="absolute bottom-4 left-1/2 -translate-x-1/2 w-max max-w-[90vw] border border-slate-800 bg-[#0f172a]/95 py-1.5 px-6 z-50 rounded-full shadow-2xl text-slate-400">
+    <div class="flex items-center justify-between gap-6 text-[11px]">
+      
+      <div class="flex items-center gap-2.5">
+        <span class="font-bold text-slate-200 tracking-tight">
+          Stockholm Environment Institute Latin America Center (SEI-LA)
+        </span>
+      </div>
 
+      <span class="text-slate-800">|</span>
+
+      <div class="flex gap-4">
+        <a href="#" class="text-slate-400 hover:text-blue-400 no-underline transition-all font-medium">Acerca de SEI-LA</a>
+        <a href="#" class="text-slate-400 hover:text-blue-400 no-underline transition-all font-medium flex items-center gap-1"><i class="fab fa-github"></i> GitHub</a>
+        <a href="#" class="text-slate-400 hover:text-blue-400 no-underline transition-all font-medium">Privacidad y Cookies</a>
+      </div>
+
+      <span class="text-slate-800">|</span>
+
+      <div class="text-slate-500 font-medium">
+        © 2026 Todos los derechos reservados.
+      </div>
+
+    </div>
+  </footer>
 </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
