@@ -503,12 +503,6 @@ function actualizarPanelInformacion() {
 }
 
 
-
-
-
-
-
-
 window.onload = function() {
   inicializarMenu();
   construirGaleriaMapasBase();
