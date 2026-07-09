@@ -259,7 +259,34 @@ function activarHerramientaDibujo(tipo) {
 }
 
 function calcularDistanciaRuta(puntos) { var dist = 0; for (var i = 0; i < puntos.length - 1; i++) { dist += puntos[i].distanceTo(puntos[i+1]); } return dist; }
-function limpiarDibujos() { capasDibujo.clearLayers(); desactivarModosMapa(); }
+
+function limpiarDibujos() {
+  // 1. Borrar todas las capas guardadas en el FeatureGroup
+  capasDibujo.clearLayers();
+  
+  // 2. Si se quedó un objeto a mitad de dibujo en el mapa, eliminarlo
+  if (dibujandoObjeto) {
+    map.removeLayer(dibujandoObjeto);
+    dibujandoObjeto = null;
+  }
+  
+  // 3. Si el tooltip de medición se quedó flotando, removerlo
+  if (tooltipMedicion) {
+    map.removeLayer(tooltipMedicion);
+    tooltipMedicion = null;
+  }
+  
+  // 4. Resetear arreglos de coordenadas y estados intermedios
+  puntosRuta = [];
+  puntosMedicion = [];
+  estaDibujandoLasso = false;
+  
+  // 5. Apagar los listeners del mapa y restaurar la interfaz
+  desactivarModosMapa();
+  
+  // 6. Asegurar que el mapa recupere el arrastre por si se limpió durante un trazo
+  map.dragging.enable();
+}
 
 var debounceTimer;
 function buscarSugerencias() {
