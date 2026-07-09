@@ -1,5 +1,4 @@
 var map = L.map('map', { zoomControl: false }).setView([11.08, -74.05], 7);
-L.control.zoom({ position: 'bottomright' }).addTo(map);
 
 var mapaBaseDefiniciones = {
   "Satélite Híbrido": {
@@ -308,26 +307,88 @@ function inicializarMenu() {
   });
 
   for (var nomGrupo in grupos) {
+    // 1. Crear el título del grupo
     var tituloGrupo = document.createElement('h3');
-    tituloGrupo.className = "text-[10px] font-bold text-slate-500 mt-4 mb-2 border-b border-slate-100 pb-1 tracking-wider flex items-center justify-between";
-    tituloGrupo.innerHTML = `<span>${nomGrupo}</span> <i class="fas fa-chevron-down text-[8px]"></i>`;
+    tituloGrupo.className = "text-[10px] font-bold text-slate-400 mt-4 mb-2 border-b border-slate-800 pb-1 tracking-wider flex items-center justify-between cursor-pointer select-none";
+    tituloGrupo.innerHTML = `<span>${nomGrupo}</span> <i class="fas fa-chevron-down text-[8px] transition-transform duration-200"></i>`;
     contenedor.appendChild(tituloGrupo);
 
+    // Al crear el subcontenedor, forzamos que inicie oculto
+    var contenedorVariables = document.createElement('div');
+    contenedorVariables.className = "space-y-1";
+    contenedorVariables.style.display = "none"; // <-- ESTA LÍNEA asegura que inicie colapsado
+    contenedor.appendChild(contenedorVariables);
+    // Opcional: inicializar la flecha rotada 90 grados para simular estado cerrado
+    tituloGrupo.querySelector('.fa-chevron-down').style.transform = "rotate(-90deg)";
+
+    // 3. Configurar el evento para colapsar/expandir al hacer clic en el título
+    tituloGrupo.onclick = (function(bloque, icono) {
+      return function() {
+        if (bloque.style.display === "none") {
+          bloque.style.display = "block";
+          icono.style.transform = "rotate(0deg)";
+        } else {
+          bloque.style.display = "none";
+          icono.style.transform = "rotate(-90deg)"; // Rota la flecha indicando que está cerrado
+        }
+      };
+    })(contenedorVariables, tituloGrupo.querySelector('.fa-chevron-down'));
+
+    // 4. Inyectar las variables dentro de SU CONTENEDOR correspondiente (no al contenedor general)
     grupos[nomGrupo].forEach(capa => {
       var item = document.createElement('div');
       item.className = "layer-item";
       item.id = "item-" + capa.id;
 
       item.innerHTML = `
-        <label class="flex items-center gap-2 cursor-pointer flex-1 text-[11px] font-sans font-medium text-slate-700 tracking-tight break-all">
+        <label class="flex items-center gap-2 cursor-pointer flex-1 text-[11px] font-sans font-medium text-slate-200 tracking-tight break-all">
           <input type="checkbox" id="chk-${capa.id}" class="rounded text-blue-600 focus:ring-blue-500 w-3.5 h-3.5 shrink-0" onchange="toggleCapa('${capa.id}', '${capa.nombre}')">
           <span>${capa.nombre}</span>
         </label>
       `;
-      contenedor.appendChild(item);
+      contenedorVariables.appendChild(item); // <--- Corregido: va al bloque del grupo
     });
   }
 }
+
+function togglePanelLateral() {
+  var panel = document.getElementById('panel-izquierdo');
+  var icono = document.getElementById('icono-flecha-panel');
+  
+  if (!panel || !icono) return;
+
+  // Alternar la clase de animación/desplazamiento
+  panel.classList.toggle('panel-oculto-izq');
+
+  // Cambiar la flecha según el estado del panel
+  if (panel.classList.contains('panel-oculto-izq')) {
+    icono.className = "fa-solid fa-chevron-right text-[10px]";
+  } else {
+    icono.className = "fa-solid fa-chevron-left text-[10px]";
+  }
+}
+
+
+
+function togglePanelDerecho() {
+  var panel = document.getElementById('panel-derecho');
+  var icono = document.getElementById('icono-flecha-derecho');
+  
+  if (!panel || !icono) return;
+
+  // Alternar la clase de desplazamiento hacia la derecha
+  panel.classList.toggle('panel-oculto-der');
+
+  // Cambiar la dirección de la flecha según el estado del panel
+  if (panel.classList.contains('panel-oculto-der')) {
+    icono.className = "fa-solid fa-chevron-left text-[10px]";
+  } else {
+    icono.className = "fa-solid fa-chevron-right text-[10px]";
+  }
+}
+
+
+
 
 function toggleCapa(layerName, tituloAmigable) {
   var checkBox = document.getElementById("chk-" + layerName);
