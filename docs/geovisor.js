@@ -416,7 +416,6 @@ function togglePanelDerecho() {
 
 
 
-
 function toggleCapa(layerName, tituloAmigable) {
   var checkBox = document.getElementById("chk-" + layerName);
   var containerItem = document.getElementById("item-" + layerName);
@@ -478,18 +477,23 @@ function actualizarPanelInformacion() {
   var contenedorDescargasItem = panelDescargas.querySelector('div');
 
   activas.forEach(idCapa => {
-    var urlDescargaRaster = `${wmsBaseUrl}?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetMap&LAYERS=coast_wind_data:${idCapa}&FORMAT=image/geotiff&SRS=EPSG:4326&BBOX=9.0,-77.0,14.0,-71.0&WIDTH=1200&HEIGHT=1000`;
-    var urlDescargaKML = `https://geoserver.coast-wind.org/geoserver/coast_wind_data/wms/kml?layers=coast_wind_data:${idCapa}`;
+    // CORRECCIÓN CLAVE: El BBOX ordenado exactamente con los límites de tu GeoServer (MinX, MinY, MáxX, MáxY)
+    // El Width y Height mantienen una proporción similar a la extensión geográfica para evitar distorsiones del píxel.
+    var bboxExacto = "-77.45093,7.88595,-70.95308,13.50104";
+    
+    var urlDescargaRaster = `${wmsBaseUrl}?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=coast_wind_data:${idCapa}&FORMAT=image/geotiff&SRS=EPSG:4326&BBOX=${bboxExacto}&WIDTH=1500&HEIGHT=1300`;
+    var urlDescargaKML = `${wmsBaseUrl}?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=coast_wind_data:${idCapa}&FORMAT=application/vnd.google-earth.kml+xml&SRS=EPSG:4326&BBOX=${bboxExacto}&WIDTH=1024&HEIGHT=1024`;
 
     var itemDescarga = document.createElement('div');
     itemDescarga.className = "bg-white p-2 border border-slate-200 rounded-lg shadow-sm font-sans text-[10px] flex flex-col gap-1.5";
+    
     itemDescarga.innerHTML = `
       <div class="text-slate-700 font-semibold tracking-tight break-all border-b border-slate-100 pb-1">${idCapa}</div>
       <div class="grid grid-cols-2 gap-1.5">
-        <a href="${urlDescargaRaster}" target="_blank" download class="bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-center py-1 rounded border border-emerald-200 font-sans font-semibold text-[10px] tracking-tight no-underline transition-colors flex items-center justify-center gap-1">
+        <a href="${urlDescargaRaster}" download="${idCapa}.tif" target="_blank" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-center py-1 rounded border border-emerald-200 font-sans font-semibold text-[10px] tracking-tight no-underline transition-colors flex items-center justify-center gap-1">
           <i class="fa-solid fa-file-raster text-[9px]"></i> GeoTIFF
         </a>
-        <a href="${urlDescargaKML}" target="_blank" class="bg-amber-50 hover:bg-amber-100 text-amber-700 text-center py-1 rounded border border-amber-200 font-sans font-semibold text-[10px] tracking-tight no-underline transition-colors flex items-center justify-center gap-1">
+        <a href="${urlDescargaKML}" download="${idCapa}.kml" target="_blank" class="bg-amber-50 hover:bg-amber-100 text-amber-700 text-center py-1 rounded border border-amber-200 font-sans font-semibold text-[10px] tracking-tight no-underline transition-colors flex items-center justify-center gap-1">
           <i class="fa-solid fa-earth-americas text-[9px]"></i> KML (Earth)
         </a>
       </div>
@@ -497,6 +501,13 @@ function actualizarPanelInformacion() {
     contenedorDescargasItem.appendChild(itemDescarga);
   });
 }
+
+
+
+
+
+
+
 
 window.onload = function() {
   inicializarMenu();
@@ -507,8 +518,6 @@ window.onload = function() {
   
   actualizarPanelInformacion();
 };
-
-
 
 var marcadorUbicacion = null;
 
@@ -540,20 +549,6 @@ function obtenerMiUbicacion() {
     { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function updateDateTime() {
   const options = { 
