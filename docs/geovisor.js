@@ -44,31 +44,31 @@ var wmsBaseUrl = "https://geoserver.coast-wind.org/geoserver/coast_wind_data/wms
 
 var capasProyecto = [
   { id: "1_env_interest_suma_geotiff", nombre: "1_env_interest_suma_geotiff", grupo: "Síntesis" },
-  { id: "MANGLARES_DE_COLOMBIA_grilla_raster", nombre: "MANGLARES_DE_COLOMBIA_grilla_raster", grupo: "Ecosistemas" },
-  { id: "Distribución_de_Pastos_Marinos_grilla_raster", nombre: "Distribución_de_Pastos_Marinos_grilla_raster", grupo: "Ecosistemas" },
-  { id: "Unidades_de_las_Áreas_Coralinas_(Poligonos)_grilla_raster", nombre: "Unidades_de_las_Áreas_Coralinas_(Poligonos)_grilla_raster", grupo: "Ecosistemas" },
-  { id: "fondvegalgascarnosas_fondvegalgascarnosas_grilla_raster", nombre: "fondvegalgascarnosas_fondvegalgascarnosas_grilla_raster", grupo: "Ecosistemas" },
-  { id: "Fondos_Duros%3A_Algas_Calcareas_grilla_raster", nombre: "Fondos_Duros%3A_Algas_Calcareas_grilla_raster", grupo: "Ecosistemas" },
-  { id: "AlimentacionTortugas_shp_grilla_raster", nombre: "AlimentacionTortugas_shp_grilla_raster", grupo: "Fauna" },
-  { id: "Playas_de_Anidacion_de_Tortugas_grilla_raster", nombre: "Playas_de_Anidacion_de_Tortugas_grilla_raster", grupo: "Fauna" },
-  { id: "DesoveNodrizaStrombusg_grilla_raster", nombre: "DesoveNodrizaStrombusg_grilla_raster", grupo: "Fauna" },
-  { id: "CongregacionPeces_grilla_raster", nombre: "CongregacionPeces_grilla_raster", grupo: "Fauna" },
-  { id: "PresenciaMamiferosMarinos_grilla_raster", nombre: "PresenciaMamiferosMarinos_grilla_raster", grupo: "Fauna" },
-  { id: "Congregacion_de_Aves_Marinas_grilla_raster", nombre: "Congregacion_de_Aves_Marinas_grilla_raster", grupo: "Fauna" },
-  { id: "Congregacion_de_Aves_Playeras_grilla_raster", nombre: "Congregacion_de_Aves_Playeras_grilla_raster", grupo: "Fauna" },
-  { id: "Playas_Caribe_grilla_raster", nombre: "Playas_Caribe_grilla_raster", grupo: "Geomorfología" },
-  { id: "Playones_grilla_raster", nombre: "Playones_grilla_raster", grupo: "Geomorfología" },
-  { id: "Playones_Salinos_grilla_raster", nombre: "Playones_Salinos_grilla_raster", grupo: "Geomorfología" },
-  { id: "Acantilados_grilla_raster", nombre: "Acantilados_grilla_raster", grupo: "Geomorfología" },
-  { id: "Humedales_Costeros_Caribe_100K_grilla_raster", nombre: "Humedales_Costeros_Caribe_100K_grilla_raster", grupo: "Geomorfología" },
-  { id: "Lagunas_Costeras_grilla_raster", nombre: "Lagunas_Costeras_grilla_raster", grupo: "Geomorfología" },
-  { id: "Estuarios_grilla_raster", nombre: "Estuarios_grilla_raster", grupo: "Geomorfología" },
-  { id: "Panganales_grilla_raster", nombre: "Panganales_grilla_raster", grupo: "Geomorfología" },
-  { id: "playonesfluviomarinos_playonesfluviomarinos_grilla_raster", nombre: "playonesfluviomarinos_playonesfluviomarinos_grilla_raster", grupo: "Geomorfología" },
-  { id: "ASB_Caribe_shape_grilla_raster", nombre: "ASB_Caribe_shape_grilla_raster", grupo: "Gestión" },
-  { id: "runap_-_Registro_Unico_Nacional_AP_grilla_raster", nombre: "runap_-_Registro_Unico_Nacional_AP_grilla_raster", grupo: "Gestión" },
-  { id: "Sitios_Prioritarios_Conservación_Caribe_grilla_raster", nombre: "Sitios_Prioritarios_Conservación_Caribe_grilla_raster", grupo: "Gestión" },
-  { id: "Surgencia_grilla_raster", nombre: "Surgencia_grilla_raster", grupo: "Gestión" }
+  { id: "MANGLARES_DE_COLOMBIA_grilla_raster", nombre: "Manglares", grupo: "Ecosistemas" },
+  { id: "Distribución_de_Pastos_Marinos_grilla_raster", nombre: "Presencia de pastos marinos", grupo: "Ecosistemas" },
+  { id: "Unidades_de_las_Áreas_Coralinas_(Poligonos)_grilla_raster", nombre: "Áreas coralinas", grupo: "Ecosistemas" },
+  { id: "fondvegalgascarnosas_fondvegalgascarnosas_grilla_raster", nombre: "Fondo algas carnosas", grupo: "Ecosistemas" },
+  { id: "Fondos_Duros%3A_Algas_Calcareas_grilla_raster", nombre: "Fondos duros algas calcáreas", grupo: "Ecosistemas" },
+  { id: "AlimentacionTortugas_shp_grilla_raster", nombre: "Zonas de alimentación de tortugas", grupo: "Fauna" },
+  { id: "Playas_de_Anidacion_de_Tortugas_grilla_raster", nombre: "Playas de anidación de tortugas", grupo: "Fauna" },
+  { id: "DesoveNodrizaStrombusg_grilla_raster", nombre: "Desove de nodriza strombusg", grupo: "Fauna" },
+  { id: "CongregacionPeces_grilla_raster", nombre: "Congregación de peces", grupo: "Fauna" },
+  { id: "PresenciaMamiferosMarinos_grilla_raster", nombre: "Presencia de mamíferos marinos", grupo: "Fauna" },
+  { id: "Congregacion_de_Aves_Marinas_grilla_raster", nombre: "Congregación de aves marinas", grupo: "Fauna" },
+  { id: "Congregacion_de_Aves_Playeras_grilla_raster", nombre: "Congregación de aves playeras", grupo: "Fauna" },
+  { id: "Playas_Caribe_grilla_raster", nombre: "Playas", grupo: "Geomorfología" },
+  { id: "Playones_grilla_raster", nombre: "Playones", grupo: "Geomorfología" },
+  { id: "Playones_Salinos_grilla_raster", nombre: "Playones salinos", grupo: "Geomorfología" },
+  { id: "Acantilados_grilla_raster", nombre: "Acantilados", grupo: "Geomorfología" },
+  { id: "Humedales_Costeros_Caribe_100K_grilla_raster", nombre: "Humedales Costeros", grupo: "Geomorfología" },
+  { id: "Lagunas_Costeras_grilla_raster", nombre: "Lagunas Costeras", grupo: "Geomorfología" },
+  { id: "Estuarios_grilla_raster", nombre: "Estuarios", grupo: "Geomorfología" },
+  { id: "Panganales_grilla_raster", nombre: "Panganales", grupo: "Geomorfología" },
+  { id: "playonesfluviomarinos_playonesfluviomarinos_grilla_raster", nombre: "Playones fluviomarinos", grupo: "Geomorfología" },
+  { id: "ASB_Caribe_shape_grilla_raster", nombre: "Áreas significativas de biodiversidad", grupo: "Gestión" },
+  { id: "runap_-_Registro_Unico_Nacional_AP_grilla_raster", nombre: "Áreas protegidas", grupo: "Gestión" },
+  { id: "Sitios_Prioritarios_Conservación_Caribe_grilla_raster", nombre: "Sitios Prioritarios de Conservación", grupo: "Gestión" },
+  { id: "Surgencia_grilla_raster", nombre: "Surgencia", grupo: "Gestión" }
 ];
 
 function construirGaleriaMapasBase() {
@@ -309,7 +309,7 @@ function inicializarMenu() {
 
   for (var nomGrupo in grupos) {
     var tituloGrupo = document.createElement('h3');
-    tituloGrupo.className = "text-[10px] font-bold text-slate-500 mt-4 mb-2 border-b border-slate-100 pb-1 uppercase tracking-wider flex items-center justify-between";
+    tituloGrupo.className = "text-[10px] font-bold text-slate-500 mt-4 mb-2 border-b border-slate-100 pb-1 tracking-wider flex items-center justify-between";
     tituloGrupo.innerHTML = `<span>${nomGrupo}</span> <i class="fas fa-chevron-down text-[8px]"></i>`;
     contenedor.appendChild(tituloGrupo);
 
