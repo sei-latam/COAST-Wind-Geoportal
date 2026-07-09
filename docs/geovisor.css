@@ -63,7 +63,7 @@ html, body {
 }
 
 .top-36 {
-  top: 9.5rem !important; /* Inicio perfecto para los Asides laterales sin pisar el buscador */
+  top: 10.5rem !important; /* Baja ambos paneles al mismo tiempo para dar distancia con los iconos */
 }
 
 .layer-item {
