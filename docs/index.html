@@ -1,37 +1,106 @@
 <!DOCTYPE html>
-<html lang="es">
+<html class="sl-theme-dark" lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>COAST - Wind</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="logo-inst3.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="index_coast.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="This website is under construction. Please check back later.">
+    <meta property="og:title" content="Website Under Construction">
+    <meta property="og:description"
+        content="This website is under construction. Please check back later.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://digitalmalayalistudio.github.io/unstruction/">
+    <meta property="og:image" content="https://digitalmalayalistudio.github.io/unstruction/assets/preview.webp">
+    <title>Herramienta en construcción</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <script src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.18.0/dist/utilities/shoelace.js"
+        data-shoelace="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0/dist/"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.16.0/cdn/themes/dark.css">
+    <script type="module"
+        src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.18.0/cdn/components/card/card.js"></script>
+    <script type="module"
+        src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.18.0/cdn/components/button/button.js"></script>
+    <script type="module"
+        src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.18.0/cdn/components/icon-button/icon-button.js"></script>
+    <script type="module"
+        src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.18.0/cdn/components/icon/icon.js"></script>
+    <script type="module"
+        src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.18.0/cdn/components/button-group/button-group.js"></script>
+    <script type="module"
+        src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.18.0/cdn/components/badge/badge.js"></script>
+    <style>
+        body {
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: var(--sl-font-sans);
+            line-height: var(--sl-line-height-normal);
+        }
+
+        .card-overview {
+            max-width: 350px;
+        }
+
+        .card-overview small {
+            color: var(--sl-color-neutral-700);
+        }
+
+        .card-overview [slot='footer'] {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        sl-badge::part(base) {
+            background-color: var(--sl-color-orange-600);
+            --pulse-color: var(--sl-color-orange-600);
+        }
+
+        sl-button::part(base) {
+            color: var(--sl-color-gray-50);
+            background-color: var(--sl-color-orange-600);
+            border-color: var(--sl-color-orange-300);
+        }
+
+        sl-button::part(base):hover {
+            background-color: var(--sl-color-orange-500);
+        }
+
+        sl-icon-button::part(base):hover {
+            color: var(--sl-color-orange-600);
+        }
+
+        .copyright {
+            color: var(--sl-color-neutral-600);
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .copyright a {
+            color: var(--sl-color-orange-600);
+        }
+    </style>
 </head>
-<body class="bg-[#0f172a]/85 text-slate-800 min-h-screen flex flex-col">
+
+<body>
 
 <header class="relative h-[800px] overflow-hidden m-2 rounded-xl shadow-2xl shrink-0 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)]">
-  <video autoplay muted loop playsinline preload="auto" class="absolute inset-0 w-full h-full object-cover z-0">
-    <source src="https://pub-57e2d6782dd6483194a2084ca392d4ce.r2.dev/Coming%20Soon%20COAST.mp4" type="video/mp4">
-  </video>
+  <img class="absolute inset-0 h-full w-full object-cover" src="https://pub-57e2d6782dd6483194a2084ca392d4ce.r2.dev/Pie%20de%20Poster.png" alt="Pie de Poster" />
+    <source src="https://pub-57e2d6782dd6483194a2084ca392d4ce.r2.dev/Pie%20de%20Poster.png" type="image/webp" />
+  </img>
 </header>
 
+    <sl-card class="card-overview">
+        <strong>COAST - Wind</strong><br>
+        Estamos trabajando para ofrecerte una mejor herramienta<br>
+        <small>Proximamente disponible, equipo COAST-Wind</small>
+    </sl-card>
 
- <div id="google_translate_element" style="display:none !important;"></div>
-    <script type="text/javascript">
-      function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-          pageLanguage: 'es',
-          includedLanguages: 'es,en,de,fr,it,ja,ko,pt,ru,zh-CN',
-          autoDisplay: false
-        }, 'google_translate_element');
-      }
-    </script>
-  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-<script src="index_coast.js"></script>
+    <small class="copyright"><sl-icon-button name="github" label="Settings" style="font-size: 1.2rem;"
+            href="https://github.com/digitalmalayalistudio/unstruction/"
+            target="_blank"></sl-icon-button><br>SEI Latin America<br>
+        © 2026, todos los derechos reservados.</small>
 </body>
-</html>
