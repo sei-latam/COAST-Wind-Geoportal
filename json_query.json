@@ -1,0 +1,550 @@
+<<<<<<< HEAD
+[
+    {
+        "id_geotiff": "Data 1",
+        "nombre_archivo": "1_runap_DistritosNacionalManejoIntegrado_grilla_raster.tif",
+        "nom_alerta": "Área protegida: Distrito Nacional de Manejo Integrado",
+        "descri_alerta": "Restricción de uso: solo permite actividades compatibles con su zonificación y plan de manejo.",
+        "capa_origen": "Capa runap - Registro Unico Nacional AP",
+        "entidad_fuente": "Parques Nacionales Naturales de Colombia",
+        "metadatos_capa_original": "https://www.datos.gov.co/dataset/runap-Registro-Unico-Nacional-AP/n9kx-xwgg/about_data",
+        "metadatos_xml": ""
+    },
+    {
+        "id_geotiff": "Data 2",
+        "nombre_archivo": "1_runap_DistritosRegionalesManejoIntegrado_grilla_raster.tif",
+        "nom_alerta": "Área protegida: Distrito Regional de Manejo Integrado",
+        "descri_alerta": "Restricción de uso: solo permite actividades compatibles con su zonificación y plan de manejo.",
+        "capa_origen": "Capa runap - Registro Unico Nacional AP",
+        "entidad_fuente": "Parques Nacionales Naturales de Colombia",
+        "metadatos_capa_original": "https://www.datos.gov.co/dataset/runap-Registro-Unico-Nacional-AP/n9kx-xwgg/about_data",
+        "metadatos_xml": ""
+    },
+    {
+        "id_geotiff": "Data 3",
+        "nombre_archivo": "1_runap_ParqueNacionalNatural_grilla_raster.tif",
+        "nom_alerta": "Área protegida: Parque Nacional Natural",
+        "descri_alerta": "Restricción de uso: excluye actividades productivas incompatibles con sus objetivos de conservación.",
+        "capa_origen": "Capa runap - Registro Unico Nacional AP",
+        "entidad_fuente": "Parques Nacionales Naturales de Colombia",
+        "metadatos_capa_original": "https://www.datos.gov.co/dataset/runap-Registro-Unico-Nacional-AP/n9kx-xwgg/about_data",
+        "metadatos_xml": ""
+    },
+    {
+        "id_geotiff": "Data 4",
+        "nombre_archivo": "1_runap_ParquesNaturalesRegionales_grilla_raster.tif",
+        "nom_alerta": "Área protegida: Parque Natural Regional",
+        "descri_alerta": "Restricción de uso: excluye actividades productivas incompatibles con sus objetivos de conservación.",
+        "capa_origen": "Capa runap - Registro Unico Nacional AP",
+        "entidad_fuente": "Parques Nacionales Naturales de Colombia",
+        "metadatos_capa_original": "https://www.datos.gov.co/dataset/runap-Registro-Unico-Nacional-AP/n9kx-xwgg/about_data",
+        "metadatos_xml": ""
+    },
+    {
+        "id_geotiff": "Data 5",
+        "nombre_archivo": "1_runap_ReservaNatural_grilla_raster.tif",
+        "nom_alerta": "Área protegida: Reserva Natural",
+        "descri_alerta": "Restricción de uso: prioriza conservación, investigación y usos expresamente permitidos.",
+        "capa_origen": "Capa runap - Registro Unico Nacional AP",
+        "entidad_fuente": "Parques Nacionales Naturales de Colombia",
+        "metadatos_capa_original": "https://www.datos.gov.co/dataset/runap-Registro-Unico-Nacional-AP/n9kx-xwgg/about_data",
+        "metadatos_xml": ""
+    },
+    {
+        "id_geotiff": "Data 6",
+        "nombre_archivo": "1_runap_ReservaNaturalSociedadCivil_grilla_raster.tif",
+        "nom_alerta": "Área protegida: Reserva Natural de la Sociedad Civil",
+        "descri_alerta": "Restricción de uso: limita las actividades a usos sostenibles definidos para la reserva.",
+        "capa_origen": "Capa runap - Registro Unico Nacional AP",
+        "entidad_fuente": "Parques Nacionales Naturales de Colombia",
+        "metadatos_capa_original": "https://www.datos.gov.co/dataset/runap-Registro-Unico-Nacional-AP/n9kx-xwgg/about_data",
+        "metadatos_xml": ""
+    },
+    {
+        "id_geotiff": "Data 7",
+        "nombre_archivo": "1_runap_SantuarioFauna_grilla_raster.tif",
+        "nom_alerta": "Área protegida: Santuario de Fauna",
+        "descri_alerta": "Restricción de uso: excluye actividades productivas incompatibles con la protección de fauna.",
+        "capa_origen": "Capa runap - Registro Unico Nacional AP",
+        "entidad_fuente": "Parques Nacionales Naturales de Colombia",
+        "metadatos_capa_original": "https://www.datos.gov.co/dataset/runap-Registro-Unico-Nacional-AP/n9kx-xwgg/about_data",
+        "metadatos_xml": ""
+    },
+    {
+        "id_geotiff": "Data 8",
+        "nombre_archivo": "1_runap_SantuarioFaunaFlora_grilla_raster.tif",
+        "nom_alerta": "Área protegida: Santuario de Fauna y Flora",
+        "descri_alerta": "Restricción de uso: excluye actividades productivas incompatibles con la conservación de especies.",
+        "capa_origen": "Capa runap - Registro Unico Nacional AP",
+        "entidad_fuente": "Parques Nacionales Naturales de Colombia",
+        "metadatos_capa_original": "https://www.datos.gov.co/dataset/runap-Registro-Unico-Nacional-AP/n9kx-xwgg/about_data",
+        "metadatos_xml": ""
+    },
+    {
+        "id_geotiff": "Data 9",
+        "nombre_archivo": "1_runap_ViaParque_grilla_raster.tif",
+        "nom_alerta": "Área protegida: Via Parque",
+        "descri_alerta": "Restricción de uso: limita actividades incompatibles con la conservación del paisaje y biodiversidad.",
+        "capa_origen": "Capa runap - Registro Unico Nacional AP",
+        "entidad_fuente": "Parques Nacionales Naturales de Colombia",
+        "metadatos_capa_original": "https://www.datos.gov.co/dataset/runap-Registro-Unico-Nacional-AP/n9kx-xwgg/about_data",
+        "metadatos_xml": ""
+    },
+    {
+        "id_geotiff": "Data 10",
+        "nombre_archivo": "Acantilados_grilla_raster.tif",
+        "nom_alerta": "Acantilados",
+        "descri_alerta": "No restringe por sí sola; exige evaluar impactos ambientales y riesgos físicos.",
+        "capa_origen": "Capa de acantalidados",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/datasets/INVEMAR::acantilados/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/33b076e20a874c4d9cd17833b35c4047/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 11",
+        "nombre_archivo": "AlimentacionTortugas_shp_grilla_raster.tif",
+        "nom_alerta": "Zona de Alimentacion de Tortugas",
+        "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre tortugas y hábitat.",
+        "capa_origen": "Capa de AlimentacionTortugas shp",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/datasets/INVEMAR::alimentaciontortugas-shp/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/6194af81581049adb7d00fc3acc7f5a0/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 12",
+        "nombre_archivo": "ASB_Caribe_shape_grilla_raster.tif",
+        "nom_alerta": "Área Sinificativa de Biodiversidad",
+        "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre biodiversidad prioritaria.",
+        "capa_origen": "Capa de Áreas Significativas Biodiversidad Caribe",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/datasets/INVEMAR::%C3%A1reas-significativas-biodiversidad-caribe/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/b1ca65490ae44bdeb39f73f93fa3da97/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 13",
+        "nombre_archivo": "Congregacion_de_Aves_Marinas_grilla_raster.tif",
+        "nom_alerta": "Congregacion de Aves Marinas",
+        "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre aves marinas.",
+        "capa_origen": "Capa de Congregacion de Aves Marinas",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/datasets/INVEMAR::congregacion-de-aves-marinas/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/39e5696b3fd041e2a1ae050a2aadfb08/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 14",
+        "nombre_archivo": "Congregacion_de_Aves_Playeras_grilla_raster.tif",
+        "nom_alerta": "Congregacion de Aves Playeras",
+        "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre aves playeras.",
+        "capa_origen": "",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/datasets/INVEMAR::congregacion-de-aves-playeras/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/bbddde004cad4dd7aa1a9e85b2a05716/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 15",
+        "nombre_archivo": "CongregacionPeces_grilla_raster.tif",
+        "nom_alerta": "Congregacion de Peces",
+        "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre agregaciones de peces.",
+        "capa_origen": "Capa CongregacionPeces",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/datasets/INVEMAR::congregacionpeces/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/4845fef4d50c47ae9ba0d9d57c2e859b/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 16",
+        "nombre_archivo": "DesoveNodrizaStrombusg_grilla_raster.tif",
+        "nom_alerta": "Desove de Nodriza Strombusg",
+        "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre reproducción y crianza.",
+        "capa_origen": "Capa DesoveNodrizaStrombusg",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/datasets/INVEMAR::desovenodrizastrombusg/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/17a8c62fe31c4e32937704703dfbf6db/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 17",
+        "nombre_archivo": "Distribucion_de_Pastos_Marinos_grilla_raster.tif",
+        "nom_alerta": "Área con presencia de Pastos Marinos",
+        "descri_alerta": "Restricción de uso: limita actividades productivas que puedan afectar los pastos marinos.",
+        "capa_origen": "Capa Distribución de Pastos Marinos",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/datasets/INVEMAR::distribuci%C3%B3n-de-pastos-marinos/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/0c2be3903b94475e9295c4ccde7dbaf4/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 18",
+        "nombre_archivo": "Estuarios_grilla_raster.tif",
+        "nom_alerta": "Estuarios",
+        "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre dinámica estuarina.",
+        "capa_origen": "Capa Estuarios",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/datasets/INVEMAR::estuarios-1/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/eb50da9642ff4a16a48cfa4da08ffd88/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 19",
+        "nombre_archivo": "Fondos_Duros%3A_Algas_Calcareas_grilla_raster.tif",
+        "nom_alerta": "Área con Fondos Duros de Algas Calcareas",
+        "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre fondos calcáreos.",
+        "capa_origen": "Capa Fondos Duros: Algas Calcareas",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/datasets/INVEMAR::fondos-duros-algas-calcareas/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/5f47732a23104bdb8fca9d67dc24b5d1/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 20",
+        "nombre_archivo": "fondvegalgascarnosas_fondvegalgascarnosas_grilla_raster.tif",
+        "nom_alerta": "Área con Fondos de Algas Carnosas",
+        "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre fondos de algas.",
+        "capa_origen": "Capa FondVegAlgasCarnosas",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/datasets/INVEMAR::fondvegalgascarnosas/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/2fdf92d5426248399be0e86906e57a90/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 21",
+        "nombre_archivo": "Humedales_Costeros_Caribe_100K_grilla_raster.tif",
+        "nom_alerta": "Humedales Costeros",
+        "descri_alerta": "Restricción de uso: limita actividades productivas incompatibles con la conservación del humedal.",
+        "capa_origen": "Capa Humedales Costeros Caribe 100K",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/datasets/INVEMAR::humedales-costeros-caribe-100k/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/977db93fdcd04cc2b31d0b7d7739a338/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 22",
+        "nombre_archivo": "Lagunas_Costeras_grilla_raster.tif",
+        "nom_alerta": "Lagunas Costeras",
+        "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre la laguna costera.",
+        "capa_origen": "Capa Lagunas Costeras",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/datasets/INVEMAR::lagunas-costeras-1/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/fb6f1f415c3e461b982a4e295693daf7/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 23",
+        "nombre_archivo": "MANGLARES_DE_COLOMBIA_grilla_raster.tif",
+        "nom_alerta": "Área de Manglares",
+        "descri_alerta": "Restricción de uso: prohíbe o limita actividades productivas que afecten el manglar.",
+        "capa_origen": "Capa MANGLARES COLOMBIA",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/maps/896482a7b108472a9739277c4d6d18a7/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/896482a7b108472a9739277c4d6d18a7/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 24",
+        "nombre_archivo": "OstrasPerliferas_grilla_raster.tif",
+        "nom_alerta": "Presencia de Ostras Perliferas",
+        "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre ostras perlíferas.",
+        "capa_origen": "Capa OstrasPerliferas",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/datasets/INVEMAR::ostrasperliferas/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/ab413e0d28f544babe1ef546a3786fb2/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 25",
+        "nombre_archivo": "Panganales_grilla_raster.tif",
+        "nom_alerta": "Panganales",
+        "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre este bosque inundable.",
+        "capa_origen": "Capa Panganales",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/datasets/INVEMAR::panganales/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/95d3434aa13d49f2b0956539d9416539/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 26",
+        "nombre_archivo": "Playas_Caribe_grilla_raster.tif",
+        "nom_alerta": "Zona de Playas",
+        "descri_alerta": "Restricción de uso: es bien de uso público y requiere autorización para ocupación.",
+        "capa_origen": "Capa Playas Caribe",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/datasets/INVEMAR::playas-caribe/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/6730b4c86a224f32ae9e44a2ef1fe56a/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 27",
+        "nombre_archivo": "Playas_de_Anidacion_de_Tortugas_grilla_raster.tif",
+        "nom_alerta": "Área de Anidacion de Tortugas",
+        "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre anidación de tortugas.",
+        "capa_origen": "Capa Playas de Anidacion de Tortugas",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/datasets/INVEMAR::playas-de-anidacion-de-tortugas/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/e565127ea99b4b6893ce8e50fc4339c0/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 28",
+        "nombre_archivo": "Playones_grilla_raster.tif",
+        "nom_alerta": "Zona de Playones",
+        "descri_alerta": "Restricción de uso: su ocupación productiva requiere autorización por tratarse de uso público.",
+        "capa_origen": "Capa Playones",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/datasets/INVEMAR::playones/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/dbd43da7c8fb48e78ddf1d6966207e56/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 29",
+        "nombre_archivo": "Playones_Salinos_grilla_raster.tif",
+        "nom_alerta": "Zona de Playones Salinos",
+        "descri_alerta": "Restricción de uso: su ocupación productiva requiere autorización y manejo ambiental.",
+        "capa_origen": "Capa Playones Salinos",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/datasets/INVEMAR::playones-salinos/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/c71f2a8594384ba2a985e55ee09691a1/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 30",
+        "nombre_archivo": "playonesfluviomarinos_playonesfluviomarinos_grilla_raster.tif",
+        "nom_alerta": "Zona de Playones Fluviomarinos",
+        "descri_alerta": "Restricción de uso: su ocupación productiva requiere autorización y manejo ambiental.",
+        "capa_origen": "Capa Playones Fluviomarinos",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/datasets/INVEMAR::playones-fluviomarinos/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/d5bfe4d931284a42b43baf4087e36248/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 31",
+        "nombre_archivo": "PresenciaMamiferosMarinos_grilla_raster.tif",
+        "nom_alerta": "Presencia de Mamiferos Marinos",
+        "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre mamíferos marinos.",
+        "capa_origen": "Capa PresenciaMamiferosMarinos",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/datasets/INVEMAR::presenciamamiferosmarinos/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/e6282e0d6f784cafb3ebb43f0dd8fc07/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 32",
+        "nombre_archivo": "Sitios_Prioritarios_Conservacion_Caribe_grilla_raster.tif",
+        "nom_alerta": "Sitio Prioritario de Conservacion",
+        "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre prioridades de conservación.",
+        "capa_origen": "Capa Sitios Prioritarios Conservación Caribe",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/datasets/INVEMAR::sitios-prioritarios-conservaci%C3%B3n-caribe/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/fcbbfe7ad4de47bcaffaca23226f0fd9/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 33",
+        "nombre_archivo": "Surgencia_grilla_raster.tif",
+        "nom_alerta": "Área de Surgencia",
+        "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre productividad marina.",
+        "capa_origen": "Capa Surgencia",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/datasets/INVEMAR::surgencia/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/1d48b0bb905d47bba0a88ba6f4739506/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data 34",
+        "nombre_archivo": "Unidades_de_las_areas_Coralinas_(Poligonos)_grilla_raster.tif",
+        "nom_alerta": "Áreas Coralinas",
+        "descri_alerta": "Restricción de uso: prohíbe actividades productivas incompatibles con la conservación coralina.",
+        "capa_origen": "Capa GDB - Atlas de Areas Coralinas de Colombia Fase II",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/maps/35e85cca85ca42b3a0a8be987b1c5fa3/about",
+        "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/35e85cca85ca42b3a0a8be987b1c5fa3/info/metadata/metadata.xml?format=default&output=html"
+    }
+=======
+[
+  {
+    "id_geotiff": "Data1",
+    "nombre_archivo": "1_runap_DistritosNacionalManejoIntegrado_grilla_raster.tif",
+    "nom_alerta": "Área protegida: Distrito Nacional de Manejo Integrado",
+    "descri_alerta": "Restricción de uso: solo permite actividades compatibles con su zonificación y plan de manejo."
+  },
+  {
+    "id_geotiff": "Data2",
+    "nombre_archivo": "1_runap_DistritosRegionalesManejoIntegrado_grilla_raster.tif",
+    "nom_alerta": "Área protegida: Distrito Regional de Manejo Integrado",
+    "descri_alerta": "Restricción de uso: solo permite actividades compatibles con su zonificación y plan de manejo."
+  },
+  {
+    "id_geotiff": "Data3",
+    "nombre_archivo": "1_runap_ParqueNacionalNatural_grilla_raster.tif",
+    "nom_alerta": "Área protegida: Parque Nacional Natural",
+    "descri_alerta": "Restricción de uso: excluye actividades productivas incompatibles con sus objetivos de conservación."
+  },
+  {
+    "id_geotiff": "Data4",
+    "nombre_archivo": "1_runap_ParquesNaturalesRegionales_grilla_raster.tif",
+    "nom_alerta": "Área protegida: Parque Natural Regional",
+    "descri_alerta": "Restricción de uso: excluye actividades productivas incompatibles con sus objetivos de conservación."
+  },
+  {
+    "id_geotiff": "Data5",
+    "nombre_archivo": "1_runap_ReservaNatural_grilla_raster.tif",
+    "nom_alerta": "Área protegida: Reserva Natural",
+    "descri_alerta": "Restricción de uso: prioriza conservación, investigación y usos expresamente permitidos."
+  },
+  {
+    "id_geotiff": "Data6",
+    "nombre_archivo": "1_runap_ReservaNaturalSociedadCivil_grilla_raster.tif",
+    "nom_alerta": "Área protegida: Reserva Natural de la Sociedad Civil",
+    "descri_alerta": "Restricción de uso: limita las actividades a usos sostenibles definidos para la reserva."
+  },
+  {
+    "id_geotiff": "Data7",
+    "nombre_archivo": "1_runap_SantuarioFauna_grilla_raster.tif",
+    "nom_alerta": "Área protegida: Santuario de Fauna",
+    "descri_alerta": "Restricción de uso: excluye actividades productivas incompatibles con la protección de fauna."
+  },
+  {
+    "id_geotiff": "Data8",
+    "nombre_archivo": "1_runap_SantuarioFaunaFlora_grilla_raster.tif",
+    "nom_alerta": "Área protegida: Santuario de Fauna y Flora",
+    "descri_alerta": "Restricción de uso: excluye actividades productivas incompatibles con la conservación de especies."
+  },
+  {
+    "id_geotiff": "Data9",
+    "nombre_archivo": "1_runap_ViaParque_grilla_raster.tif",
+    "nom_alerta": "Área protegida: Via Parque",
+    "descri_alerta": "Restricción de uso: limita actividades incompatibles con la conservación del paisaje y biodiversidad."
+  },
+  {
+    "id_geotiff": "Data10",
+    "nombre_archivo": "Acantilados_grilla_raster.tif",
+    "nom_alerta": "Acantilados",
+    "descri_alerta": "No restringe por sí sola; exige evaluar impactos ambientales y riesgos físicos."
+  },
+  {
+    "id_geotiff": "Data11",
+    "nombre_archivo": "AlimentacionTortugas_shp_grilla_raster.tif",
+    "nom_alerta": "Zona de Alimentacion de Tortugas",
+    "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre tortugas y hábitat."
+  },
+  {
+    "id_geotiff": "Data12",
+    "nombre_archivo": "ASB_Caribe_shape_grilla_raster.tif",
+    "nom_alerta": "Área Sinificativa de Biodiversidad",
+    "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre biodiversidad prioritaria."
+  },
+  {
+    "id_geotiff": "Data13",
+    "nombre_archivo": "Congregacion_de_Aves_Marinas_grilla_raster.tif",
+    "nom_alerta": "Congregacion de Aves Marinas",
+    "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre aves marinas."
+  },
+  {
+    "id_geotiff": "Data14",
+    "nombre_archivo": "Congregacion_de_Aves_Playeras_grilla_raster.tif",
+    "nom_alerta": "Congregacion de Aves Playeras",
+    "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre aves playeras."
+  },
+  {
+    "id_geotiff": "Data15",
+    "nombre_archivo": "CongregacionPeces_grilla_raster.tif",
+    "nom_alerta": "Congregacion de Peces",
+    "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre agregaciones de peces."
+  },
+  {
+    "id_geotiff": "Data16",
+    "nombre_archivo": "DesoveNodrizaStrombusg_grilla_raster.tif",
+    "nom_alerta": "Desove de Nodriza Strombusg",
+    "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre reproducción y crianza."
+  },
+  {
+    "id_geotiff": "Data17",
+    "nombre_archivo": "Distribucion_de_Pastos_Marinos_grilla_raster.tif",
+    "nom_alerta": "Área con presencia de Pastos Marinos",
+    "descri_alerta": "Restricción de uso: limita actividades productivas que puedan afectar los pastos marinos."
+  },
+  {
+    "id_geotiff": "Data18",
+    "nombre_archivo": "Estuarios_grilla_raster.tif",
+    "nom_alerta": "Estuarios",
+    "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre dinámica estuarina."
+  },
+  {
+    "id_geotiff": "Data19",
+    "nombre_archivo": "Fondos_Duros%3A_Algas_Calcareas_grilla_raster.tif",
+    "nom_alerta": "Área con Fondos Duros de Algas Calcareas",
+    "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre fondos calcáreos."
+  },
+  {
+    "id_geotiff": "Data20",
+    "nombre_archivo": "fondvegalgascarnosas_fondvegalgascarnosas_grilla_raster.tif",
+    "nom_alerta": "Área con Fondos de Algas Carnosas",
+    "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre fondos de algas."
+  },
+  {
+    "id_geotiff": "Data21",
+    "nombre_archivo": "Humedales_Costeros_Caribe_100K_grilla_raster.tif",
+    "nom_alerta": "Humedales Costeros",
+    "descri_alerta": "Restricción de uso: limita actividades productivas incompatibles con la conservación del humedal."
+  },
+  {
+    "id_geotiff": "Data22",
+    "nombre_archivo": "Lagunas_Costeras_grilla_raster.tif",
+    "nom_alerta": "Lagunas Costeras",
+    "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre la laguna costera."
+  },
+  {
+    "id_geotiff": "Data23",
+    "nombre_archivo": "MANGLARES_DE_COLOMBIA_grilla_raster.tif",
+    "nom_alerta": "Área de Manglares",
+    "descri_alerta": "Restricción de uso: prohíbe o limita actividades productivas que afecten el manglar."
+  },
+  {
+    "id_geotiff": "Data24",
+    "nombre_archivo": "OstrasPerliferas_grilla_raster.tif",
+    "nom_alerta": "Presencia de Ostras Perliferas",
+    "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre ostras perlíferas."
+  },
+  {
+    "id_geotiff": "Data25",
+    "nombre_archivo": "Panganales_grilla_raster.tif",
+    "nom_alerta": "Panganales",
+    "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre este bosque inundable."
+  },
+  {
+    "id_geotiff": "Data26",
+    "nombre_archivo": "Playas_Caribe_grilla_raster.tif",
+    "nom_alerta": "Zona de Playas",
+    "descri_alerta": "Restricción de uso: es bien de uso público y requiere autorización para ocupación."
+  },
+  {
+    "id_geotiff": "Data27",
+    "nombre_archivo": "Playas_de_Anidacion_de_Tortugas_grilla_raster.tif",
+    "nom_alerta": "Área de Anidacion de Tortugas",
+    "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre anidación de tortugas."
+  },
+  {
+    "id_geotiff": "Data28",
+    "nombre_archivo": "Playones_grilla_raster.tif",
+    "nom_alerta": "Zona de Playones",
+    "descri_alerta": "Restricción de uso: su ocupación productiva requiere autorización por tratarse de uso público."
+  },
+  {
+    "id_geotiff": "Data29",
+    "nombre_archivo": "Playones_Salinos_grilla_raster.tif",
+    "nom_alerta": "Zona de Playones Salinos",
+    "descri_alerta": "Restricción de uso: su ocupación productiva requiere autorización y manejo ambiental."
+  },
+  {
+    "id_geotiff": "Data30",
+    "nombre_archivo": "playonesfluviomarinos_playonesfluviomarinos_grilla_raster.tif",
+    "nom_alerta": "Zona de Playones Fluviomarinos",
+    "descri_alerta": "Restricción de uso: su ocupación productiva requiere autorización y manejo ambiental."
+  },
+  {
+    "id_geotiff": "Data31",
+    "nombre_archivo": "PresenciaMamiferosMarinos_grilla_raster.tif",
+    "nom_alerta": "Presencia de Mamiferos Marinos",
+    "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre mamíferos marinos."
+  },
+  {
+    "id_geotiff": "Data32",
+    "nombre_archivo": "Sitios_Prioritarios_Conservacion_Caribe_grilla_raster.tif",
+    "nom_alerta": "Sitio Prioritario de Conservacion",
+    "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre prioridades de conservación."
+  },
+  {
+    "id_geotiff": "Data33",
+    "nombre_archivo": "Surgencia_grilla_raster.tif",
+    "nom_alerta": "Área de Surgencia",
+    "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre productividad marina."
+  },
+  {
+    "id_geotiff": "Data34",
+    "nombre_archivo": "Unidades_de_las_areas_Coralinas_(Poligonos)_grilla_raster.tif",
+    "nom_alerta": "Áreas Coralinas",
+    "descri_alerta": "Restricción de uso: prohíbe actividades productivas incompatibles con la conservación coralina."
+  }
+>>>>>>> a44276eb40a3d9c48f5fab4ceb86399b4cd79fce
+]
