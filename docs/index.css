@@ -1,0 +1,293 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply m-0 font-sans bg-[#ecf3f0] text-[#333];
+}
+
+/* Franja superior institucional */
+.topbar {
+  @apply bg-[#0d3d2a] text-white flex justify-between items-center px-4 h-10 text-[0.9rem];
+}
+
+.topbar-left {
+  @apply flex items-center gap-4;
+}
+
+.topbar-logo {
+  @apply h-[30px] w-auto;
+}
+
+.topbar-search {
+  @apply flex items-center bg-white/10 rounded px-2 h-[28px];
+}
+
+.topbar-input {
+  @apply bg-transparent border-none text-white text-xs outline-none px-2 placeholder:text-white/60;
+}
+
+.topbar-button {
+  @apply bg-transparent border-none text-white cursor-pointer;
+}
+
+/* Header Video */
+.header-video {
+  @apply relative h-[800px] overflow-hidden;
+}
+
+.header-video-bg {
+  @apply absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 object-cover z-[-1] brightness-[0.6];
+}
+
+.header-overlay {
+  @apply relative z-10 h-full flex flex-col justify-center items-center text-white text-center p-4;
+}
+
+.header-overlay h1 {
+  @apply m-0 text-[2rem] md:text-[3rem] font-bold;
+}
+
+.header-nav {
+  @apply mt-4;
+}
+
+.header-nav ul {
+  @apply list-none p-0 m-0 flex gap-6;
+}
+
+.header-nav a {
+  @apply text-white no-underline font-bold hover:underline;
+}
+
+/* Sidebar */
+.sidebar {
+  @apply flex flex-col gap-2;
+}
+
+.sidebar-item {
+  @apply flex items-center gap-3 p-3 no-underline text-[#333] font-bold rounded border border-[#ccc] transition-all hover:bg-[#1a3d2f] hover:text-white;
+}
+
+.sidebar-item.active {
+  @apply bg-[#1a3d2f] text-white border-[#1a3d2f];
+}
+
+/* Bloques de capítulos */
+.chapter-block {
+  @apply flex gap-6 bg-white p-6 rounded shadow-sm border border-black/5 transition-all hover:scale-[1.01] hover:shadow-md;
+}
+
+.chapter-icon {
+  @apply text-[2rem] text-[#1a3d2f] shrink-0;
+}
+
+.chapter-content h2 {
+  @apply mt-0 text-[#080808] font-bold text-xl uppercase;
+}
+
+.chapter-content p, 
+.chapter-content ul {
+  @apply my-2 leading-relaxed;
+}
+
+.chapter-content ul {
+  @apply ml-5 list-disc;
+}
+
+/* ==========================================================================
+   ESTILOS DE LOS CONTROLES (IDIOMA Y TEMA) EN EL HEADER
+   ========================================================================== */
+
+/* Selector de Idioma Personalizado */
+.select-lang-custom {
+  background: rgba(15, 23, 42, 0.6);
+  color: #f8fafc;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(51, 65, 85, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+.select-lang-custom:hover {
+  background: #0f172a;
+  border-color: #475569;
+}
+
+/* Botón de Cambio de Tema Personalizado */
+.btn-theme-toggle {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.6);
+  color: #94a3b8;
+  border-radius: 6px;
+  border: 1px solid rgba(51, 65, 85, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-theme-toggle:hover {
+  background: #0f172a;
+  color: #f8fafc;
+  border-color: #475569;
+}
+.btn-theme-toggle i {
+  font-size: 11px;
+}
+
+/* ==========================================================================
+   MANEJO DE IMAGEN DE FONDO USANDO CLOUDFLARE R2
+   ========================================================================= */
+
+/* 1. Fondo por defecto (Modo Oscuro) con enlace directo de R2 */
+body {
+  background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), 
+                    url('https://pub-57e2d6782dd6483194a2084ca392d4ce.r2.dev/Body_wepage.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+}
+
+/* 2. Cuando se activa el Modo Claro con enlace directo de R2 */
+body.light-theme {
+  background-image: linear-gradient(rgba(241, 245, 249, 0.88), rgba(241, 245, 249, 0.88)), 
+                    url('https://pub-57e2d6782dd6483194a2084ca392d4ce.r2.dev/Body_wepage.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+  color: #0f172a !important;
+}
+/* ==========================================================================
+   MUTACIONES DE DISEÑO EN MODO CLARO (.light-theme)
+   ========================================================================== */
+
+/* Mutación de Tarjetas Translúcidas Principales */
+body.light-theme .bg-slate-900\/40,
+body.light-theme .bg-slate-900\/60,
+body.light-theme .bg-slate-950\/40,
+body.light-theme .backdrop-blur-xl {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Forzar contraste en Títulos e Iconos dentro de las tarjetas modificadas */
+body.light-theme h1, 
+body.light-theme h2, 
+body.light-theme h5, 
+body.light-theme .text-white {
+  color: #0f172a !important;
+}
+
+/* Forzar contraste en textos secundarios o párrafos */
+body.light-theme .text-slate-300,
+body.light-theme .text-slate-400 {
+  color: #475569 !important;
+}
+
+/* Mutación Específica del HEADER en Modo Claro */
+body.light-theme header {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Enlaces, textos e indicadores de hora/país internos del header */
+body.light-theme header a,
+body.light-theme header span,
+body.light-theme header #topbar-datetime {
+  color: #1e293b !important;
+}
+
+/* Comportamiento Hover de los enlaces del Header en modo claro */
+body.light-theme header a:hover {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+/* Divisores estéticos y cajitas internas del header */
+body.light-theme header .border-slate-700,
+body.light-theme header .bg-slate-700 {
+  background-color: #cbd5e1 !important;
+  border-color: #cbd5e1 !important;
+}
+body.light-theme header .bg-slate-900\/50 {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Mutación Específica del FOOTER en Modo Claro */
+body.light-theme footer {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 -10px 25px -5px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Textos y enlaces del footer */
+body.light-theme footer span,
+body.light-theme footer a {
+  color: #334155 !important;
+}
+
+/* Enlaces activos u hovers en el footer */
+body.light-theme footer a:hover {
+  color: #0284c7 !important;
+}
+
+/* Ajuste de la pastilla de versión del footer */
+body.light-theme footer .bg-slate-900\/50 {
+  background-color: #f1f5f9 !important;
+}
+body.light-theme footer .bg-slate-900\/50 span {
+  color: #475569 !important;
+}
+
+/* Comportamiento de los propios selectores del Header en Modo Claro */
+body.light-theme .select-lang-custom,
+body.light-theme .btn-theme-toggle {
+  background: #ffffff;
+  color: #334155;
+  border-color: #cbd5e1;
+}
+body.light-theme .select-lang-custom:hover,
+body.light-theme .btn-theme-toggle:hover {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+/* Transición suave global al cambiar de tema */
+body, header, footer, .bg-slate-900\/50, a, span, button, select {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+/* Quita el fondo blanco de tarjetas en modo claro */
+body.light-theme .bg-white {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.goog-te-banner-frame.skiptranslate,
+.goog-te-banner-frame,
+#goog-gt-tt,
+.goog-te-balloon-frame,
+.goog-te-gadget-icon {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
+}
+
+.goog-text-highlight {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
