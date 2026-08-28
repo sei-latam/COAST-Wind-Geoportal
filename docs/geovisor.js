@@ -43,42 +43,42 @@ var capasWMSActivas = {};
 var capasProyecto = [
   // Sintesis
   { id: "grilla_joint_EPSG4326_conv", nombre: "Cuadricula y grilla", grupo: "Cuadricula" },
-  { id: "Environmental_Sensitivity_Index", nombre: "Environmental Sensitivity Index (ESI)", grupo: "Sintesis" },
-  { id: "Poligono_ronda_eolica", nombre: "Polígono Ronda Eólica", grupo: "Sintesis" },
+  { id: "Environmental Sensitivity Index", nombre: "Environmental Sensitivity Index (ESI)", grupo: "Sintesis" },
+  { id: "Poligono ronda eolica", nombre: "Polígono Ronda Eólica", grupo: "Sintesis" },
   
   // Ecosistemas
   { id: "Manglares", nombre: "Manglares", grupo: "Ecosistemas" },
-  { id: "Presencia_de_pastos_marinos", nombre: "Presencia de pastos marinos", grupo: "Ecosistemas" },
-  { id: "Areas_Coralinas", nombre: "Áreas coralinas", grupo: "Ecosistemas" },
-  { id: "Fondo_algas_carnosas", nombre: "Fondo algas carnosas", grupo: "Ecosistemas" },
-  { id: "Fondos_duros_algas_calcareas", nombre: "Fondos duros algas calcáreas", grupo: "Ecosistemas" },
-  { id: "Ostras_perliferas", nombre: "Ostras perlíferas", grupo: "Ecosistemas" },
+  { id: "Presencia de pastos marinos", nombre: "Presencia de pastos marinos", grupo: "Ecosistemas" },
+  { id: "Areas Coralinas", nombre: "Áreas coralinas", grupo: "Ecosistemas" },
+  { id: "Fondo algas carnosas", nombre: "Fondo algas carnosas", grupo: "Ecosistemas" },
+  { id: "Fondos duros algas calcareas", nombre: "Fondos duros algas calcáreas", grupo: "Ecosistemas" },
+  { id: "Ostras perliferas", nombre: "Ostras perlíferas", grupo: "Ecosistemas" },
 
   // Fauna
-  { id: "Zonas_de_alimentacion_de_tortugas", nombre: "Zonas de alimentación de tortugas", grupo: "Fauna" },
-  { id: "Playas_de_anidacion_de_tortugas", nombre: "Playas de anidación de tortugas", grupo: "Fauna" },
-  { id: "Desove_de_nodriza_strombusg", nombre: "Desove de nodriza strombusg", grupo: "Fauna" },
-  { id: "Congregacion_de_peces", nombre: "Congregación de peces", grupo: "Fauna" },
-  { id: "Presencia_de_mamiferos_marinos", nombre: "Presencia de mamíferos marinos", grupo: "Fauna" },
-  { id: "Congregacion_de_aves_marinas", nombre: "Congregación de aves marinas", grupo: "Fauna" },
-  { id: "Congregacion_de_aves_playeras", nombre: "Congregación de aves playeras", grupo: "Fauna" },
+  { id: "Zonas de alimentacion de tortugas", nombre: "Zonas de alimentación de tortugas", grupo: "Fauna" },
+  { id: "Playas de anidacion de tortugas", nombre: "Playas de anidación de tortugas", grupo: "Fauna" },
+  { id: "Desove de nodriza strombusg", nombre: "Desove de nodriza strombusg", grupo: "Fauna" },
+  { id: "Congregacion de peces", nombre: "Congregación de peces", grupo: "Fauna" },
+  { id: "Presencia de mamiferos marinos", nombre: "Presencia de mamíferos marinos", grupo: "Fauna" },
+  { id: "Congregacion de aves marinas", nombre: "Congregación de aves marinas", grupo: "Fauna" },
+  { id: "Congregacion de aves playeras", nombre: "Congregación de aves playeras", grupo: "Fauna" },
 
   // Geomorfología
   { id: "Playas", nombre: "Playas", grupo: "Geomorfología" },
   { id: "Playones", nombre: "Playones", grupo: "Geomorfología" },
-  { id: "Playones_salinos", nombre: "Playones salinos", grupo: "Geomorfología" },
+  { id: "Playones salinos", nombre: "Playones salinos", grupo: "Geomorfología" },
   { id: "Acantilados", nombre: "Acantilados", grupo: "Geomorfología" },
-  { id: "Humedales_costeros", nombre: "Humedales Costeros", grupo: "Geomorfología" },
-  { id: "Lagunas_costeras", nombre: "Lagunas Costeras", grupo: "Geomorfología" },
+  { id: "Humedales costeros", nombre: "Humedales Costeros", grupo: "Geomorfología" },
+  { id: "Lagunas costeras", nombre: "Lagunas Costeras", grupo: "Geomorfología" },
   { id: "Estuarios", nombre: "Estuarios", grupo: "Geomorfología" },
   { id: "Panganales", nombre: "Panganales", grupo: "Geomorfología" },
-  { id: "Playones_fluviomarinos", nombre: "Playones fluviomarinos", grupo: "Geomorfología" },
-  { id: "Volcanes_de_lodo_SGC_2023", nombre: "Volcanes de lodo", grupo: "Geomorfología" },
+  { id: "Playones fluviomarinos", nombre: "Playones fluviomarinos", grupo: "Geomorfología" },
+  { id: "Volcanes de lodo SGC 2023", nombre: "Volcanes de lodo", grupo: "Geomorfología" },
 
   // Gestión
-  { id: "Areas_significativas_de_biodiversidad", nombre: "Áreas significativas de biodiversidad", grupo: "Gestión" },
-  { id: "Areas_protegidas", nombre: "Áreas protegidas", grupo: "Gestión" },
-  { id: "Sitios_prioritarios_de_conservacion", nombre: "Sitios Prioritarios de Conservación", grupo: "Gestión" },
+  { id: "Areas significativas de biodiversidad", nombre: "Áreas significativas de biodiversidad", grupo: "Gestión" },
+  { id: "Areas protegidas", nombre: "Áreas protegidas", grupo: "Gestión" },
+  { id: "Sitios prioritarios de conservacion", nombre: "Sitios Prioritarios de Conservación", grupo: "Gestión" },
   { id: "Surgencia", nombre: "Surgencia", grupo: "Gestión" }
 ];
 
