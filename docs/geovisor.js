@@ -37,7 +37,7 @@ var tooltipMedicion = null;
 var puntosRuta = []; 
 var estaDibujandoLasso = false;
 
-var wmsBaseUrl = "http://localhost:8085/geoserver/coast_wind_data/wms";
+var wmsBaseUrl = "https://geoserver.coast-wind.org/geoserver/coast_wind_data/wms";
 var capasWMSActivas = {};
 
 var capasProyecto = [
@@ -163,9 +163,6 @@ function desactivarModosMapa() {
   var statusElem = document.getElementById('statusDibujo');
   if (statusElem) statusElem.innerText = "Ninguna herramienta activa";
 }
-
-
-
 
 function activarHerramientaDibujo(tipo) {
   desactivarModosMapa(); 
@@ -349,7 +346,7 @@ async function consultarGrillaPorCoordenadas(lat, lon, marcador) {
   var nombreCapa = "coast_wind_data:grilla_joint_EPSG4326_conv";
   var cqlFilter = `INTERSECTS(the_geom, POINT(${lon} ${lat}))`;
   
-  var wfsUrl = `http://localhost:8085/geoserver/coast_wind_data/ows?` +
+  var wfsUrl = `https://geoserver.coast-wind.org/geoserver/coast_wind_data/ows?` +
     `service=WFS&version=1.0.0&request=GetFeature&` +
     `typeName=${encodeURIComponent(nombreCapa)}&` +
     `outputFormat=application/json&` +
@@ -399,7 +396,7 @@ async function consultarGrillaPorGeometria(capaGrafica, bounds, tituloGeometria)
   var nombreCapa = "coast_wind_data:grilla_joint_EPSG4326_conv";
   var bboxFilter = `${minLon},${minLat},${maxLon},${maxLat},EPSG:4326`;
   
-  var wfsUrl = `http://localhost:8085/geoserver/coast_wind_data/ows?` +
+  var wfsUrl = `https://geoserver.coast-wind.org/geoserver/coast_wind_data/ows?` +
     `service=WFS&version=1.0.0&request=GetFeature&` +
     `typeName=${encodeURIComponent(nombreCapa)}&` +
     `outputFormat=application/json&` +
