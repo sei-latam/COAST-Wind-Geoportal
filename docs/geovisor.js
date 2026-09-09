@@ -1192,3 +1192,14 @@ function limpiarVectorCargado() {
 
   if (typeof limpiarDibujos === 'function') limpiarDibujos();
 }
+
+
+function toggleTodasLasCapas(activar) {
+  capasProyecto.forEach(function(capa) {
+    var checkBox = document.getElementById("chk-" + capa.id);
+    if (checkBox && checkBox.checked !== activar) {
+      checkBox.checked = activar;
+      toggleCapa(capa.id, capa.nombre);
+    }
+  });
+}
