@@ -43,7 +43,7 @@ var capasWMSActivas = {};
 var capasProyecto = [
   // Sintesis
   { id: "grilla_joint_EPSG4326_conv", nombre: "Cuadricula y grilla", grupo: "Cuadricula" },
-  { id: "Environmental Sensitivity Index", nombre: "Environmental Sensitivity Index (ESI)", grupo: "Sintesis" },
+  ///{ id: "Environmental Sensitivity Index", nombre: "Environmental Sensitivity Index (ESI)", grupo: "Sintesis" },
   { id: "Poligono ronda eolica", nombre: "Polígono Ronda Eólica", grupo: "Sintesis" },
   
   // Ecosistemas
