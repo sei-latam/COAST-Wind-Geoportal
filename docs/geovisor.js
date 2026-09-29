@@ -803,30 +803,6 @@ function togglePanelDerecho() {
   icono.className = panel.classList.contains('panel-oculto-der') ? "fa-solid fa-chevron-left text-[10px]" : "fa-solid fa-chevron-right text-[10px]";
 }
 
-function toggleCapa(layerName, tituloAmigable) {
-  var checkBox = document.getElementById("chk-" + layerName);
-  var containerItem = document.getElementById("item-" + layerName);
-  if(!checkBox) return;
-
-  if (checkBox.checked) {
-    if(containerItem) containerItem.classList.add('active');
-    capasWMSActivas[layerName] = L.tileLayer.wms(wmsBaseUrl, {
-      layers: 'coast_wind_data:' + layerName,
-      format: 'image/png',
-      transparent: true,
-      version: '1.1.0',
-      srs: 'EPSG:4326',
-      styles: ''
-    }).addTo(map);
-  } else {
-    if(containerItem) containerItem.classList.remove('active');
-    if (capasWMSActivas[layerName]) {
-      map.removeLayer(capasWMSActivas[layerName]);
-      delete capasWMSActivas[layerName];
-    }
-  }
-  actualizarPanelInformacion();
-}
 
 function actualizarPanelInformacion() {
   var panelTexto = document.getElementById('panel-texto');
@@ -1194,12 +1170,121 @@ function limpiarVectorCargado() {
 }
 
 
+// --- Control del progreso de carga de capas ---
+var totalCapasEnCarga = 0;
+var capasCargadasContador = 0;
+
+function actualizarBarraProgreso() {
+  var contenedor = document.getElementById('contenedor-progreso');
+  var barra = document.getElementById('barra-progreso-capas');
+  var texto = document.getElementById('texto-progreso-capas');
+
+  if (!contenedor || !barra || !texto) return;
+
+  if (totalCapasEnCarga === 0) {
+    contenedor.classList.add('hidden');
+    barra.style.width = '0%';
+    texto.innerText = '0%';
+    return;
+  }
+
+  contenedor.classList.remove('hidden');
+  var porcentaje = Math.round((capasCargadasContador / totalCapasEnCarga) * 100);
+  if (porcentaje > 100) porcentaje = 100;
+
+  barra.style.width = porcentaje + '%';
+  texto.innerText = porcentaje + '%';
+
+  // Al completar la carga de todas las capas, espera medio segundo y oculta la barra
+  if (capasCargadasContador >= totalCapasEnCarga) {
+    setTimeout(function() {
+      contenedor.classList.add('hidden');
+      barra.style.width = '0%';
+      texto.innerText = '0%';
+      totalCapasEnCarga = 0;
+      capasCargadasContador = 0;
+    }, 600);
+  }
+}
+
 function toggleTodasLasCapas(activar) {
-  capasProyecto.forEach(function(capa) {
-    var checkBox = document.getElementById("chk-" + capa.id);
-    if (checkBox && checkBox.checked !== activar) {
-      checkBox.checked = activar;
-      toggleCapa(capa.id, capa.nombre);
+  if (activar) {
+    // Cuenta únicamente las capas que están apagadas y se van a encender
+    var capasAActivar = capasProyecto.filter(function(capa) {
+      var checkBox = document.getElementById("chk-" + capa.id);
+      return checkBox && !checkBox.checked;
+    });
+
+    totalCapasEnCarga = capasAActivar.length;
+    capasCargadasContador = 0;
+    actualizarBarraProgreso();
+
+    capasAActivar.forEach(function(capa) {
+      var checkBox = document.getElementById("chk-" + capa.id);
+      if (checkBox) {
+        checkBox.checked = true;
+        toggleCapa(capa.id, capa.nombre);
+      }
+    });
+  } else {
+    // Si se desactivan todas, reiniciamos el contador y ocultamos la barra
+    totalCapasEnCarga = 0;
+    capasCargadasContador = 0;
+    actualizarBarraProgreso();
+
+    capasProyecto.forEach(function(capa) {
+      var checkBox = document.getElementById("chk-" + capa.id);
+      if (checkBox && checkBox.checked) {
+        checkBox.checked = false;
+        toggleCapa(capa.id, capa.nombre);
+      }
+    });
+  }
+}
+
+function toggleCapa(layerName, tituloAmigable) {
+  var checkBox = document.getElementById("chk-" + layerName);
+  var containerItem = document.getElementById("item-" + layerName);
+  if (!checkBox) return;
+
+  if (checkBox.checked) {
+    if (containerItem) containerItem.classList.add('active');
+    
+    var nuevaCapaWMS = L.tileLayer.wms(wmsBaseUrl, {
+      layers: 'coast_wind_data:' + layerName,
+      format: 'image/png',
+      transparent: true,
+      version: '1.1.0',
+      srs: 'EPSG:4326',
+      styles: '',
+      opacity: typeof opacidadWMSGlobal !== 'undefined' ? opacidadWMSGlobal : 1.0
+    });
+
+    // Control individual para contar cuando finaliza o falla la carga de los tiles de esta capa
+    var finalizada = false;
+    function alFinalizarCarga() {
+      if (!finalizada) {
+        finalizada = true;
+        if (totalCapasEnCarga > 0) {
+          capasCargadasContador++;
+          actualizarBarraProgreso();
+        }
+      }
     }
-  });
+
+    nuevaCapaWMS.on('load', alFinalizarCarga);
+    nuevaCapaWMS.on('tileerror', alFinalizarCarga); // Evita que la barra se bloquee si falla la respuesta WMS
+
+    capasWMSActivas[layerName] = nuevaCapaWMS;
+    nuevaCapaWMS.addTo(map);
+
+  } else {
+    if (containerItem) containerItem.classList.remove('active');
+    if (capasWMSActivas[layerName]) {
+      map.removeLayer(capasWMSActivas[layerName]);
+      delete capasWMSActivas[layerName];
+    }
+  }
+
+  actualizarPanelInformacion();
 }

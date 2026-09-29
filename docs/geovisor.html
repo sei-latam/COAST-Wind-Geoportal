@@ -83,6 +83,7 @@
     </button>
   </div>
 
+
   <aside id="panel-izquierdo" class="absolute top-48 left-4 z-30 w-[285px] max-h-[calc(100vh-240px)] bg-slate-900/90 backdrop-blur-md border border-slate-800 p-2.5 rounded-xl shadow-2xl flex flex-col gap-2 overflow-hidden transition-all duration-300">
     
     <div class="dashboard-panel p-2 bg-slate-950/40 border-slate-800/80 shrink-0">
@@ -91,17 +92,30 @@
       </div>
     </div>
 
-  <!-- Botones de Control Master de Capas -->
-  <div class="d-flex gap-2 mb-3 px-1">
-    <button type="button" class="btn btn-action-master btn-act-all flex-fill" onclick="toggleTodasLasCapas(true)">
-      <i class="bi bi-check-all me-1"></i> Activar capas
-    </button>    
-  </div>
-  <div class="d-flex gap-2 mb-3 px-1">    
-    <button type="button" class="btn btn-action-master btn-desact-all flex-fill" onclick="toggleTodasLasCapas(false)">
-      <i class="bi bi-x-circle me-1"></i> Desactivar capas
-    </button>
-  </div>
+    <!-- Botones de Control Master de Capas -->
+    <div class="d-flex gap-2 mb-1 px-1">
+      <button type="button" class="btn btn-action-master btn-act-all flex-fill" onclick="toggleTodasLasCapas(true)">
+        <i class="bi bi-check-all me-1"></i> Activar capas
+      </button>    
+    </div>
+    <div class="d-flex gap-2 mb-2 px-1">    
+      <button type="button" class="btn btn-action-master btn-desact-all flex-fill" onclick="toggleTodasLasCapas(false)">
+        <i class="bi bi-x-circle me-1"></i> Desactivar capas
+      </button>
+    </div>
+
+    <!-- Barra de Progreso de Carga de Capas -->
+    <div id="contenedor-progreso" class="hidden dashboard-panel p-2 bg-slate-950/40 border-slate-800/80 shrink-0 mb-1">
+      <div class="flex items-center justify-between text-[10px] font-bold text-slate-200 tracking-wider mb-1">
+        <span class="flex items-center gap-1">
+          <i class="fa-solid fa-spinner fa-spin text-blue-500"></i> Cargando capas...
+        </span>
+        <span id="texto-progreso-capas" class="text-blue-400 font-mono text-[10px]">0%</span>
+      </div>
+      <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
+        <div id="barra-progreso-capas" class="bg-blue-500 h-1.5 rounded-full transition-all duration-200 w-0"></div>
+      </div>
+    </div>
 
     <div class="dashboard-panel p-2 bg-slate-950/40 border-slate-800/80 shrink-0">
       <div class="text-[10px] font-bold text-slate-200 tracking-wider flex items-center gap-1 mb-1">
@@ -359,6 +373,41 @@
 
   </div>
 </div>
+
+
+<script>
+    // ----------------------------------------------------
+    // RELOJ Y FECHA EN TIEMPO REAL
+    // ----------------------------------------------------
+    function actualizarRelojHeader() {
+        const ahora = new Date();
+        const opcionesFecha = { day: '2-digit', month: 'short', year: 'numeric' };
+        const fecha = ahora.toLocaleDateString('es-CO', opcionesFecha).toUpperCase().replace(/\./g, '');
+        const hora = ahora.toLocaleTimeString('es-CO', { hour12: false });
+        
+        const elementoReloj = document.getElementById('topbar-datetime');
+        if (elementoReloj) {
+            elementoReloj.textContent = `${fecha} • ${hora}`;
+        }
+    }
+    setInterval(actualizarRelojHeader, 1000);
+    actualizarRelojHeader();
+
+    // ----------------------------------------------------
+    // INICIALIZACIÓN DE VISORES Y MAPAS (Leaflet y CesiumJS)
+    // ----------------------------------------------------
+    let cesiumViewer = null;
+
+    const leafletMap = L.map('map', { zoomControl: false }).setView([11.08, -74.05], 8);
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri',
+        maxZoom: 18
+    }).addTo(leafletMap);
+
+    // Resto de tus funciones (switchView, toggleWidget, etc.)
+</script>
+
+
 
 </body>
 </html>
