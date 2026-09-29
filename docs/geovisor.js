@@ -73,7 +73,7 @@ var capasProyecto = [
   { id: "Estuarios", nombre: "Estuarios", grupo: "Geomorfología" },
   { id: "Panganales", nombre: "Panganales", grupo: "Geomorfología" },
   { id: "Playones fluviomarinos", nombre: "Playones fluviomarinos", grupo: "Geomorfología" },
-  { id: "Volcanes de lodo SGC 2023", nombre: "Volcanes de lodo", grupo: "Geomorfología" },
+  ///{ id: "Volcanes de lodo SGC 2023", nombre: "Volcanes de lodo", grupo: "Geomorfología" },
 
   // Gestión
   { id: "Areas significativas de biodiversidad", nombre: "Áreas significativas de biodiversidad", grupo: "Gestión" },
