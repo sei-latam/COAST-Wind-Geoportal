@@ -1288,3 +1288,30 @@ function toggleCapa(layerName, tituloAmigable) {
 
   actualizarPanelInformacion();
 }
+
+
+
+if (window.intervaloReloj) {
+  clearInterval(window.intervaloReloj);
+}
+
+function actualizarRelojTopbar() {
+  var elementoFecha = document.getElementById('topbar-reloj-nuevo');
+  if (!elementoFecha) return;
+
+  var ahora = new Date();
+
+  var dia = String(ahora.getDate()).padStart(2, '0');
+  var mes = String(ahora.getMonth() + 1).padStart(2, '0');
+  var anio = ahora.getFullYear();
+
+  var horas = String(ahora.getHours()).padStart(2, '0');
+  var minutos = String(ahora.getMinutes()).padStart(2, '0');
+  var segundos = String(ahora.getSeconds()).padStart(2, '0');
+
+  elementoFecha.innerText = `${dia}/${mes}/${anio}, ${horas}:${minutos}:${segundos}`;
+}
+
+actualizarRelojTopbar();
+window.intervaloReloj = setInterval(actualizarRelojTopbar, 1000);
+
