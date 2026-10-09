@@ -254,7 +254,7 @@ See [`SECURITY.md`](./SECURITY.md) for detailed security policy and supported ve
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please read [`CONTRIBUTING.md`](./CONTRIBUTING.md) for:
 
@@ -266,7 +266,7 @@ We welcome contributions! Please read [`CONTRIBUTING.md`](./CONTRIBUTING.md) for
 
 ### Contributors
 
-**Developed by** [Stockholm Environment Institute Latin America Center (SEI-LA)](https://www.sei.org/centres/latinoamerica/)
+#### **Developed by** [Stockholm Environment Institute Latin America Center (SEI-LA)](https://www.sei.org/centres/latinoamerica/)
 ---
 
 ## License
