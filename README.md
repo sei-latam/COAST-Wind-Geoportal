@@ -10,13 +10,13 @@ A modern geovisualization platform for analyzing environmental sensitivity and s
 
 ---
 
-## 🌐 Live Platform
+## Live Platform
 
 The COAST-Wind Geovisor is deployed at: **[https://coast-wind.org](https://coast-wind.org)**
 
 ---
 
-## 📋 Features
+## Features
 
 - **Interactive Web Mapping** – Leaflet-based geovisor with multiple basemap layers (OpenStreetMap, ESRI, Google)
 - **27 Environmental Layers** – Marine habitats, protected areas, biodiversity hotspots, coastal features
@@ -28,7 +28,7 @@ The COAST-Wind Geovisor is deployed at: **[https://coast-wind.org](https://coast
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -69,11 +69,11 @@ For production GeoServer + PostGIS deployment on cloud infrastructure:
 4. **Deploy GeoServer** – Follow containerized deployment guide
 5. **Configure reverse proxy** – Set up Nginx with TLS
 
-**⚠️ Security Warning:** Never commit credentials, API keys, database passwords, or internal IP addresses to version control. Use environment variables and secrets management systems.
+**Security Warning:** Never commit credentials, API keys, database passwords, or internal IP addresses to version control. Use environment variables and secrets management systems.
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── README.md                          # This file
@@ -116,7 +116,7 @@ For production GeoServer + PostGIS deployment on cloud infrastructure:
 
 ---
 
-## 🗺️ Data & Layers
+## Data & Layers
 
 COAST integrates **27 geospatial layers** from authoritative Colombian sources:
 
@@ -186,7 +186,7 @@ npm run deploy:production
 
 ---
 
-## 📝 Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -208,7 +208,7 @@ DATABASE_USER=coastal_user
 DATABASE_POOL_SIZE=20
 ```
 
-**⚠️ NEVER commit actual `.env` files to version control.**
+** NEVER commit actual `.env` files to version control.**
 
 Use a secrets management system:
 - **Local:** `.env.local` (add to `.gitignore`)
@@ -217,11 +217,11 @@ Use a secrets management system:
 
 ---
 
-## 🚨 Security
+## Security
 
 ### Reporting Vulnerabilities
 
-🔒 **PLEASE DO NOT OPEN ISSUES FOR SECURITY VULNERABILITIES**
+**PLEASE DO NOT OPEN ISSUES FOR SECURITY VULNERABILITIES**
 
 If you discover a security vulnerability:
 - Description of the vulnerability
@@ -246,7 +246,7 @@ See [`SECURITY.md`](./SECURITY.md) for detailed security policy and supported ve
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 - **[`CONTRIBUTING.md`](./CONTRIBUTING.md)** – How to contribute code, report bugs, request features
 - **[`SECURITY.md`](./SECURITY.md)** – Security policy, vulnerability reporting, supported versions
@@ -267,12 +267,9 @@ We welcome contributions! Please read [`CONTRIBUTING.md`](./CONTRIBUTING.md) for
 ### Contributors
 
 **Developed by** [Stockholm Environment Institute Latin America Center (SEI-LA)](https://www.sei.org/centres/latinoamerica/)
-
-Special thanks to [INVEMAR](https://www.invemar.org.co/) and [Parques Nacionales Naturales de Colombia](https://www.parquesnacionales.gov.co/) for data partnership.
-
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the **GNU General Public License v3.0** – see [`LICENSE`](./LICENSE) for details.
 
@@ -284,32 +281,15 @@ You are free to:
 - ✅ Distribute copies
 
 Under the conditions that you:
-- 📋 License derivatives under GPLv3
-- 📢 Disclose source code
-- 📝 Include license and copyright notice
-- 📊 Document significant changes
+- License derivatives under GPLv3
+- Disclose source code
+- Include license and copyright notice
+- Document significant changes
 
 See [`LICENSE`](./LICENSE) for complete terms.
-
 ---
 
-## 📞 Support & Contact
-
-- **Project Website:** [https://www.sei.org/projects/coast/](https://www.sei.org/projects/coast/)
-- **Email:** [contact-coast@sei.org](mailto:contact-coast@sei.org)
-- **GitHub Issues:** [Report bugs & request features](https://github.com/sei-latam/COAST-Wind-Geoportal/issues)
-- **SEI-LA Office:** [www.sei.org/centres/latinoamerica/](https://www.sei.org/centres/latinoamerica/)
-
-### Funding & Acknowledgments
-
-COAST-Wind development is supported by:
-- [Fondo de Adaptación](https://www.fondoadaptacion.gov.co/)
-- [The Nature Conservancy (TNC)](https://www.tnc.org/)
-- [World Wildlife Fund (WWF)](https://www.worldwildlife.org/)
-
----
-
-## 📈 Status
+## Status
 
 | Component | Status | Notes |
 |-----------|--------|-------|
