@@ -146,7 +146,7 @@ All layer information is stored in [`json_query.json`](./json_query.json) with:
 
 ---
 
-## 🛠️ Development
+## Development
 
 ### Tech Stack
 
@@ -271,7 +271,7 @@ We welcome contributions! Please read [`CONTRIBUTING.md`](./CONTRIBUTING.md) for
 
 ## License
 
-This project is licensed under the **GNU General Public License v3.0** – see [`LICENSE`](./LICENSE) for details.
+#### This project is licensed under the **GNU General Public License v3.0** – see [`LICENSE`](./LICENSE) for details.
 
 ### Summary
 
