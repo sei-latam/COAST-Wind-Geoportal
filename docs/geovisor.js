@@ -24,7 +24,7 @@ var mapaBaseDefiniciones = {
   }
 };
 
-var esriHibridoLayer = L.tileLayer(mapaBaseDefiniciones["Satélite Híbrido"].url);
+var esriHibridoLayer = L.tileLayer(mapaBaseDefiniciones["Google Maps"].url);
 var esriLabelsLayer = L.tileLayer(mapaBaseDefiniciones["Satélite Híbrido"].urlEsriLabels);
 var capaBaseInstanciada = L.layerGroup([esriHibridoLayer, esriLabelsLayer]).addTo(map);
 var mapaBaseActualNombre = "Satélite Híbrido";
