@@ -52,7 +52,7 @@ var capasProyecto = [
   { id: "Cables_submarinos_prj_ok_grilla_raster", nombre: "Presencia de cables submarinos", grupo: "Actividad Humana" },
   { id: "Caladeros_de_Pesca_(poligonos)_grilla_raster", nombre: "Caladeros de pesca", grupo: "Actividad Humana" },
   { id: "EspaciosSagrados_2023_grilla_raster", nombre: "Espacios sagrados de comunidades", grupo: "Actividad Humana" },
-  { id: "IntensidadPescaCaribe_mayor1_dissolved_grilla_raster", nombre: "Intensidad Pesquera", grupo: "Actividad Humana" },
+  { id: "IntensidadPescaCaribe_mayor1_dissolved_grilla_raster", nombre: "Intensidad y presencia pesquera", grupo: "Actividad Humana" },
   { id: "RutasCaladeroPesca_(linea)_grilla_raster", nombre: "Rutas de caladeros de pesca", grupo: "Actividad Humana" },
 
   // Ecosistemas
