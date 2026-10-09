@@ -338,5 +338,75 @@
         "entidad_fuente": "Invemar",
         "metadatos_capa_original": "https://acceso-datos-ambientales-invemar.hub.arcgis.com/maps/35e85cca85ca42b3a0a8be987b1c5fa3/about",
         "metadatos_xml": "https://www.arcgis.com/sharing/rest/content/items/35e85cca85ca42b3a0a8be987b1c5fa3/info/metadata/metadata.xml?format=default&output=html"
+    },
+    {
+        "id_geotiff": "Data35",
+        "nombre_archivo": "areas_asignadas_grilla_raster.tif",
+        "nom_alerta": "Área asignada deexploración/explotación de hidrocarburos",
+        "descri_alerta": "No restringe por sí sola; exige evaluar compatibilidad con actividades y derechos contractuales de hidrocarburos.",
+        "capa_origen": "Mapa de Tierras ANH",
+        "entidad_fuente": "ANH",
+        "metadatos_capa_original": "https://www.arcgis.com/home/item.html?id=71ecf92a04f44ab5ab703d09c1330bb2&sublayer=0#overview",
+        "metadatos_xml": ""
+    },
+    {
+        "id_geotiff": "Data36",
+        "nombre_archivo": "areas_reservadas_grilla_raster.tif",
+        "nom_alerta": "Área reservada de exploración/explotación de hidrocarburos",
+        "descri_alerta": "No restringe por sí sola; exige verificar la causa de reserva y las posibles limitaciones aplicables.",
+        "capa_origen": "Mapa de Tierras ANH",
+        "entidad_fuente": "ANH",
+        "metadatos_capa_original": "https://www.arcgis.com/home/item.html?id=71ecf92a04f44ab5ab703d09c1330bb2&sublayer=0#overview",
+        "metadatos_xml": ""
+    },
+    {
+        "id_geotiff": "Data37",
+        "nombre_archivo": "Cables_submarinos_prj_ok_grilla_raster.tif",
+        "nom_alerta": "Presencia de cables submarinos",
+        "descri_alerta": "Restricción de uso: prohíbe fondeo, pesca de arrastre y actividades con contacto con el fondo en su zona de seguridad.",
+        "capa_origen": "Mapa de cables submarinos",
+        "entidad_fuente": "TeleGeography obtenido de https://github.com/JesseCallahanBryant/undersea-cables/tree/main",
+        "metadatos_capa_original": "https://github.com/JesseCallahanBryant/undersea-cables/tree/main",
+        "metadatos_xml": ""
+    },
+    {
+        "id_geotiff": "Data38",
+        "nombre_archivo": "Caladeros_de_Pesca_(poligonos)_grilla_raster.tif",
+        "nom_alerta": "Caladeros de pesca",
+        "descri_alerta": "No restringe por sí sola; exige evaluar impactos sobre áreas de pesca y acceso a recursos pesqueros.",
+        "capa_origen": "Capa Caladeros de pesca (polígonos)",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://www.arcgis.com/home/item.html?id=0f8b2f2ae7f541fc8fb612632d10ca6b#overview",
+        "metadatos_xml": ""
+    },
+    {
+        "id_geotiff": "Data39",
+        "nombre_archivo": "EspaciosSagrados_2023_grilla_raster.tif",
+        "nom_alerta": "Espacios sagrados de comunidades",
+        "descri_alerta": "No restringe por sí sola; exige evaluar afectación cultural y, cuando proceda, consulta previa con comunidades étnicas.",
+        "capa_origen": "Capa de Espacios Sagrados de la Sierra Nevada de Santa Marta",
+        "entidad_fuente": "IGAC",
+        "metadatos_capa_original": "https://www.arcgis.com/home/item.html?id=28348af9a2fe4b63b0682d4e45eb53a8#overview",
+        "metadatos_xml": ""
+    },
+    {
+        "id_geotiff": "Data40",
+        "nombre_archivo": "IntensidadPescaCaribe_mayor1_dissolved_grilla_raster.tif",
+        "nom_alerta": "Presencia de actividad pesquera",
+        "descri_alerta": "No restringe por sí sola; exige evaluar interferencias con la actividad pesquera y los medios de vida asociados.",
+        "capa_origen": "Capa de intensidad de pesca",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://invemar.maps.arcgis.com/home/item.html?id=b63aec9b627c4fba9de8a14a95df0418#overview",
+        "metadatos_xml": ""
+    },
+    {
+        "id_geotiff": "Data41",
+        "nombre_archivo": "RutasCaladeroPesca_(linea)_grilla_raster.tif",
+        "nom_alerta": "Rutas de caladeros de pesca",
+        "descri_alerta": "No restringe por sí sola; exige evaluar interferencias con rutas de acceso a caladeros y faenas de pesca.",
+        "capa_origen": "Capa de rutas de caladeros de pesca (línea)",
+        "entidad_fuente": "Invemar",
+        "metadatos_capa_original": "https://invemar.maps.arcgis.com/home/item.html?id=36625d90a71e4abca52ed6e55f6eecaf#overview",
+        "metadatos_xml": ""
     }
 ]
