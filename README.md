@@ -286,7 +286,7 @@ Under the conditions that you:
 - Include license and copyright notice
 - Document significant changes
 
-See [`LICENSE`](./LICENSE) for complete terms.
+#### See [`LICENSE`](./LICENSE) for complete terms.
 ---
 
 ## Status
