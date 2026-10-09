@@ -46,7 +46,7 @@ var capasWMSActivas = {};
 // ------------------------------------------------------------------
 var GRILLA_WFS_URL = "https://geoserver.coast-wind.org/geoserver/coast_wind_data/ows";
 var GRILLA_CAPA = "coast_wind_data:grilla_joint_epsg4326_conv_v2";
-var grillaCampoGeometria = null; // se detecta automáticamente (the_geom, geom, wkb_geometry...)
+var grillaCampoGeometria = null; // se detecta automáticamente; en el GeoPackage v2 se llama "geom"
 
 async function obtenerCampoGeometriaGrilla() {
   if (grillaCampoGeometria) return grillaCampoGeometria;
@@ -61,9 +61,9 @@ async function obtenerCampoGeometriaGrilla() {
       if (geom) grillaCampoGeometria = geom.name;
     }
   } catch (e) {
-    console.warn("No se pudo detectar la columna geométrica de la grilla; se usará 'the_geom'.", e);
+    console.warn("No se pudo detectar la columna geométrica de la grilla; se usará 'geom'.", e);
   }
-  if (!grillaCampoGeometria) grillaCampoGeometria = "the_geom";
+  if (!grillaCampoGeometria) grillaCampoGeometria = "geom";
   return grillaCampoGeometria;
 }
 
