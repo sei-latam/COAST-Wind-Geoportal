@@ -223,7 +223,7 @@ Use a secrets management system:
 
 🔒 **PLEASE DO NOT OPEN ISSUES FOR SECURITY VULNERABILITIES**
 
-If you discover a security vulnerability, **email** security@sei.org with:
+If you discover a security vulnerability:
 - Description of the vulnerability
 - Steps to reproduce
 - Potential impact
