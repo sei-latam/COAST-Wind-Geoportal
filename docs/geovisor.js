@@ -40,9 +40,36 @@ var estaDibujandoLasso = false;
 var wmsBaseUrl = "https://geoserver.coast-wind.org/geoserver/coast_wind_data/wms";
 var capasWMSActivas = {};
 
+// ------------------------------------------------------------------
+// CONFIGURACIÓN DE LA GRILLA DE CONSULTA (WFS)
+// Para cambiar de versión de grilla en el futuro, basta con editar GRILLA_CAPA.
+// ------------------------------------------------------------------
+var GRILLA_WFS_URL = "https://geoserver.coast-wind.org/geoserver/coast_wind_data/ows";
+var GRILLA_CAPA = "coast_wind_data:grilla_joint_epsg4326_conv_v2";
+var grillaCampoGeometria = null; // se detecta automáticamente (the_geom, geom, wkb_geometry...)
+
+async function obtenerCampoGeometriaGrilla() {
+  if (grillaCampoGeometria) return grillaCampoGeometria;
+  try {
+    var url = `${GRILLA_WFS_URL}?service=WFS&version=1.0.0&request=DescribeFeatureType&` +
+      `typeName=${encodeURIComponent(GRILLA_CAPA)}&outputFormat=application/json`;
+    var res = await fetch(url);
+    if (res.ok) {
+      var desc = await res.json();
+      var props = (desc.featureTypes && desc.featureTypes[0] && desc.featureTypes[0].properties) || [];
+      var geom = props.find(function(p) { return p.type && p.type.indexOf('gml:') === 0; });
+      if (geom) grillaCampoGeometria = geom.name;
+    }
+  } catch (e) {
+    console.warn("No se pudo detectar la columna geométrica de la grilla; se usará 'the_geom'.", e);
+  }
+  if (!grillaCampoGeometria) grillaCampoGeometria = "the_geom";
+  return grillaCampoGeometria;
+}
+
 var capasProyecto = [
   // Sintesis
-  { id: "grilla_joint_EPSG4326_conv", nombre: "Cuadricula y grilla", grupo: "Cuadricula" },
+  { id: "grilla_joint_epsg4326_conv_v2", nombre: "Cuadricula y grilla", grupo: "Cuadricula" },
   ///{ id: "Environmental Sensitivity Index", nombre: "Environmental Sensitivity Index (ESI)", grupo: "Sintesis" },
   { id: "Poligono ronda eolica", nombre: "Polígono Ronda Eólica", grupo: "Sintesis" },
   
@@ -352,10 +379,11 @@ function activarHerramientaDibujo(tipo) {
 
 
 async function consultarGrillaPorCoordenadas(lat, lon, marcador) {
-  var nombreCapa = "coast_wind_data:grilla_joint_EPSG4326_conv";
-  var cqlFilter = `INTERSECTS(the_geom, POINT(${lon} ${lat}))`;
+  var nombreCapa = GRILLA_CAPA;
+  var campoGeom = await obtenerCampoGeometriaGrilla();
+  var cqlFilter = `INTERSECTS(${campoGeom}, POINT(${lon} ${lat}))`;
   
-  var wfsUrl = `https://geoserver.coast-wind.org/geoserver/coast_wind_data/ows?` +
+  var wfsUrl = `${GRILLA_WFS_URL}?` +
     `service=WFS&version=1.0.0&request=GetFeature&` +
     `typeName=${encodeURIComponent(nombreCapa)}&` +
     `outputFormat=application/json&` +
@@ -402,10 +430,10 @@ async function consultarGrillaPorGeometria(capaGrafica, bounds, tituloGeometria)
   var maxLon = bounds.getEast();
   var maxLat = bounds.getNorth();
 
-  var nombreCapa = "coast_wind_data:grilla_joint_EPSG4326_conv";
+  var nombreCapa = GRILLA_CAPA;
   var bboxFilter = `${minLon},${minLat},${maxLon},${maxLat},EPSG:4326`;
   
-  var wfsUrl = `https://geoserver.coast-wind.org/geoserver/coast_wind_data/ows?` +
+  var wfsUrl = `${GRILLA_WFS_URL}?` +
     `service=WFS&version=1.0.0&request=GetFeature&` +
     `typeName=${encodeURIComponent(nombreCapa)}&` +
     `outputFormat=application/json&` +
@@ -818,11 +846,9 @@ function actualizarPanelInformacion() {
   var panelDescargas = document.getElementById('panel-descargas');
   var activas = Object.keys(capasWMSActivas);
 
-  if (!panelDescargas) return;
-
   if (activas.length === 0) {
     if (panelTexto) panelTexto.innerHTML = '<p class="text-slate-400 italic text-[11px]">No hay capas activas en el mapa.</p>';
-    panelDescargas.innerHTML = '<p class="text-slate-400 italic text-[11px] text-center mt-4">Active una capa para habilitar los enlaces de descarga.</p>';
+    if (panelDescargas) panelDescargas.innerHTML = '<p class="text-slate-400 italic text-[11px] text-center mt-4">Active una capa para habilitar los enlaces de descarga.</p>';
     return;
   }
 
@@ -855,6 +881,8 @@ if (panelTexto) {
       listaContenedor.appendChild(bloqueCapa);
     });
   }
+
+  if (!panelDescargas) return; // El panel de descargas está deshabilitado en el HTML
 
   panelDescargas.innerHTML = '<div class="space-y-3 max-h-[300px] overflow-y-auto pr-1"></div>';
   var contenedorDescargasItem = panelDescargas.querySelector('div');

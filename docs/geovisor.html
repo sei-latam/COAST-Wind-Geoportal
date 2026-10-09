@@ -393,18 +393,7 @@
     setInterval(actualizarRelojHeader, 1000);
     actualizarRelojHeader();
 
-    // ----------------------------------------------------
-    // INICIALIZACIÓN DE VISORES Y MAPAS (Leaflet y CesiumJS)
-    // ----------------------------------------------------
-    let cesiumViewer = null;
-
-    const leafletMap = L.map('map', { zoomControl: false }).setView([11.08, -74.05], 8);
-    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Tiles &copy; Esri',
-        maxZoom: 18
-    }).addTo(leafletMap);
-
-    // Resto de tus funciones (switchView, toggleWidget, etc.)
+    // El mapa se inicializa una sola vez en geovisor.js (variable global "map").
 </script>
 
 
