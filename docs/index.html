@@ -1,191 +1,142 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <title>COAST Wind</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
   <link rel="icon" type="image/png" href="logo-inst3.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+  <!-- Aplica el tema y el idioma guardados antes de pintar la página (evita parpadeo) -->
+  <script>
+    (function () {
+      var tema = 'dark', idioma = null;
+      try {
+        tema = localStorage.getItem('coast_theme') || localStorage.getItem('theme') || 'dark';
+        idioma = localStorage.getItem('coast_lang');
+      } catch (e) {}
+      document.documentElement.setAttribute('data-theme', tema === 'light' ? 'light' : 'dark');
+      if (idioma) document.documentElement.setAttribute('lang', idioma);
+    })();
+  </script>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="index_coast.css">
+  <link rel="stylesheet" href="index.css">
 </head>
-<body class="bg-[#0f172a]/85 text-slate-800 min-h-screen flex flex-col">
+<body>
 
-  <header class="h-16 border-b border-slate-800 bg-[#0f172a]/80 flex items-center justify-between px-6 z-50 rounded-xl overflow-hidden m-2 shadow-[0_0_20px_rgba(0,0,0,0.5)]">
-      <div class="flex items-center gap-3 w-1/3">
-              <img src="logo-inst1.png" alt="Logo Inst 2" class="h-6 w-auto">
-              <span class="text-white font-bold text-sm">Bienvenido(a) a COAST - Wind</span>    
-      </div>
+  <!-- ============================== ENCABEZADO ============================== -->
+  <header class="cx-header">
+    <div class="cx-brand">
+      <img src="logo-inst1.png" alt="SEI" class="cx-brand-logo">
+      <span class="cx-brand-title cx-desktop-only" data-i18n="header.welcome">Bienvenido(a) a COAST - Wind</span>
+      <span class="cx-brand-title cx-mobile-only">COAST - Wind</span>
+    </div>
 
-      <div class="flex items-center justify-center w-1/3">
-          <div class="bg-slate-900/50 border border-slate-700 px-4 py-1.5 rounded-full hidden lg:flex items-center gap-3">
-              <div class="flex items-center gap-2">
-                  <div class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                  <span id="topbar-datetime" class="text-[12px] text-slate-300 tracking-tighter"></span>
-              </div>
-              <div class="w-[1px] h-3 bg-slate-700"></div>
-              <span class="text-[12px] text-slate-500 font-semibold tracking-tighter text-white">Colombia UTC-5</span>
-          </div>
-      </div>
+    <div class="cx-clock">
+      <span class="cx-clock-dot"></span>
+      <span id="topbar-datetime" class="cx-clock-time"></span>
+      <span class="cx-clock-sep"></span>
+      <span class="cx-clock-zone" data-i18n="header.timezone">Colombia UTC-5</span>
+    </div>
 
-      <div class="flex items-center justify-end gap-3 w-1/3">
-          <div class="hidden lg:flex items-center gap-2 border-r border-slate-800 pr-3">
-              <a href="https://www.linkedin.com/company/sei-latinoamerica" class="px-3 py-1.5 rounded-lg text-[12px] font-bold text-white hover:bg-slate-700 transition-all flex items-center gap-2 no-underline">
-                  <i class="fab fa-linkedin"></i> LinkedIn
-              </a>
-              <a href="https://dash.cloudflare.com/login" class="px-3 py-1.5 rounded-lg text-[12px] font-bold text-white hover:bg-slate-700 transition-all flex items-center gap-2 no-underline">
-                  <i class="fas fa-sign-in-alt text-[9px]"></i> Ingresar
-              </a>
-          </div>
-      </div>
-
-      <div class="flex items-center gap-2 border-l border-slate-850 pl-3 ml-1 tracking-tight">
-        <select id="lang-selector" class="select-lang-custom">
-          <option value="es">🇲🇽 ES</option>
-          <option value="en">🇺🇸 EN</option>
-          <option value="de">🇩🇪 DE</option>
-          <option value="fr">🇫🇷 FR</option>
-          <option value="it">🇮🇹 IT</option>
-          <option value="ja">🇯🇵 JA</option>
-          <option value="ko">🇰🇷 KO</option>
-          <option value="pt">🇧🇷 PT</option>
-          <option value="ru">🇷🇺 RU</option>
-          <option value="zh-CN">🇨🇳 ZH</option>
+    <nav class="cx-header-actions">
+      <a href="https://www.linkedin.com/company/sei-latinoamerica" target="_blank" rel="noopener noreferrer" class="cx-navlink" title="LinkedIn">
+        <i class="fab fa-linkedin"></i><span class="cx-navlink-text">LinkedIn</span>
+      </a>
+      <a href="https://dash.cloudflare.com/login" class="cx-navlink" data-i18n-title="header.login" title="Ingresar">
+        <i class="fas fa-sign-in-alt cx-icon-sm"></i><span class="cx-navlink-text" data-i18n="header.login">Ingresar</span>
+      </a>
+      <span class="cx-header-divider"></span>
+      <label class="cx-lang" data-i18n-title="header.language" title="Idioma">
+        <i class="fa-solid fa-globe"></i>
+        <select id="lang-selector" aria-label="Idioma">
+          <option value="es">ES</option>
+          <option value="en">EN</option>
+          <option value="pt">PT</option>
         </select>
-          <button id="theme-toggle" title="Cambiar tema" class="btn-theme-toggle">
-            <i id="theme-icon" class="fa-solid fa-moon"></i>
-          </button>
-      </div>
+      </label>
+      <button id="theme-toggle" type="button" class="cx-iconbtn" data-i18n-title="header.toLight" title="Cambiar tema">
+        <i id="theme-icon" class="fa-solid fa-moon"></i>
+      </button>
+    </nav>
   </header>
 
-<header class="relative h-[800px] overflow-hidden m-2 rounded-xl shadow-2xl shrink-0 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)]">
-  <video autoplay muted loop playsinline preload="auto" class="absolute inset-0 w-full h-full object-cover z-0">
-    <source src="https://pub-57e2d6782dd6483194a2084ca392d4ce.r2.dev/pexels_13040830-uhd_3840_2160_25fps.mp4" type="video/mp4">
-  </video>
-  
-  <div class="relative z-10 h-full flex flex-col justify-center items-center bg-black/10 text-darkblue p-6 text-center">
-    <h4 class="text-3xl md:text-4xl font-bold tracking-tighter drop-shadow-2xl mb-8 max-w-5xl">
-      Colombian Ocean Activity and Susceptibility Tool (COAST) - Wind
-    </h4>
-    
-    <nav class="relative z-10 bg-white/10 backdrop-blur-md rounded-full px-8 py-2 border border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.9)] transform translate-z-0 transition-all duration-300">
-      <ul class="flex gap-8 list-none m-0 p-0 font-semibold tracking-tighter">
-        <li><a href="introduction.html" class="hover:text-blue-700 transition-colors no-underline text-[#0f172a]/85">Introducción</a></li>
-        <li><a href="geovisor.html" class="hover:text-blue-700 transition-colors no-underline text-[#0f172a]/85">Geovisor</a></li>
-        <li><a href="contact.html" class="hover:text-blue-700 transition-colors no-underline text-[#0f172a]/85">Contacto</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-
-  <div class="container-fluid flex-grow mb-8">
-  </div>
-
-<div class="max-w-4xl mx-auto px-4 my-12">
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    <a href="introduction.html" class="animate-card group relative overflow-hidden bg-slate-900/50 backdrop-blur-xl border border-slate-700/50 p-6 rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.5)] hover:border-cyan-500/50 hover:shadow-cyan-500/20 transition-all duration-500 no-underline hover-float" style="animation-delay: 0.3s;">
-      <div class="absolute -right-4 -top-4 w-24 h-24 bg-cyan-500/10 rounded-full blur-2xl group-hover:bg-cyan-500/20 transition-colors"></div>
-      <div class="relative z-10">
-        <div class="bg-gradient-to-br from-cyan-500/20 to-cyan-600/5">
-        </div>
-        <h5 class="text-white font-black mb-2 group-hover:text-cyan-400 transition-colors">Introducción</h5>
-        <p class="text-slate-400 text-[12px] text-justify leading-relaxed">Conoce con mayor detalle el proyecto COAST - Wind.</p>
-      </div>
-    </a>
-
-    <a href="geovisor.html" class="animate-card group relative overflow-hidden bg-slate-900/50 backdrop-blur-xl border border-slate-700/50 p-6 rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.5)] hover:border-cyan-500/50 hover:shadow-cyan-500/20 transition-all duration-500 no-underline hover-float" style="animation-delay: 0.3s;">
-      <div class="absolute -right-4 -top-4 w-24 h-24 bg-cyan-500/10 rounded-full blur-2xl group-hover:bg-cyan-500/20 transition-colors"></div>
-      <div class="relative z-10">
-        <div class="bg-gradient-to-br from-cyan-500/20 to-cyan-600/5">
-        </div>
-        <h5 class="text-white font-black mb-2 group-hover:text-cyan-400 transition-colors">Geovisor</h5>
-        <p class="text-slate-400 text-[12px] text-justify leading-relaxed">Visualiza los resultados de los análisis de COAST - Wind en un entorno interactivo.</p>
-      </div>
-    </a>
-
-    <a href="contact.html" class="animate-card group relative overflow-hidden bg-slate-900/50 backdrop-blur-xl border border-slate-700/50 p-6 rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.5)] hover:border-cyan-500/50 hover:shadow-cyan-500/20 transition-all duration-500 no-underline hover-float" style="animation-delay: 0.3s;">
-      <div class="relative z-10">
-        <h5 class="text-white font-black mb-2 group-hover:text-cyan-400 transition-colors">Contacto</h5>
-        <p class="text-slate-400 text-[12px] text-justify leading-relaxed">Ponte en contacto con nosotros para obtener más información o asistencia.</p>
-      </div>
-    </a>
-  </div>
-</div>
-
-<footer class="mt-auto border-t border-slate-800 bg-[#0f172a]/80 py-6 px-8 z-50 overflow-hidden m-2 rounded-xl shrink-0 shadow-[0_0_20px_rgba(0,0,0,0.5)]">
-    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-      <div class="flex items-center gap-3 w-full md:w-1/3">
-        <div class="p-2 rounded-lg shadow-lg shrink-0">
-            <img src="logo-inst1.png" alt="Logo Inst 1" class="h-6 w-auto">
-        </div>
-        <span class="px-0 py-1.5 rounded-lg text-[11px] font-bold text-white">
-          Stockholm Environment Institute Latin America Center (SEI-LA)
-        </span>
-      </div>
-      <div class="flex items-center justify-end gap-6 w-full md:w-1/3">
-      <span class="px-14 py-1.5 rounded-lg text-[12px] text-white flex items-center gap-2 no-underline">
-        Informaciones adicionales
-      </span>
-      </div>
+  <!-- ============================== PORTADA CON VIDEO ============================== -->
+  <section class="cx-hero">
+    <video autoplay muted loop playsinline preload="auto" class="cx-hero-video" poster="https://pub-57e2d6782dd6483194a2084ca392d4ce.r2.dev/Body_wepage.jpg">
+      <source src="https://pub-57e2d6782dd6483194a2084ca392d4ce.r2.dev/pexels_13040830-uhd_3840_2160_25fps.mp4" type="video/mp4">
+    </video>
+    <div class="cx-hero-content">
+      <h1 class="cx-hero-title">Colombian Ocean Activity and Susceptibility Tool (COAST) - Wind</h1>
+      <nav class="cx-hero-nav">
+        <a href="introduction.html" data-i18n="nav.intro">Introducción</a>
+        <a href="geovisor.html" data-i18n="nav.geovisor">Geovisor</a>
+        <a href="contact.html" data-i18n="nav.contact">Contacto</a>
+      </nav>
     </div>
+  </section>
 
-  <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-    <div class="flex items-center gap-3 w-full md:w-1/3">
-      <span class="px-0 py-1.5 rounded-lg text-[11px] text-white">
-        © 2026 SEI-LA, Todos los derechos reservados.
-      </span>
-    </div>
-    <div class="flex items-center justify-end gap-6 w-full md:w-1/3">
-        <a href="https://www.sei.org/centres/latinoamerica/" class="px-14 py-1.5 rounded-lg text-[12px] text-white transition-all flex items-center gap-2 no-underline">
-          Acerca de SEI-LA
-        </a>
-    </div>  
-  </div>
+  <!-- ============================== TARJETAS CON VISTA PREVIA ============================== -->
+  <main class="cx-cards-wrap">
+    <div class="cx-cards">
 
-  <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-    <div class="flex items-center gap-3 w-full md:w-1/3">
-      <a href="https://github.com/sei-latam" class="px-0 py-1.5 rounded-lg text-[12px] text-white transition-all flex items-center gap-2 no-underline">
-          <i class="fab fa-github"></i> GitHub
+      <a href="introduction.html" class="cx-card">
+        <div class="cx-card-glow"></div>
+        <div class="cx-preview" data-preview="introduction.html">
+          <div class="cx-preview-placeholder"><i class="fa-solid fa-book-open"></i></div>
+          <span class="cx-preview-open"><span data-i18n="cards.open">Abrir</span> <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+        <div class="cx-card-body">
+          <h2 class="cx-card-title" data-i18n="nav.intro">Introducción</h2>
+          <p class="cx-card-text" data-i18n="cards.intro">Conoce con mayor detalle el proyecto COAST - Wind.</p>
+        </div>
       </a>
-    </div>
-    <div class="flex items-center justify-end gap-6 w-full md:w-1/3">
-      <a href="https://www.sei.org/centres/latinoamerica/" class="px-14 py-1.5 rounded-lg text-[12px] text-white transition-all flex items-center gap-2 no-underline">
-        Privacidad y Política de Cookies
+
+      <a href="geovisor.html" class="cx-card">
+        <div class="cx-card-glow"></div>
+        <div class="cx-preview" data-preview="geovisor.html">
+          <div class="cx-preview-placeholder"><i class="fa-solid fa-map-location-dot"></i></div>
+          <span class="cx-preview-open"><span data-i18n="cards.open">Abrir</span> <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+        <div class="cx-card-body">
+          <h2 class="cx-card-title" data-i18n="nav.geovisor">Geovisor</h2>
+          <p class="cx-card-text" data-i18n="cards.geovisor">Visualiza los resultados de los análisis de COAST - Wind en un entorno interactivo.</p>
+        </div>
       </a>
-    </div>  
-  </div>
 
-  <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-    <div class="bg-slate-900/50 px-0 py-1.5 rounded-full flex items-center gap-3">
-      <div class="flex items-center gap-2">
-        <div class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-pulse"></div>
-          <span class="text-[12px] text-white tracking-tighter">Versión: 1.0</span>
-      </div>
+      <a href="contact.html" class="cx-card">
+        <div class="cx-card-glow"></div>
+        <div class="cx-preview" data-preview="contact.html">
+          <div class="cx-preview-placeholder"><i class="fa-solid fa-envelope-open-text"></i></div>
+          <span class="cx-preview-open"><span data-i18n="cards.open">Abrir</span> <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+        <div class="cx-card-body">
+          <h2 class="cx-card-title" data-i18n="nav.contact">Contacto</h2>
+          <p class="cx-card-text" data-i18n="cards.contact">Ponte en contacto con nosotros para obtener más información o asistencia.</p>
+        </div>
+      </a>
+
     </div>
-    <div class="flex items-center gap-3 w-full md:w-1/3"></div>
-      <div class="flex items-center justify-end gap-6 w-full md:w-1/3">
-        <a href="#" class="px-14 py-1.5 rounded-lg text-[12px] text-white transition-all flex items-center gap-2 no-underline">
-          Terminos y Condiciones
-        </a>
-      </div>  
-  </div>
+  </main>
 
-</footer>
+  <!-- ============================== PIE DE PÁGINA ============================== -->
+  <footer class="cx-footer">
+    <div class="cx-footer-col">
+      <div class="cx-footer-brand">
+        <img src="logo-inst1.png" alt="SEI" class="cx-footer-logo">
+        <span class="cx-footer-org">Stockholm Environment Institute Latin America Center (SEI-LA)</span>
+      </div>
+      <span class="cx-footer-text" data-i18n="footer.rights">© 2026 SEI-LA, Todos los derechos reservados.</span>
+      <a href="https://github.com/sei-latam" target="_blank" rel="noopener noreferrer" class="cx-footer-link"><i class="fab fa-github"></i> GitHub</a>
+    </div>
+    <div class="cx-footer-col cx-footer-col-right">
+      <a href="https://www.sei.org/projects/coast-una-herramienta-para-integrar-actividad-humana-y-susceptibilidad-ambiental-en-la-planificacion-espacial-marina/" target="_blank" rel="noopener noreferrer" class="cx-footer-link" data-i18n="footer.more">Informaciones adicionales</a>
+      <a href="https://www.sei.org/centres/latinoamerica/" target="_blank" rel="noopener noreferrer" class="cx-footer-link" data-i18n="footer.about">Acerca de SEI-LA</a>
+      <a href="https://www.sei.org/website-policies/" target="_blank" rel="noopener noreferrer" class="cx-footer-link" data-i18n="footer.policies">Privacidad y cookies (SEI)</a>
+    </div>
+  </footer>
 
- <div id="google_translate_element" style="display:none !important;"></div>
-    <script type="text/javascript">
-      function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-          pageLanguage: 'es',
-          includedLanguages: 'es,en,de,fr,it,ja,ko,pt,ru,zh-CN',
-          autoDisplay: false
-        }, 'google_translate_element');
-      }
-    </script>
-  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-<script src="index_coast.js"></script>
+  <script src="index.js"></script>
 </body>
 </html>
