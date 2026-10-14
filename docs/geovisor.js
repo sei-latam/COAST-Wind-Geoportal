@@ -24,7 +24,7 @@ var mapaBaseDefiniciones = {
   }
 };
 
-var esriHibridoLayer = L.tileLayer(mapaBaseDefiniciones["Google Maps"].url);
+var esriHibridoLayer = L.tileLayer(mapaBaseDefiniciones["Satélite Híbrido"].url);
 var esriLabelsLayer = L.tileLayer(mapaBaseDefiniciones["Satélite Híbrido"].urlEsriLabels);
 var capaBaseInstanciada = L.layerGroup([esriHibridoLayer, esriLabelsLayer]).addTo(map);
 var mapaBaseActualNombre = "Satélite Híbrido";
@@ -46,6 +46,17 @@ var capasWMSActivas = {};
 // ------------------------------------------------------------------
 var GRILLA_WFS_URL = "https://geoserver.coast-wind.org/geoserver/coast_wind_data/ows";
 var GRILLA_CAPA = "coast_wind_data:grilla_joint_epsg4326_conv_v2";
+// ------------------------------------------------------------------
+// CACHÉ DE TESELAS (GeoWebCache vía WMTS)
+// true  = las capas se piden como teselas pre-renderizadas de GeoWebCache (rápido).
+// false = cada tesela la dibuja GeoServer en el momento (WMS clásico).
+// Si una capa no tiene caché activada en GeoServer, el visor vuelve a WMS solo para esa capa.
+// ------------------------------------------------------------------
+var USAR_CACHE_TESELAS = true;
+var WMTS_URL = "https://geoserver.coast-wind.org/geoserver/gwc/service/wmts";
+var WMTS_GRIDSET = "EPSG:900913"; // gridset por defecto de GeoWebCache, equivalente a la proyección de Leaflet
+
+var grillaCamposData = null; // lista de campos DataN; se pide solo eso por WFS (sin geometría)
 var grillaCampoGeometria = null; // se detecta automáticamente; en el GeoPackage v2 se llama "geom"
 
 async function obtenerCampoGeometriaGrilla() {
@@ -59,6 +70,10 @@ async function obtenerCampoGeometriaGrilla() {
       var props = (desc.featureTypes && desc.featureTypes[0] && desc.featureTypes[0].properties) || [];
       var geom = props.find(function(p) { return p.type && p.type.indexOf('gml:') === 0; });
       if (geom) grillaCampoGeometria = geom.name;
+      grillaCamposData = props
+        .map(function(p) { return p.name; })
+        .filter(function(n) { return /^data\d+$/i.test(n); });
+      if (grillaCamposData.length === 0) grillaCamposData = null;
     }
   } catch (e) {
     console.warn("No se pudo detectar la columna geométrica de la grilla; se usará 'geom'.", e);
@@ -378,6 +393,11 @@ function activarHerramientaDibujo(tipo) {
 }
 
 
+// Pide a GeoServer solo los campos DataN: evita transferir geometrías y columnas que no se usan
+function parametroCamposWFS() {
+  return grillaCamposData ? `propertyName=${encodeURIComponent(grillaCamposData.join(','))}&` : '';
+}
+
 async function consultarGrillaPorCoordenadas(lat, lon, marcador) {
   var nombreCapa = GRILLA_CAPA;
   var campoGeom = await obtenerCampoGeometriaGrilla();
@@ -386,7 +406,8 @@ async function consultarGrillaPorCoordenadas(lat, lon, marcador) {
   var wfsUrl = `${GRILLA_WFS_URL}?` +
     `service=WFS&version=1.0.0&request=GetFeature&` +
     `typeName=${encodeURIComponent(nombreCapa)}&` +
-    `outputFormat=application/json&` +
+    `outputFormat=application/json&maxFeatures=1&` +
+    parametroCamposWFS() +
     `cql_filter=${encodeURIComponent(cqlFilter)}`;
 
   try {
@@ -432,11 +453,13 @@ async function consultarGrillaPorGeometria(capaGrafica, bounds, tituloGeometria)
 
   var nombreCapa = GRILLA_CAPA;
   var bboxFilter = `${minLon},${minLat},${maxLon},${maxLat},EPSG:4326`;
+  await obtenerCampoGeometriaGrilla(); // carga la lista de campos DataN (una sola vez)
   
   var wfsUrl = `${GRILLA_WFS_URL}?` +
     `service=WFS&version=1.0.0&request=GetFeature&` +
     `typeName=${encodeURIComponent(nombreCapa)}&` +
     `outputFormat=application/json&` +
+    parametroCamposWFS() +
     `bbox=${encodeURIComponent(bboxFilter)}`;
 
   try {
@@ -1279,6 +1302,61 @@ function toggleTodasLasCapas(activar) {
   }
 }
 
+// Opciones comunes: no pedir teselas durante la animación de zoom y conservar
+// más teselas alrededor de la vista para que el paneo no las vuelva a solicitar.
+var OPCIONES_TESELAS = {
+  tileSize: 256,
+  updateWhenZooming: false,
+  updateWhenIdle: true,
+  keepBuffer: 4
+};
+
+function crearCapaWMS(layerName) {
+  return L.tileLayer.wms(wmsBaseUrl, Object.assign({}, OPCIONES_TESELAS, {
+    layers: 'coast_wind_data:' + layerName,
+    format: 'image/png',
+    transparent: true,
+    version: '1.1.1',
+    styles: '',
+    tiled: true,
+    opacity: typeof opacidadWMSGlobal !== 'undefined' ? opacidadWMSGlobal : 1.0
+  }));
+}
+
+function crearCapaTeselas(layerName) {
+  if (!USAR_CACHE_TESELAS) return crearCapaWMS(layerName);
+
+  var urlWMTS = `${WMTS_URL}?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0` +
+    `&LAYER=${encodeURIComponent('coast_wind_data:' + layerName)}&STYLE=` +
+    `&TILEMATRIXSET=${encodeURIComponent(WMTS_GRIDSET)}` +
+    `&TILEMATRIX=${encodeURIComponent(WMTS_GRIDSET)}:{z}&TILEROW={y}&TILECOL={x}` +
+    `&FORMAT=image/png`;
+
+  var capa = L.tileLayer(urlWMTS, Object.assign({}, OPCIONES_TESELAS, {
+    opacity: typeof opacidadWMSGlobal !== 'undefined' ? opacidadWMSGlobal : 1.0
+  }));
+
+  // Respaldo: si la capa NO tiene caché en GeoWebCache, se reemplaza por WMS.
+  // Ojo: GeoWebCache responde con error las teselas que caen fuera de la extensión
+  // de la capa (TileOutOfRange). Eso es normal y no debe provocar el cambio a WMS,
+  // así que solo se cambia si en una carga completa NO llegó ninguna tesela válida.
+  var reemplazada = false;
+  var teselasOk = 0, teselasError = 0;
+  capa.on('tileload', function() { teselasOk++; });
+  capa.on('tileerror', function() { teselasError++; });
+  capa.on('load', function() {
+    if (reemplazada || teselasOk > 0 || teselasError === 0) return;
+    if (capasWMSActivas[layerName] !== capa) return;
+    reemplazada = true;
+    console.warn(`La capa "${layerName}" no está en GeoWebCache; se carga por WMS.`);
+    var capaWMS = crearCapaWMS(layerName);
+    capasWMSActivas[layerName] = capaWMS;
+    map.removeLayer(capa);
+    capaWMS.addTo(map);
+  });
+  return capa;
+}
+
 function toggleCapa(layerName, tituloAmigable) {
   var checkBox = document.getElementById("chk-" + layerName);
   var containerItem = document.getElementById("item-" + layerName);
@@ -1287,15 +1365,7 @@ function toggleCapa(layerName, tituloAmigable) {
   if (checkBox.checked) {
     if (containerItem) containerItem.classList.add('active');
     
-    var nuevaCapaWMS = L.tileLayer.wms(wmsBaseUrl, {
-      layers: 'coast_wind_data:' + layerName,
-      format: 'image/png',
-      transparent: true,
-      version: '1.1.0',
-      srs: 'EPSG:4326',
-      styles: '',
-      opacity: typeof opacidadWMSGlobal !== 'undefined' ? opacidadWMSGlobal : 1.0
-    });
+    var nuevaCapaWMS = crearCapaTeselas(layerName);
 
     // Control individual para contar cuando finaliza o falla la carga de los tiles de esta capa
     var finalizada = false;
