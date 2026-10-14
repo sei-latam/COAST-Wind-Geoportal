@@ -529,7 +529,7 @@ async function obtenerCampoGeometriaGrilla() {
 // ------------------------------------------------------------------
 var capasProyecto = [
   // Cuadrícula y síntesis
-  { id: "grilla_joint_epsg4326_conv_v2", grupo: "Cuadricula",
+  { id: "grilla_joint_EPSG4326_Dissolve", grupo: "Cuadricula",
     nombres: { es: "Cuadrícula y grilla", en: "Analysis grid", pt: "Grade de análise" } },
   ///{ id: "Environmental Sensitivity Index", grupo: "Sintesis", nombres: { es: "Environmental Sensitivity Index (ESI)" } },
   { id: "Poligono ronda eolica", grupo: "Sintesis",
