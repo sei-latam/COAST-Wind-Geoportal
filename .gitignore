@@ -23,3 +23,10 @@ Gemfile.lock
 !.dev.vars.example
 .env*
 !.env.example
+escritorio_dark_2_panel.png
+escritorio_dark_6_colapsado.png
+escritorio_light_4_consulta.png
+idioma_pt_2_consulta.png
+movil_dark_2_inicio.png
+movil_dark_3_panel.png
+movil_light_3_panel.png
