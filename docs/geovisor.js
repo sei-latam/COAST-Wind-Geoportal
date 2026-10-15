@@ -538,8 +538,8 @@ var capasProyecto = [
   // Actividad humana
   { id: "areas_asignadas_grilla_raster", grupo: "Actividad Humana",
     nombres: { es: "Asignación de exploración/explotación de hidrocarburos", en: "Assigned hydrocarbon exploration/production areas", pt: "Áreas atribuídas de exploração/produção de hidrocarbonetos" } },
-  { id: "areas_reservadas_grilla_raster", grupo: "Actividad Humana",
-    nombres: { es: "Reservada de exploración/explotación de hidrocarburos", en: "Reserved hydrocarbon exploration/production areas", pt: "Áreas reservadas de exploração/produção de hidrocarbonetos" } },
+  //{ id: "areas_reservadas_grilla_raster", grupo: "Actividad Humana",
+  //  nombres: { es: "Reservada de exploración/explotación de hidrocarburos", en: "Reserved hydrocarbon exploration/production areas", pt: "Áreas reservadas de exploração/produção de hidrocarbonetos" } },
   { id: "Cables_submarinos_prj_ok_grilla_raster", grupo: "Actividad Humana",
     nombres: { es: "Presencia de cables submarinos", en: "Submarine cables", pt: "Cabos submarinos" } },
   { id: "Caladeros_de_Pesca_(poligonos)_grilla_raster", grupo: "Actividad Humana",
