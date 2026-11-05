@@ -1,305 +1,121 @@
 # COAST-Wind-Geoportal
 
-**Colombian Ocean Activity and Susceptibility Tool - Wind (COAST)**
+**Colombian Ocean Activity and Susceptibility Tool (COAST) - Wind**
 
-A modern geovisualization platform for analyzing environmental sensitivity and spatial suitability for wind energy development along Colombia's Caribbean coast. COAST integrates marine ecosystem data, protected areas, and biodiversity hotspots to support evidence-based marine spatial planning.
+COAST-Wind es un geovisor y sitio web del Stockholm Environment Institute Latin America Center (SEI-LA). El sitio presenta el proyecto y permite explorar información geográfica de la costa Caribe colombiana mediante un visor basado en Leaflet que consume capas WMS de GeoServer. El catálogo del repositorio reúne metadatos de capas ambientales y de actividades humanas.
 
-![GitHub License](https://img.shields.io/badge/license-GPLv3-blue)
-![GitHub Stars](https://img.shields.io/github/stars/sei-latam/COAST-Wind-Geoportal?style=flat)
-![Contributors](https://img.shields.io/github/contributors/sei-latam/COAST-Wind-Geoportal)
+## Sitio
 
----
+La versión publicada se encuentra en [https://coast-wind.org](https://coast-wind.org). El directorio `docs/` contiene las páginas y los recursos estáticos del sitio.
 
-## Live Platform
+## Funcionalidades del geovisor
 
-The COAST-Wind Geovisor is deployed at: **[https://coast-wind.org](https://coast-wind.org)**
+La interfaz de `docs/geovisor.html` y su código asociado incluyen:
 
----
+- Mapa interactivo con Leaflet, selector de mapas base, control de opacidad y controles de zoom, vista inicial y ubicación.
+- Panel para mostrar u ocultar capas y consultar su simbología, con controles para activar o desactivar las capas.
+- Búsqueda de lugares y direcciones.
+- Herramientas para dibujar puntos, archivos y geometrías, medir y limpiar los gráficos.
+- Importación de archivos vectoriales `.zip` (Shapefile), `.geojson`, `.json`, `.kml` y `.topojson`.
+- Interfaz en español, inglés y portugués, con tema claro y oscuro.
 
-## Features
+El archivo `json_query.json` contiene registros de capas con nombres y descripciones en español, inglés y portugués, fuentes y enlaces a metadatos cuando están disponibles. El catálogo abarca áreas protegidas, ambientes y especies marinas, rasgos costeros, pesca, infraestructura y otros usos humanos. El catálogo es metadato; no contiene los archivos raster o vectoriales de cada capa.
 
-- **Interactive Web Mapping** – Leaflet-based geovisor with multiple basemap layers (OpenStreetMap, ESRI, Google)
-- **27 Environmental Layers** – Marine habitats, protected areas, biodiversity hotspots, coastal features
-- **Spatial Analysis Tools** – Point queries, polygon drawing, distance measurement, custom file upload
-- **Data Export** – Download consulted areas as CSV reports with environmental metadata
-- **Multilingual Interface** – Spanish, English, German, French, Italian, Japanese, Korean, Portuguese, Russian, Chinese
-- **Responsive Design** – Desktop-optimized interface with dark/light theme toggle
-- **GIS Data Integration** – PostGIS spatial database with OGC WMS/WFS services via GeoServer
+## Inicio local
 
----
-
-## Quick Start
-
-### Prerequisites
-
-- **Node.js** 16+ (for development/local testing)
-- **Python 3.8+** (for data processing scripts)
-- **PostgreSQL 13+** with PostGIS extension (for backend deployment)
-- **Java 21 OpenJDK** (for GeoServer deployment)
-- **Nginx** or reverse proxy (for production)
-
-### Frontend Development
+No se incluyen `package.json`, manifiestos de dependencias del frontend ni instrucciones de pruebas automatizadas. Para servir las páginas estáticas desde una copia local del repositorio, use Python 3:
 
 ```bash
-# Clone repository
-git clone https://github.com/sei-latam/COAST-Wind-Geoportal.git
-cd COAST-Wind-Geoportal
-
-# Install dependencies (if using npm)
-npm install
-
-# Start development server
-npm run dev
-# Or use Python's built-in HTTP server
-cd docs
-python -m http.server 8000
-
-# Open browser
-# http://localhost:8000/index.html
-# http://localhost:8000/docs/geovisor.html
+python -m http.server 8000 --directory docs
 ```
 
-### Backend Deployment
+Abra `http://localhost:8000/` para la página principal, o directamente `http://localhost:8000/geovisor.html`, `http://localhost:8000/introduction.html` y `http://localhost:8000/contact.html`. El geovisor consulta servicios externos, entre ellos GeoServer; servir los archivos localmente no instala ni configura esos servicios.
 
-For production GeoServer + PostGIS deployment on cloud infrastructure:
+## Datos y servicios geográficos
 
-1. **Review deployment documentation** – See `docs/DEPLOYMENT.md`
-2. **Configure environment variables** – Create `.env` file with required settings (see `.env.example`)
-3. **Initialize database** – Run PostGIS setup scripts
-4. **Deploy GeoServer** – Follow containerized deployment guide
-5. **Configure reverse proxy** – Set up Nginx with TLS
+- `geodatabase_COAST/CreationCOASTdatabase.sql` contiene instrucciones SQL para crear una base de datos y un esquema, asignar permisos y habilitar extensiones espaciales de PostGIS.
+- `geodatabase_COAST/InputPostGISdata.sql` documenta la importación de datos GIS con `shp2pgsql`, `raster2pgsql` y `psql`, además de consultas de ejemplo. Incluye rutas y parámetros específicos de un entorno; revíselos y sustitúyalos antes de reutilizarlos.
+- `geodatabase_COAST/conversionGIStoWGS84.ipynb` muestra la reproyección de un Shapefile a WGS 84 (EPSG:4326) con GeoPandas.
+- `GCP.markdown` reúne comandos y fragmentos de configuración para instalar GeoServer y Nginx y publicar capas en una máquina virtual. Es una guía operativa, no una configuración automatizada o lista para ejecutar sin revisión; contiene valores de ejemplo y configuraciones de servidor que deben verificarse antes de usarse.
+- `configurar_cache_geoserver.py` configura GeoWebCache para las capas de un espacio de trabajo GeoServer. Admite simulación, configuración, siembra de caché y opciones de URL y zoom; solicita la contraseña por variable de entorno o por teclado.
 
-**Security Warning:** Never commit credentials, API keys, database passwords, or internal IP addresses to version control. Use environment variables and secrets management systems.
+Los scripts y documentos describen componentes de la infraestructura geográfica, pero este repositorio no incluye una instalación completa de PostgreSQL/PostGIS o GeoServer ni los datos GIS publicados en esos servicios.
 
----
+## Organización de archivos
 
-## Project Structure
-
-```
-├── README.md                          # This file
-├── CONTRIBUTING.md                   # Contribution guidelines
-├── SECURITY.md                        # Security policy & vulnerability reporting
-├── CODE_OF_CONDUCT.md                 # Community standards
-├── LICENSE                            # GPLv3 license
-│
-├── src/                               # Vue.js components (source)
-│   └── components/
-│       ├── MapView.vue                # Main Leaflet map component
-│       ├── LayerPanel.vue             # Layer management
-│       ├── Topbar.vue                 # Header/navigation
-│       └── Metadata.vue               # Layer metadata viewer
-│
-├── docs/                              # Deployed frontend assets
-│   ├── index.html                     # Landing page
-│   ├── geovisor.html                  # Main geovisor interface
-│   ├── introduction.html               # Project overview
-│   ├── development.html                # Development status
-│   ├── contact.html                   # Contact form
-│   ├── geovisor.js                    # Core mapping logic (47KB)
-│   ├── geovisor.css                   # Map styling
-│   ├── index.css                      # Landing page styles
-│   ├── *.png, *.webp                  # Images and logos
-│   └── wrangler.jsonc                 # Cloudflare Workers config
-│
-├── geodatabase_COAST/                 # Database scripts & notebooks
-│   ├── CreationCOASTdatabase.sql      # PostGIS schema initialization
-│   ├── InputPostGISdata.sql           # Data import commands
-│   └── conversionGIStoWGS84.ipynb     # Coordinate transformation
-│
-├── create_json.py                     # CSV → JSON metadata catalog converter
-├── json_query.json                    # Environmental layer catalog (27 layers)
-│
-└── .github/
-    ├── ISSUE_TEMPLATE/
-    └── workflows/                     # CI/CD workflows (GitHub Actions)
-```
-
----
-
-## Data & Layers
-
-COAST integrates **27 geospatial layers** from authoritative Colombian sources:
-
-### Layer Categories
-
-| Category | Layers | Source |
-|----------|--------|--------|
-| **Protected Areas** | 9 | RUNAP (Parques Nacionales de Colombia) |
-| **Marine Habitats** | 5 | INVEMAR |
-| **Biodiversity Hotspots** | 8 | INVEMAR, conservation partners |
-| **Coastal Features** | 3 | INVEMAR, SGC |
-| **Socioeconomic** | 2 | INVEMAR |
-
-### Layer Metadata
-
-All layer information is stored in [`json_query.json`](./json_query.json) with:
-- Layer name and description
-- Data source and authority
-- Restrictions & usage recommendations
-- Links to metadata (XML schemas, data portals)
-
-**To add a new layer:**
-1. Convert GIS file to EPSG:4326 (WGS84)
-2. Follow instructions in deployment documentation
-3. Update `json_query.json` with metadata
-4. Test in development environment before production deployment
-
----
-
-## Development
-
-### Tech Stack
-
-- **Frontend:** Vue.js, Leaflet.js 1.9.4, Tailwind CSS, Font Awesome
-- **Backend:** GeoServer 2.24.2, PostGIS, PostgreSQL 13+
-- **Infrastructure:** Nginx, Docker (optional), Google Cloud Platform
-- **Deployment:** Cloudflare Workers (frontend), Cloud Run / VM (backend)
-
-### Running Tests
-
-```bash
-# Lint code
-npm run lint
-
-# Run unit tests
-npm run test
-
-# Run end-to-end tests
-npm run test:e2e
+```text
+.
+├── .gitattributes                         # Atributos de detección de lenguaje para SQL y notebooks
+├── .gitignore                              # Exclusiones de Jekyll, Wrangler, variables locales e imágenes listadas
+├── .github/
+│   └── ISSUE_TEMPLATE/
+│       └── bug_report.md                   # Plantilla para reportar errores
+├── assets/
+│   └── preview.png                         # Imagen de vista previa del proyecto
+├── COAST_Visualization.qgz                 # Proyecto de QGIS
+├── CODE_OF_CONDUCT.md                      # Contributor Covenant, versión 2.0
+├── CONTRIBUTING.md                         # Archivo breve con pautas de contribución
+├── GCP.markdown                            # Notas de instalación y despliegue de GeoServer/Nginx
+├── LICENSE                                 # GNU General Public License, versión 3
+├── README.md                               # Descripción y guía de los archivos del repositorio
+├── SECURITY.md                             # Plantilla de política de seguridad y versiones
+├── configurar_cache_geoserver.py           # Configuración y siembra de caché de GeoWebCache
+├── create_json.py                          # Conversión de un CSV local a JSON
+├── json_query.json                         # Catálogo de metadatos geográficos
+├── geodatabase_COAST/
+│   ├── CreationCOASTdatabase.sql           # Creación de base de datos, esquema, roles y extensiones
+│   ├── InputPostGISdata.sql                # Ejemplos de importación y consultas PostGIS
+│   └── conversionGIStoWGS84.ipynb          # Reproyección de datos GIS a EPSG:4326
+├── src/
+│   └── components/                         # Componentes Vue de una interfaz de mapa
+│       ├── LayerPanel.vue                  # Controles de capas de ejemplo
+│       ├── MapView.vue                     # Mapa Leaflet y configuración WMS
+│       ├── Metadata.vue                    # Visualización de fuente y fecha de ejemplo
+│       └── Topbar.vue                      # Barra superior con fecha y hora de Colombia
+└── docs/                                   # Sitio estático publicado y configuración de Wrangler
+    ├── Body_wepage.jpg                     # Imagen
+    ├── Esri_Hybrid_Map.png                  # Imagen de mapa base
+    ├── Esri_Satellite_Map.png               # Imagen de mapa base
+    ├── Esri_World_Street_Map.png            # Imagen de mapa base
+    ├── Google_Maps.png                      # Imagen de mapa base
+    ├── Google_Satellite.png                 # Imagen de mapa base
+    ├── Profile1.jpg                          # Imagen de perfil
+    ├── Profile2.webp                         # Imagen de perfil
+    ├── Profile3.webp                         # Imagen de perfil
+    ├── Profile4.webp                         # Imagen de perfil
+    ├── Profile5.webp                         # Imagen de perfil
+    ├── contact.html                         # Formulario de contacto
+    ├── development.css                      # Estilos de la página de desarrollo
+    ├── development.html                     # Página de desarrollo
+    ├── development.js                       # Comportamiento de la página de desarrollo
+    ├── geovisor.css                         # Estilos del geovisor
+    ├── geovisor.html                        # Interfaz del geovisor
+    ├── geovisor.js                          # Lógica del mapa y sus herramientas
+    ├── index.css                            # Estilos de la página principal
+    ├── index.html                           # Página principal y navegación
+    ├── index.js                             # Idioma, tema, reloj y vistas previas
+    ├── introduction.css                     # Estilos compartidos de introducción y contacto
+    ├── introduction.html                    # Descripción, equipo y temas del proyecto
+    ├── introduction.js                      # Idioma, tema e índice de la introducción/contacto
+    ├── logo-inst1.png                       # Imagen de logo institucional
+    ├── logo-inst2.png                       # Imagen de logo institucional
+    ├── logo-inst3.png                       # Imagen de logo institucional
+    └── wrangler.jsonc                       # Configuración de Wrangler para los recursos de docs/
 ```
 
-### Building for Production
+### Componentes Vue
 
-```bash
-# Build frontend assets
-npm run build
+Los cuatro componentes de `src/components/` son un conjunto de interfaz Vue separado de las páginas HTML estáticas de `docs/`. `MapView.vue` configura capas base y tres capas WMS; `LayerPanel.vue` presenta controles de ejemplo para clima e hidrología, y `Metadata.vue` contiene metadatos de ejemplo. En el repositorio no hay manifiesto o punto de entrada que integre estos componentes con `docs/geovisor.html`.
 
-# Optimize GeoServer configuration
-./scripts/optimize-geoserver.sh
+### Archivos de soporte
 
-# Deploy to staging
-npm run deploy:staging
+- `.github/ISSUE_TEMPLATE/bug_report.md` define los campos de la plantilla para reportar errores. No hay flujos de GitHub Actions en el árbol actual.
+- `create_json.py` convierte un CSV local en `json_query.json`; la ruta del CSV está escrita para un equipo local concreto y el script requiere `pandas`.
+- `COAST_Visualization.qgz` es un proyecto comprimido de QGIS.
+- `assets/preview.png` es el recurso gráfico de vista previa.
+- `CONTRIBUTING.md` contiene únicamente un encabezado de pautas; `SECURITY.md` conserva texto de plantilla sobre versiones y reporte de vulnerabilidades.
+- `.gitattributes` configura cómo GitHub clasifica archivos SQL y notebooks. `.gitignore` incluye exclusiones para archivos locales y algunas capturas que no forman parte del árbol versionado.
 
-# Deploy to production
-npm run deploy:production
-```
+## Licencia y comunidad
 
----
-
-## Configuration
-
-### Environment Variables
-
-Create a `.env` file based on `.env.example`:
-
-```bash
-# Frontend
-VUE_APP_GEOSERVER_URL=https://your-geoserver-domain.com/geoserver
-VUE_APP_API_URL=https://your-api-domain.com
-VUE_APP_ENVIRONMENT=production
-
-# Backend (GeoServer)
-GEOSERVER_HOME=/usr/share/geoserver
-GEOSERVER_DATA_DIR=/var/geoserver/data_dir
-JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
-
-# Database
-DATABASE_USER=coastal_user
-DATABASE_POOL_SIZE=20
-```
-
-** NEVER commit actual `.env` files to version control.**
-
-Use a secrets management system:
-- **Local:** `.env.local` (add to `.gitignore`)
-- **Cloud:** Google Secret Manager, AWS Secrets Manager, HashiCorp Vault
-- **CI/CD:** GitHub Secrets, GitLab CI/CD Variables
-
----
-
-## Security
-
-### Reporting Vulnerabilities
-
-**PLEASE DO NOT OPEN ISSUES FOR SECURITY VULNERABILITIES**
-
-If you discover a security vulnerability:
-- Description of the vulnerability
-- Steps to reproduce
-- Potential impact
-- Suggested fix (if available)
-
-**Do not** post security issues on GitHub, Twitter, or public channels.
-
-See [`SECURITY.md`](./SECURITY.md) for detailed security policy and supported versions.
-
-### Best Practices
-
-- ✅ Keep dependencies updated (`npm audit`, `pip-audit`)
-- ✅ Use HTTPS everywhere (TLS 1.2+)
-- ✅ Never commit credentials, API keys, or passwords
-- ✅ Enable CSRF protection on all state-changing endpoints
-- ✅ Validate and sanitize all user inputs
-- ✅ Implement rate limiting on public APIs
-- ✅ Use environment variables for sensitive configuration
-- ✅ Enable Web Application Firewall (WAF) on production
-
----
-
-## Documentation
-
-- **[`CONTRIBUTING.md`](./CONTRIBUTING.md)** – How to contribute code, report bugs, request features
-- **[`SECURITY.md`](./SECURITY.md)** – Security policy, vulnerability reporting, supported versions
-- **[`CODE_OF_CONDUCT.md`](./CODE_OF_CONDUCT.md)** – Community guidelines and standards
-
----
-
-## Contributing
-
-We welcome contributions! Please read [`CONTRIBUTING.md`](./CONTRIBUTING.md) for:
-
-- How to set up your development environment
-- Coding standards and conventions
-- Testing requirements
-- Pull request process
-- Code review guidelines
-
-### Contributors
-
-#### **Developed by** [Stockholm Environment Institute Latin America Center (SEI-LA)](https://www.sei.org/centres/latinoamerica/)
----
-
-## License
-
-#### This project is licensed under the **GNU General Public License v3.0** – see [`LICENSE`](./LICENSE) for details.
-
-### Summary
-
-You are free to:
-- ✅ Use commercially
-- ✅ Modify the code
-- ✅ Distribute copies
-
-Under the conditions that you:
-- License derivatives under GPLv3
-- Disclose source code
-- Include license and copyright notice
-- Document significant changes
-
-#### See [`LICENSE`](./LICENSE) for complete terms.
----
-
-## Status
-
-| Component | Status | Notes |
-|-----------|--------|-------|
-| Frontend | ✅ Production | Deployed via Cloudflare Workers |
-| GeoServer | ✅ Production | WMS/WFS available |
-| Database | ✅ Production | PostGIS with 27 layers |
-| Tests | 🟡 Partial | Unit tests needed |
-| Documentation | 🟡 In Progress | API & deployment docs needed |
-| CI/CD | 🟡 Partial | GitHub Actions workflows in progress |
-
----
-
-**Last Updated:** September 2026 | **Maintainer:** SEI-LA Development Team
+El repositorio incluye la licencia GNU GPL v3 en `LICENSE`, el código de conducta en `CODE_OF_CONDUCT.md` y los archivos `CONTRIBUTING.md` y `SECURITY.md` descritos arriba.
