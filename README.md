@@ -2,120 +2,120 @@
 
 **Colombian Ocean Activity and Susceptibility Tool (COAST) - Wind**
 
-COAST-Wind es un geovisor y sitio web del Stockholm Environment Institute Latin America Center (SEI-LA). El sitio presenta el proyecto y permite explorar información geográfica de la costa Caribe colombiana mediante un visor basado en Leaflet que consume capas WMS de GeoServer. El catálogo del repositorio reúne metadatos de capas ambientales y de actividades humanas.
+COAST-Wind is a geovisor and website of the Stockholm Environment Institute Latin America Center (SEI-LA). The site introduces the project and allows users to explore geographic information about Colombia's Caribbean coast through a Leaflet-based viewer that consumes GeoServer WMS layers. The repository's catalog brings together metadata for environmental and human-activity layers.
 
-## Sitio
+## Website
 
-La versión publicada se encuentra en [https://coast-wind.org](https://coast-wind.org). El directorio `docs/` contiene las páginas y los recursos estáticos del sitio.
+The published version is available at [https://coast-wind.org](https://coast-wind.org). The `docs/` directory contains the site's pages and static resources.
 
-## Funcionalidades del geovisor
+## Geovisor features
 
-La interfaz de `docs/geovisor.html` y su código asociado incluyen:
+The interface in `docs/geovisor.html` and its associated code include:
 
-- Mapa interactivo con Leaflet, selector de mapas base, control de opacidad y controles de zoom, vista inicial y ubicación.
-- Panel para mostrar u ocultar capas y consultar su simbología, con controles para activar o desactivar las capas.
-- Búsqueda de lugares y direcciones.
-- Herramientas para dibujar puntos, archivos y geometrías, medir y limpiar los gráficos.
-- Importación de archivos vectoriales `.zip` (Shapefile), `.geojson`, `.json`, `.kml` y `.topojson`.
-- Interfaz en español, inglés y portugués, con tema claro y oscuro.
+- An interactive Leaflet map with a basemap selector, opacity control, and controls for zoom, the initial view, and location.
+- A panel for showing or hiding layers and viewing their symbology, with controls to activate or deactivate layers.
+- Place and address search.
+- Tools for drawing points, files, and geometries, measuring, and clearing graphics.
+- Import of vector files in `.zip` (Shapefile), `.geojson`, `.json`, `.kml`, and `.topojson` formats.
+- An interface in Spanish, English, and Portuguese, with light and dark themes.
 
-El archivo `json_query.json` contiene registros de capas con nombres y descripciones en español, inglés y portugués, fuentes y enlaces a metadatos cuando están disponibles. El catálogo abarca áreas protegidas, ambientes y especies marinas, rasgos costeros, pesca, infraestructura y otros usos humanos. El catálogo es metadato; no contiene los archivos raster o vectoriales de cada capa.
+The `json_query.json` file contains layer records with names and descriptions in Spanish, English, and Portuguese, sources, and metadata links when available. The catalog covers protected areas, marine environments and species, coastal features, fishing, infrastructure, and other human uses. The catalog contains metadata; it does not contain the raster or vector files for each layer.
 
-## Inicio local
+## Run locally
 
-No se incluyen `package.json`, manifiestos de dependencias del frontend ni instrucciones de pruebas automatizadas. Para servir las páginas estáticas desde una copia local del repositorio, use Python 3:
+There is no `package.json`, frontend dependency manifest, or automated test instructions in the repository. To serve the static pages from a local copy of the repository, use Python 3:
 
 ```bash
 python -m http.server 8000 --directory docs
 ```
 
-Abra `http://localhost:8000/` para la página principal, o directamente `http://localhost:8000/geovisor.html`, `http://localhost:8000/introduction.html` y `http://localhost:8000/contact.html`. El geovisor consulta servicios externos, entre ellos GeoServer; servir los archivos localmente no instala ni configura esos servicios.
+Open `http://localhost:8000/` for the home page, or go directly to `http://localhost:8000/geovisor.html`, `http://localhost:8000/introduction.html`, or `http://localhost:8000/contact.html`. The geovisor queries external services, including GeoServer; serving the files locally does not install or configure those services.
 
-## Datos y servicios geográficos
+## Geographic data and services
 
-- `geodatabase_COAST/CreationCOASTdatabase.sql` contiene instrucciones SQL para crear una base de datos y un esquema, asignar permisos y habilitar extensiones espaciales de PostGIS.
-- `geodatabase_COAST/InputPostGISdata.sql` documenta la importación de datos GIS con `shp2pgsql`, `raster2pgsql` y `psql`, además de consultas de ejemplo. Incluye rutas y parámetros específicos de un entorno; revíselos y sustitúyalos antes de reutilizarlos.
-- `geodatabase_COAST/conversionGIStoWGS84.ipynb` muestra la reproyección de un Shapefile a WGS 84 (EPSG:4326) con GeoPandas.
-- `GCP.markdown` reúne comandos y fragmentos de configuración para instalar GeoServer y Nginx y publicar capas en una máquina virtual. Es una guía operativa, no una configuración automatizada o lista para ejecutar sin revisión; contiene valores de ejemplo y configuraciones de servidor que deben verificarse antes de usarse.
-- `configurar_cache_geoserver.py` configura GeoWebCache para las capas de un espacio de trabajo GeoServer. Admite simulación, configuración, siembra de caché y opciones de URL y zoom; solicita la contraseña por variable de entorno o por teclado.
+- `geodatabase_COAST/CreationCOASTdatabase.sql` contains SQL instructions to create a database and schema, assign permissions, and enable PostGIS spatial extensions.
+- `geodatabase_COAST/InputPostGISdata.sql` documents GIS data import with `shp2pgsql`, `raster2pgsql`, and `psql`, as well as example queries. It includes paths and parameters specific to an environment; review and replace them before reuse.
+- `geodatabase_COAST/conversionGIStoWGS84.ipynb` demonstrates reprojecting a Shapefile to WGS 84 (EPSG:4326) with GeoPandas.
+- `GCP.markdown` collects commands and configuration snippets for installing GeoServer and Nginx and publishing layers on a virtual machine. It is an operational guide, not an automated or ready-to-run configuration; it contains example values and server configurations that must be checked before use.
+- `configurar_cache_geoserver.py` configures GeoWebCache for the layers in a GeoServer workspace. It supports simulation, configuration, cache seeding, and URL and zoom options; it prompts for the password through an environment variable or the keyboard.
 
-Los scripts y documentos describen componentes de la infraestructura geográfica, pero este repositorio no incluye una instalación completa de PostgreSQL/PostGIS o GeoServer ni los datos GIS publicados en esos servicios.
+The scripts and documents describe parts of the geographic infrastructure, but this repository does not include a complete PostgreSQL/PostGIS or GeoServer installation, or the GIS data published through those services.
 
-## Organización de archivos
+## File organization
 
 ```text
 .
-├── .gitattributes                         # Atributos de detección de lenguaje para SQL y notebooks
-├── .gitignore                              # Exclusiones de Jekyll, Wrangler, variables locales e imágenes listadas
+├── .gitattributes                         # Language detection attributes for SQL and notebooks
+├── .gitignore                              # Jekyll, Wrangler, local-variable, and listed-image exclusions
 ├── .github/
 │   └── ISSUE_TEMPLATE/
-│       └── bug_report.md                   # Plantilla para reportar errores
+│       └── bug_report.md                   # Bug report template
 ├── assets/
-│   └── preview.png                         # Imagen de vista previa del proyecto
-├── COAST_Visualization.qgz                 # Proyecto de QGIS
-├── CODE_OF_CONDUCT.md                      # Contributor Covenant, versión 2.0
-├── CONTRIBUTING.md                         # Archivo breve con pautas de contribución
-├── GCP.markdown                            # Notas de instalación y despliegue de GeoServer/Nginx
-├── LICENSE                                 # GNU General Public License, versión 3
-├── README.md                               # Descripción y guía de los archivos del repositorio
-├── SECURITY.md                             # Plantilla de política de seguridad y versiones
-├── configurar_cache_geoserver.py           # Configuración y siembra de caché de GeoWebCache
-├── create_json.py                          # Conversión de un CSV local a JSON
-├── json_query.json                         # Catálogo de metadatos geográficos
+│   └── preview.png                         # Project preview image
+├── COAST_Visualization.qgz                 # QGIS project
+├── CODE_OF_CONDUCT.md                      # Contributor Covenant, version 2.0
+├── CONTRIBUTING.md                         # Brief contribution guidelines file
+├── GCP.markdown                            # GeoServer/Nginx installation and deployment notes
+├── LICENSE                                 # GNU General Public License, version 3
+├── README.md                               # Repository description and file guide
+├── SECURITY.md                             # Security policy and supported-versions template
+├── configurar_cache_geoserver.py           # GeoWebCache configuration and cache seeding
+├── create_json.py                          # Conversion of a local CSV to JSON
+├── json_query.json                         # Geographic metadata catalog
 ├── geodatabase_COAST/
-│   ├── CreationCOASTdatabase.sql           # Creación de base de datos, esquema, roles y extensiones
-│   ├── InputPostGISdata.sql                # Ejemplos de importación y consultas PostGIS
-│   └── conversionGIStoWGS84.ipynb          # Reproyección de datos GIS a EPSG:4326
+│   ├── CreationCOASTdatabase.sql           # Database, schema, roles, and extensions setup
+│   ├── InputPostGISdata.sql                # PostGIS import and query examples
+│   └── conversionGIStoWGS84.ipynb          # GIS data reprojection to EPSG:4326
 ├── src/
-│   └── components/                         # Componentes Vue de una interfaz de mapa
-│       ├── LayerPanel.vue                  # Controles de capas de ejemplo
-│       ├── MapView.vue                     # Mapa Leaflet y configuración WMS
-│       ├── Metadata.vue                    # Visualización de fuente y fecha de ejemplo
-│       └── Topbar.vue                      # Barra superior con fecha y hora de Colombia
-└── docs/                                   # Sitio estático publicado y configuración de Wrangler
-    ├── Body_wepage.jpg                     # Imagen
-    ├── Esri_Hybrid_Map.png                  # Imagen de mapa base
-    ├── Esri_Satellite_Map.png               # Imagen de mapa base
-    ├── Esri_World_Street_Map.png            # Imagen de mapa base
-    ├── Google_Maps.png                      # Imagen de mapa base
-    ├── Google_Satellite.png                 # Imagen de mapa base
-    ├── Profile1.jpg                          # Imagen de perfil
-    ├── Profile2.webp                         # Imagen de perfil
-    ├── Profile3.webp                         # Imagen de perfil
-    ├── Profile4.webp                         # Imagen de perfil
-    ├── Profile5.webp                         # Imagen de perfil
-    ├── contact.html                         # Formulario de contacto
-    ├── development.css                      # Estilos de la página de desarrollo
-    ├── development.html                     # Página de desarrollo
-    ├── development.js                       # Comportamiento de la página de desarrollo
-    ├── geovisor.css                         # Estilos del geovisor
-    ├── geovisor.html                        # Interfaz del geovisor
-    ├── geovisor.js                          # Lógica del mapa y sus herramientas
-    ├── index.css                            # Estilos de la página principal
-    ├── index.html                           # Página principal y navegación
-    ├── index.js                             # Idioma, tema, reloj y vistas previas
-    ├── introduction.css                     # Estilos compartidos de introducción y contacto
-    ├── introduction.html                    # Descripción, equipo y temas del proyecto
-    ├── introduction.js                      # Idioma, tema e índice de la introducción/contacto
-    ├── logo-inst1.png                       # Imagen de logo institucional
-    ├── logo-inst2.png                       # Imagen de logo institucional
-    ├── logo-inst3.png                       # Imagen de logo institucional
-    └── wrangler.jsonc                       # Configuración de Wrangler para los recursos de docs/
+│   └── components/                         # Vue components for a map interface
+│       ├── LayerPanel.vue                  # Example layer controls
+│       ├── MapView.vue                     # Leaflet map and WMS configuration
+│       ├── Metadata.vue                    # Example source and date display
+│       └── Topbar.vue                      # Top bar with Colombia date and time
+└── docs/                                   # Published static site and Wrangler configuration
+    ├── Body_wepage.jpg                     # Image
+    ├── Esri_Hybrid_Map.png                  # Basemap image
+    ├── Esri_Satellite_Map.png               # Basemap image
+    ├── Esri_World_Street_Map.png            # Basemap image
+    ├── Google_Maps.png                      # Basemap image
+    ├── Google_Satellite.png                 # Basemap image
+    ├── Profile1.jpg                          # Profile image
+    ├── Profile2.webp                         # Profile image
+    ├── Profile3.webp                         # Profile image
+    ├── Profile4.webp                         # Profile image
+    ├── Profile5.webp                         # Profile image
+    ├── contact.html                         # Contact form
+    ├── development.css                      # Development page styles
+    ├── development.html                     # Development page
+    ├── development.js                       # Development page behavior
+    ├── geovisor.css                         # Geovisor styles
+    ├── geovisor.html                        # Geovisor interface
+    ├── geovisor.js                          # Map and tool logic
+    ├── index.css                            # Home page styles
+    ├── index.html                           # Home page and navigation
+    ├── index.js                             # Language, theme, clock, and previews
+    ├── introduction.css                     # Shared introduction and contact styles
+    ├── introduction.html                    # Project description, team, and topics
+    ├── introduction.js                      # Language, theme, and introduction/contact index
+    ├── logo-inst1.png                       # Institutional logo image
+    ├── logo-inst2.png                       # Institutional logo image
+    ├── logo-inst3.png                       # Institutional logo image
+    └── wrangler.jsonc                       # Wrangler configuration for docs/ resources
 ```
 
-### Componentes Vue
+### Vue components
 
-Los cuatro componentes de `src/components/` son un conjunto de interfaz Vue separado de las páginas HTML estáticas de `docs/`. `MapView.vue` configura capas base y tres capas WMS; `LayerPanel.vue` presenta controles de ejemplo para clima e hidrología, y `Metadata.vue` contiene metadatos de ejemplo. En el repositorio no hay manifiesto o punto de entrada que integre estos componentes con `docs/geovisor.html`.
+The four components in `src/components/` form a Vue interface separate from the static HTML pages in `docs/`. `MapView.vue` configures basemaps and three WMS layers; `LayerPanel.vue` provides example controls for climate and hydrology, and `Metadata.vue` contains example metadata. The repository has no manifest or entry point integrating these components with `docs/geovisor.html`.
 
-### Archivos de soporte
+### Supporting files
 
-- `.github/ISSUE_TEMPLATE/bug_report.md` define los campos de la plantilla para reportar errores. No hay flujos de GitHub Actions en el árbol actual.
-- `create_json.py` convierte un CSV local en `json_query.json`; la ruta del CSV está escrita para un equipo local concreto y el script requiere `pandas`.
-- `COAST_Visualization.qgz` es un proyecto comprimido de QGIS.
-- `assets/preview.png` es el recurso gráfico de vista previa.
-- `CONTRIBUTING.md` contiene únicamente un encabezado de pautas; `SECURITY.md` conserva texto de plantilla sobre versiones y reporte de vulnerabilidades.
-- `.gitattributes` configura cómo GitHub clasifica archivos SQL y notebooks. `.gitignore` incluye exclusiones para archivos locales y algunas capturas que no forman parte del árbol versionado.
+- `.github/ISSUE_TEMPLATE/bug_report.md` defines the fields in the bug report template. There are no GitHub Actions workflows in the current repository tree.
+- `create_json.py` converts a local CSV to `json_query.json`; the CSV path is specific to a particular local machine, and the script requires `pandas`.
+- `COAST_Visualization.qgz` is a compressed QGIS project.
+- `assets/preview.png` is the project preview graphic.
+- `CONTRIBUTING.md` contains only a guidelines heading; `SECURITY.md` retains template text about supported versions and vulnerability reporting.
+- `.gitattributes` configures how GitHub classifies SQL and notebook files. `.gitignore` includes exclusions for local files and some screenshots that are not in the versioned tree.
 
-## Licencia y comunidad
+## License and community
 
-El repositorio incluye la licencia GNU GPL v3 en `LICENSE`, el código de conducta en `CODE_OF_CONDUCT.md` y los archivos `CONTRIBUTING.md` y `SECURITY.md` descritos arriba.
+The repository includes the GNU GPL v3 license in `LICENSE`, the code of conduct in `CODE_OF_CONDUCT.md`, and the `CONTRIBUTING.md` and `SECURITY.md` files described above.
