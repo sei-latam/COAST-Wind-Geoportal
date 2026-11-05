@@ -68,10 +68,7 @@ The scripts and documents describe parts of the geographic infrastructure, but t
 │   └── conversionGIStoWGS84.ipynb          # GIS data reprojection to EPSG:4326
 ├── src/
 │   └── components/                         # Vue components for a map interface
-│       ├── LayerPanel.vue                  # Example layer controls
 │       ├── MapView.vue                     # Leaflet map and WMS configuration
-│       ├── Metadata.vue                    # Example source and date display
-│       └── Topbar.vue                      # Top bar with Colombia date and time
 └── docs/                                   # Published static site and Wrangler configuration
     ├── Body_wepage.jpg                     # Image
     ├── Esri_Hybrid_Map.png                  # Basemap image
