@@ -103,10 +103,6 @@ The scripts and documents describe parts of the geographic infrastructure, but t
     └── wrangler.jsonc                       # Wrangler configuration for docs/ resources
 ```
 
-### Vue components
-
-The four components in `src/components/` form a Vue interface separate from the static HTML pages in `docs/`. `MapView.vue` configures basemaps and three WMS layers; `LayerPanel.vue` provides example controls for climate and hydrology, and `Metadata.vue` contains example metadata. The repository has no manifest or entry point integrating these components with `docs/geovisor.html`.
-
 ### Supporting files
 
 - `.github/ISSUE_TEMPLATE/bug_report.md` defines the fields in the bug report template. There are no GitHub Actions workflows in the current repository tree.
