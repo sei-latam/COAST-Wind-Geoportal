@@ -1,4 +1,4 @@
-# COAST-Wind-Geoportal
+# COAST-Wind-Geovisor
 
 **Colombian Ocean Activity and Susceptibility Tool (COAST) - Wind**
 
