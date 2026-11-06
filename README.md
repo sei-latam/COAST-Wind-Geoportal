@@ -66,9 +66,6 @@ The scripts and documents describe parts of the geographic infrastructure, but t
 │   ├── CreationCOASTdatabase.sql           # Database, schema, roles, and extensions setup
 │   ├── InputPostGISdata.sql                # PostGIS import and query examples
 │   └── conversionGIStoWGS84.ipynb          # GIS data reprojection to EPSG:4326
-├── src/
-│   └── components/                         # Vue components for a map interface
-│       ├── MapView.vue                     # Leaflet map and WMS configuration
 └── docs/                                   # Published static site and Wrangler configuration
     ├── Body_wepage.jpg                     # Image
     ├── Esri_Hybrid_Map.png                  # Basemap image
